@@ -13,9 +13,25 @@ class MediaAPIManager {
     
     private init () { }
     
-    enum TVSeries: String {
+    enum TVSeries: Int, CaseIterable {
         case top_rated
         case popular
+        
+        var caseValue : String {
+            switch self {
+            default :
+                return String(describing: self)
+            }
+        }
+        
+        var textValue : String {
+            switch self {
+            case .top_rated:
+                return "Top Rated TV SERIES"
+            case .popular :
+                return "Popular TV SERIES"
+            }
+        }
     }
     
     

@@ -21,6 +21,7 @@
 		DB8151D22B6925920026AAA9 /* CommonTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8151D12B6925920026AAA9 /* CommonTextLabel.swift */; };
 		DB8151D42B6926270026AAA9 /* UICollectionViewCell + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8151D32B6926270026AAA9 /* UICollectionViewCell + Extension.swift */; };
 		DB8151D62B6926940026AAA9 /* UITableViewCell + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8151D52B6926940026AAA9 /* UITableViewCell + Extension.swift */; };
+		DB8151D82B692E180026AAA9 /* TVTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8151D72B692E180026AAA9 /* TVTableViewCell.swift */; };
 		DBB376D82B68DCA800DA1C8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB376D72B68DCA800DA1C8F /* AppDelegate.swift */; };
 		DBB376DA2B68DCA800DA1C8F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB376D92B68DCA800DA1C8F /* SceneDelegate.swift */; };
 		DBB376DC2B68DCA800DA1C8F /* TVViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB376DB2B68DCA800DA1C8F /* TVViewController.swift */; };
@@ -39,6 +40,7 @@
 		DB8151D12B6925920026AAA9 /* CommonTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTextLabel.swift; sourceTree = "<group>"; };
 		DB8151D32B6926270026AAA9 /* UICollectionViewCell + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell + Extension.swift"; sourceTree = "<group>"; };
 		DB8151D52B6926940026AAA9 /* UITableViewCell + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell + Extension.swift"; sourceTree = "<group>"; };
+		DB8151D72B692E180026AAA9 /* TVTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVTableViewCell.swift; sourceTree = "<group>"; };
 		DBB376D42B68DCA800DA1C8F /* Media Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Media Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBB376D72B68DCA800DA1C8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBB376D92B68DCA800DA1C8F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				DB8151CF2B69254D0026AAA9 /* TVCollectionViewCell.swift */,
+				DB8151D72B692E180026AAA9 /* TVTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				DB8151D42B6926270026AAA9 /* UICollectionViewCell + Extension.swift in Sources */,
 				DBB376D82B68DCA800DA1C8F /* AppDelegate.swift in Sources */,
 				DB8151D22B6925920026AAA9 /* CommonTextLabel.swift in Sources */,
+				DB8151D82B692E180026AAA9 /* TVTableViewCell.swift in Sources */,
 				DB8151C82B6918E00026AAA9 /* TVSeriesListsModel.swift in Sources */,
 				DB8151D62B6926940026AAA9 /* UITableViewCell + Extension.swift in Sources */,
 				DB8151C62B6914250026AAA9 /* API.swift in Sources */,

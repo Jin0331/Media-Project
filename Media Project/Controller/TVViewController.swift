@@ -19,12 +19,22 @@ class TVViewController: UIViewController, ViewSetUp{
     lazy var mainCollectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
     lazy var mainTableView = UITableView()
     
-    var mainList : [TrendTV] = [] {
+    var mainList : [TrendTV] = [] { // trend TV
         didSet {
             mainCollectionView.reloadData()
         }
     }
-
+    var popularList : [TVSeriesLists] = [] {
+        didSet {
+            mainTableView.reloadData()
+        }
+    }
+    var topRatedList : [TVSeriesLists] = [] {
+        didSet {
+            mainTableView.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,19 +46,20 @@ class TVViewController: UIViewController, ViewSetUp{
         MediaAPIManager.shared.fetchTrendingTV { tv in
             print(#function, "TV-trend")
             self.mainList = tv
-            print(tv)
         }
         
-//        // popular
-//        MediaAPIManager.shared.fetchTVSeriesLists(contents: MediaAPIManager.TVSeries.popular.rawValue, page: 1) { tv in
-//            print(#function, "Popular ", tv)
-//        }
-//
-//        // top rate
-//        MediaAPIManager.shared.fetchTVSeriesLists(contents: MediaAPIManager.TVSeries.top_rated.rawValue, page: 1) { tv in
-//            print(#function, "Top Rate ", tv)
-//        }
-//        
+        // popular
+        MediaAPIManager.shared.fetchTVSeriesLists(contents: MediaAPIManager.TVSeries.popular.caseValue, page: 1) { tv in
+            print(#function, "Popular")
+            self.popularList = tv
+        }
+
+        // top rate
+        MediaAPIManager.shared.fetchTVSeriesLists(contents: MediaAPIManager.TVSeries.top_rated.caseValue, page: 1) { tv in
+            print(#function, "Top Rate")
+            self.topRatedList = tv
+        }
+        
     }
     
     func configureHirerachy() {
@@ -76,29 +87,43 @@ class TVViewController: UIViewController, ViewSetUp{
         mainCollectionView.backgroundColor = .clear
         mainCollectionView.isPagingEnabled = true
         
-//        mainTableView.delegate = self
-//        mainTableView.dataSource = self
-//        mainTableView.rowHeight = 200
-//        mainTableView.register(SearchTableViewCell.self, forCellReuseIdentifier: "SearchTableViewCell")
+        mainTableView.delegate = self
+        mainTableView.dataSource = self
+        mainTableView.rowHeight = 300
+        mainTableView.register(TVTableViewCell.self, forCellReuseIdentifier: TVTableViewCell.identifier)
     }
 }
 
 extension TVViewController : UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return mainList.count
+        
+        let layerName = collectionView.layer.name ?? ""
+        if self.mainCollectionView == collectionView {
+            return mainList.count
+        } else if layerName == MediaAPIManager.TVSeries.popular.caseValue {
+            return popularList.count
+        } else {
+            return topRatedList.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TVCollectionViewCell.identifier, for: indexPath) as! TVCollectionViewCell
+        let layerName = collectionView.layer.name ?? ""
         
-        let item = mainList[indexPath.item]
-        let url = URL(string: "https://image.tmdb.org/t/p/w500\(item.backdropPath)")
-        
-        cell.posterImageView.kf.setImage(with: url, placeholder: UIImage(systemName: "star.fill"))
-        
-        print(item.name)
-        
-        cell.titleLabel.text = item.name
+        if self.mainCollectionView == collectionView {
+            let item = mainList[indexPath.item]
+            let url = URL(string: "https://image.tmdb.org/t/p/w500\(item.backdropPath)")
+            
+            cell.posterImageView.kf.setImage(with: url, placeholder: UIImage(systemName: "star.fill"))
+            cell.titleLabel.text = item.name
+        } else {
+            let item = layerName == MediaAPIManager.TVSeries.popular.caseValue ? popularList[indexPath.item] : topRatedList[indexPath.item] // case가 2개기때문에 가능함. case가 늘어나면 switch 사용하면 될 듯
+            
+            let url = URL(string: "https://image.tmdb.org/t/p/w500\(item.backdropPath ?? "")")
+            cell.posterImageView.kf.setImage(with: url, placeholder: UIImage(systemName: "star.fill"))
+            cell.titleLabel.text = item.name
+        }
         
         return cell
     }
@@ -113,5 +138,28 @@ extension TVViewController : UICollectionViewDelegate, UICollectionViewDataSourc
         
         return layout
     }
+    
+}
+
+extension TVViewController : UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return MediaAPIManager.TVSeries.allCases.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: TVTableViewCell.identifier, for: indexPath) as! TVTableViewCell
+        
+        cell.subCollectionView.delegate = self
+        cell.subCollectionView.dataSource = self
+        
+        cell.subCollectionView.layer.name = MediaAPIManager.TVSeries(rawValue: indexPath.row)?.caseValue // optional value
+        
+        cell.subCollectionView.register(TVCollectionViewCell.self, forCellWithReuseIdentifier: TVCollectionViewCell.identifier)
+        cell.titleLabel.text = MediaAPIManager.TVSeries(rawValue: indexPath.row)?.textValue ?? ""
+        cell.subCollectionView.reloadData()
+        
+        return cell
+    }
+    
     
 }
