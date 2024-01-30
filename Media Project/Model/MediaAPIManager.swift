@@ -20,7 +20,7 @@ class MediaAPIManager {
     
     
     func fetchTrendingTV(completionHandler : @escaping (([TrendTV]) -> Void)) {
-        let url = "https://api.themoviedb.org/3/trending/movie/week?language=ko-KR"
+        let url = "https://api.themoviedb.org/3/trending/tv/week?language=ko-KR"
         
         //TODO: - API.swift로 변경해야됨 - 완료
         let header : HTTPHeaders = ["Authorization" : API.TMDBAPI]
