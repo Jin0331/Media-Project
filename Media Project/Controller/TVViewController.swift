@@ -14,7 +14,7 @@ import SnapKit
 import Kingfisher
 
 class TVViewController: UIViewController, ViewSetUp{
-
+    
     
     lazy var mainCollectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
     lazy var mainTableView = UITableView()
@@ -35,6 +35,9 @@ class TVViewController: UIViewController, ViewSetUp{
         }
     }
     
+    var popularStart = 1 // pagination 변수
+    var topRatedStart = 1 // pagination 변수
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,13 +52,13 @@ class TVViewController: UIViewController, ViewSetUp{
         }
         
         // popular
-        MediaAPIManager.shared.fetchTVSeriesLists(contents: MediaAPIManager.TVSeries.popular.caseValue, page: 1) { tv in
+        MediaAPIManager.shared.fetchTVSeriesLists(contents: MediaAPIManager.TVSeries.popular.caseValue, page: popularStart) { tv in
             print(#function, "Popular")
             self.popularList = tv
         }
-
+        
         // top rate
-        MediaAPIManager.shared.fetchTVSeriesLists(contents: MediaAPIManager.TVSeries.top_rated.caseValue, page: 1) { tv in
+        MediaAPIManager.shared.fetchTVSeriesLists(contents: MediaAPIManager.TVSeries.top_rated.caseValue, page: topRatedStart) { tv in
             print(#function, "Top Rate")
             self.topRatedList = tv
         }
@@ -138,7 +141,6 @@ extension TVViewController : UICollectionViewDelegate, UICollectionViewDataSourc
         
         return layout
     }
-    
 }
 
 extension TVViewController : UITableViewDelegate, UITableViewDataSource {
@@ -151,6 +153,7 @@ extension TVViewController : UITableViewDelegate, UITableViewDataSource {
         
         cell.subCollectionView.delegate = self
         cell.subCollectionView.dataSource = self
+        cell.subCollectionView.prefetchDataSource = self
         
         cell.subCollectionView.layer.name = MediaAPIManager.TVSeries(rawValue: indexPath.row)?.caseValue // optional value
         
@@ -160,6 +163,28 @@ extension TVViewController : UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-    
-    
+}
+
+//MARK: - collection View pagination
+extension TVViewController : UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        let layerName = collectionView.layer.name ?? ""
+        let currentCount = layerName == MediaAPIManager.TVSeries.popular.caseValue ? popularList.count : topRatedList.count
+        var start : Int
+        
+        for item in indexPaths {
+            if currentCount - 5 == item.item && currentCount < 9000 { //TODO: - totalPage는 따로 구현해야됨... 일단 러프하게 값 줌
+                if layerName == "popular" {
+                    self.popularStart += 1
+                } else {
+                    self.topRatedStart += 1
+                }
+                
+                start = layerName == "popular" ? self.popularStart : self.topRatedStart
+                MediaAPIManager.shared.fetchTVSeriesLists(contents: layerName, page: start) { tv in
+                    layerName == "popular" ? self.popularList.append(contentsOf: tv) : self.topRatedList.append(contentsOf: tv)
+                }
+            }
+        }
+    }
 }
