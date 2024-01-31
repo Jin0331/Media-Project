@@ -16,12 +16,22 @@ struct TVSeriesDetail : Decodable {
     let overview : String
     let tagline : String
     let voteAverage : Double
+    let numberOfSeasons : Int
     
     enum CodingKeys : String, CodingKey {
         case genres, id, overview, tagline
         case backdropPath = "backdrop_path"
         case originalName = "original_name"
         case voteAverage = "vote_average"
+        case numberOfSeasons = "number_of_seasons"
+    }
+    
+    var mainText : String {
+        var genreText : String = genres.map { item in
+            return item.name
+        }.joined(separator: "-")
+        
+        return "평균 \(voteAverage)·시즌 \(numberOfSeasons)개·\(genreText)"
     }
     
 }
@@ -76,3 +86,5 @@ struct Cast : Decodable {
         case profilePath = "profile_path"
     }
 }
+
+
