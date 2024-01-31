@@ -1,5 +1,5 @@
 //
-//  UITableViewCell + Extension.swift
+//  UICollectionViewCell + Extension.swift
 //  Media Project
 //
 //  Created by JinwooLee on 1/30/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension UITableViewCell : ResuableProtocol {
+extension UIView : ResuableProtocol {
     static var identifier: String {
         return String(describing: self)
     }
