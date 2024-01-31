@@ -1,0 +1,78 @@
+//
+//  TVSeriesModel.swift
+//  Media Project
+//
+//  Created by JinwooLee on 1/31/24.
+//
+
+import Foundation
+
+//MARK: - Detail API
+struct TVSeriesDetail : Decodable {
+    let backdropPath : String
+    let genres : [Genres]
+    let id : Int
+    let originalName : String
+    let overview : String
+    let tagline : String
+    let voteAverage : Double
+    
+    enum CodingKeys : String, CodingKey {
+        case genres, id, overview, tagline
+        case backdropPath = "backdrop_path"
+        case originalName = "original_name"
+        case voteAverage = "vote_average"
+    }
+    
+}
+
+struct Genres : Decodable {
+    let id : Int
+    let name : String
+}
+
+//MARK: - Recommendations API
+struct TVSeriesRecommendations : Decodable {
+    let page : Int
+    let results : [Recommendations]
+    let totalPages : Int
+    
+    enum CodingKeys : String, CodingKey {
+        case page, results
+        case totalPages = "total_pages"
+    }
+}
+
+struct Recommendations : Decodable {
+    let id : Int
+    let originalName : String
+    let overview : String
+    let posterPath : String
+    
+    enum CodingKeys : String, CodingKey {
+        case id, overview
+        case originalName = "original_name"
+        case posterPath = "poster_path"
+    }
+}
+
+
+//MARK: - Aggregate Credits API
+
+struct TVSeriesAggregateCredit : Decodable {
+    let cast : [Cast]
+    let id : Int
+}
+
+struct Cast : Decodable {
+    let id : Int
+    let gender : Int
+    let originalName : String
+    let profilePath : String
+    
+    enum CodingKeys : String, CodingKey {
+        case id, gender
+        case originalName = "original_name"
+        case profilePath = "profile_path"
+    }
+}

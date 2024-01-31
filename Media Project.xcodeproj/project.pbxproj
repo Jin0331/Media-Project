@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB5D40972B6A203E003B9176 /* TVSeriesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5D40962B6A203E003B9176 /* TVSeriesModel.swift */; };
 		DB8151B72B6911390026AAA9 /* TrendTVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8151B62B6911390026AAA9 /* TrendTVModel.swift */; };
 		DB8151B92B69137C0026AAA9 /* MediaAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8151B82B69137C0026AAA9 /* MediaAPIManager.swift */; };
 		DB8151BC2B6913A20026AAA9 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DB8151BB2B6913A20026AAA9 /* Kingfisher */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DB5D40962B6A203E003B9176 /* TVSeriesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVSeriesModel.swift; sourceTree = "<group>"; };
 		DB8151B62B6911390026AAA9 /* TrendTVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendTVModel.swift; sourceTree = "<group>"; };
 		DB8151B82B69137C0026AAA9 /* MediaAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaAPIManager.swift; sourceTree = "<group>"; };
 		DB8151C52B6914250026AAA9 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 			children = (
 				DB8151B62B6911390026AAA9 /* TrendTVModel.swift */,
 				DB8151C72B6918E00026AAA9 /* TVSeriesListsModel.swift */,
+				DB5D40962B6A203E003B9176 /* TVSeriesModel.swift */,
 				DB8151B82B69137C0026AAA9 /* MediaAPIManager.swift */,
 				DB8151C52B6914250026AAA9 /* API.swift */,
 			);
@@ -227,6 +230,7 @@
 				DBB376DC2B68DCA800DA1C8F /* TVViewController.swift in Sources */,
 				DB8151B72B6911390026AAA9 /* TrendTVModel.swift in Sources */,
 				DB8151CB2B6923090026AAA9 /* Protocol.swift in Sources */,
+				DB5D40972B6A203E003B9176 /* TVSeriesModel.swift in Sources */,
 				DB8151D02B69254D0026AAA9 /* TVCollectionViewCell.swift in Sources */,
 				DB8151CE2B6924F80026AAA9 /* PosterImageView.swift in Sources */,
 				DB8151D42B6926270026AAA9 /* UIView + Extension.swift in Sources */,
