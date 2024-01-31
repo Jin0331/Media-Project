@@ -27,7 +27,7 @@ struct TVSeriesDetail : Decodable {
     }
     
     var mainText : String {
-        var genreText : String = genres.map { item in
+        let genreText : String = genres.map { item in
             return item.name
         }.joined(separator: "-")
         

@@ -48,15 +48,26 @@ class TVDetailViewController: BaseViewController {
     
     let middleView : UIView = {
         let view = UIView()
-        view.backgroundColor = .blue
+//        view.backgroundColor = .red
         return view
     }()
-    let middleLabel = UILabel()
+    
+    let middleLabel : UILabel = {
+        let view = UILabel()
+//        view.backgroundColor = .blue
+        view.textColor = .white
+        view.font = .systemFont(ofSize: 20, weight: .heavy)
+        view.text = "관련 콘텐츠"
+        
+        return view
+    }()
+    
     lazy var middleCollectionView : UICollectionView = {
-        let view = UICollectionView(frame: .zero, collectionViewLayout: <#T##UICollectionViewLayout#>)
+        let view = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
         view.delegate = self
         view.dataSource = self
-        view.register(SearchViewCollectionViewCell.self, forCellWithReuseIdentifier: "Search")
+        view.register(CommonCollectionViewCell.self, forCellWithReuseIdentifier: CommonCollectionViewCell.identifier)
+//        print(#function, CommonCollectionViewCell.identifier)
         
         return view
     }()
@@ -115,21 +126,30 @@ class TVDetailViewController: BaseViewController {
             print("갱신완료")
             
             self.configureView()
+            self.middleCollectionView.reloadData()
             
-//            self.tableView.reloadData()
-//            self.collectionView.reloadData()
+//            print(self.recommendationsList)
         }
     }
     
     override func configureHirerachy() {
         view.addSubview(topView)
+        // topViewSubView
         [topViewImage, topViewTitle, topViewInformation, topViewOverView].map { item in
             return topView.addSubview(item)
         }
         
+        view.addSubview(middleView)
+        // middleSubView
+        [middleLabel,middleCollectionView].map { item in
+            return middleView.addSubview(item)
+        }
+        
+        
     }
     
     override func configureLayout() {
+        // topView
         topView.snp.makeConstraints { make in
             make.horizontalEdges.top.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(200)
@@ -159,6 +179,24 @@ class TVDetailViewController: BaseViewController {
             make.bottom.greaterThanOrEqualToSuperview().inset(5)
         }
         
+        // middleView
+        middleView.snp.makeConstraints { make in
+            make.top.equalTo(topView.snp.bottom).offset(15)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(200)
+        }
+        
+        middleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview().inset(15)
+            make.height.equalTo(20)
+        }
+        
+        middleCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(middleLabel.snp.bottom).offset(10)
+            make.horizontalEdges.equalToSuperview().inset(15)
+        }
+        
         
     }
     
@@ -170,17 +208,42 @@ class TVDetailViewController: BaseViewController {
         topViewTitle.text = detailList.originalName
         topViewInformation.text = detailList.mainText
         topViewOverView.text = detailList.overview
+
     }
 }
 
-//extension TVDetailViewController : UICollectionViewDelegate, UICollectionViewDataSource {
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        <#code#>
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        <#code#>
-//    }
-//    
-//    
-//}
+extension TVDetailViewController : UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return recommendationsList?.results.count ?? 0
+
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        print(#function)
+        
+        guard let recommendationsList = recommendationsList else {
+            print("fail")
+            return UICollectionViewCell()}
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCollectionViewCell.identifier, for: indexPath) as! CommonCollectionViewCell
+        
+        let item = recommendationsList.results[indexPath.item]
+        let url = URL(string: MediaAPIManager.CommonVariable.imageURL + item.posterPath)!
+        cell.posterImageView.kf.setImage(with: url, placeholder: UIImage(systemName: "star.fill"))
+        
+        return cell
+    }
+    
+    func configureCollectionViewLayout() -> UICollectionViewFlowLayout {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 200)
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.scrollDirection = .horizontal
+        
+        return layout
+    }
+}

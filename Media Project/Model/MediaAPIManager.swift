@@ -36,8 +36,6 @@ class MediaAPIManager {
                 return "비슷한 콘텐츠"
             case .aggregate_credits :
                 return "출연"
-            default:
-                return "None"
             }
         }
     }

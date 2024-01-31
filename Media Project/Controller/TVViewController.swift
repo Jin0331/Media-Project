@@ -85,7 +85,7 @@ class TVViewController: UIViewController, ViewSetUp{
     func configureView() {
         mainCollectionView.delegate = self
         mainCollectionView.dataSource = self
-        mainCollectionView.register(TVCollectionViewCell.self, forCellWithReuseIdentifier: TVCollectionViewCell.identifier)
+        mainCollectionView.register(CommonCollectionViewCell.self, forCellWithReuseIdentifier: CommonCollectionViewCell.identifier)
         
         mainCollectionView.backgroundColor = .clear
         mainCollectionView.isPagingEnabled = true
@@ -111,7 +111,7 @@ extension TVViewController : UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TVCollectionViewCell.identifier, for: indexPath) as! TVCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCollectionViewCell.identifier, for: indexPath) as! CommonCollectionViewCell
         let layerName = collectionView.layer.name ?? ""
         
         if self.mainCollectionView == collectionView {
@@ -119,13 +119,13 @@ extension TVViewController : UICollectionViewDelegate, UICollectionViewDataSourc
             let url = URL(string: "https://image.tmdb.org/t/p/w500\(item.backdropPath)")
             
             cell.posterImageView.kf.setImage(with: url, placeholder: UIImage(systemName: "star.fill"))
-            cell.titleLabel.text = item.name
+//            cell.titleLabel.text = item.name
         } else {
             let item = layerName == MediaAPIManager.TVSeries.popular.caseValue ? popularList[indexPath.item] : topRatedList[indexPath.item] // case가 2개기때문에 가능함. case가 늘어나면 switch 사용하면 될 듯
             
             let url = URL(string: "https://image.tmdb.org/t/p/w500\(item.backdropPath ?? "")")
             cell.posterImageView.kf.setImage(with: url, placeholder: UIImage(systemName: "star.fill"))
-            cell.titleLabel.text = item.name
+//            cell.titleLabel.text = item.name
         }
         
         return cell
@@ -157,7 +157,7 @@ extension TVViewController : UITableViewDelegate, UITableViewDataSource {
         
         cell.subCollectionView.layer.name = MediaAPIManager.TVSeries(rawValue: indexPath.row)?.caseValue // optional value
         
-        cell.subCollectionView.register(TVCollectionViewCell.self, forCellWithReuseIdentifier: TVCollectionViewCell.identifier)
+        cell.subCollectionView.register(CommonCollectionViewCell.self, forCellWithReuseIdentifier: CommonCollectionViewCell.identifier)
         cell.titleLabel.text = MediaAPIManager.TVSeries(rawValue: indexPath.row)?.textValue ?? ""
         cell.subCollectionView.reloadData()
         
