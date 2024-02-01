@@ -14,7 +14,7 @@ class TVDetailViewController: UIViewController {
     
     let mainView = TVDetailView()
     //MARK: - Data
-    var tvSeriesId = 96102 //TODO: - Search TV API로 값 전달 받으면 됨
+    var tvSeriesId = 96462 //TODO: - Search TV API로 값 전달 받으면 됨
     var detailList : TVSeriesDetail?
     var aggregateCreditList : TVSeriesAggregateCredit?
     var recommendationsList : TVSeriesRecommendations?
@@ -29,17 +29,14 @@ class TVDetailViewController: UIViewController {
         
         mainView.bottomLeftTableView.delegate = self
         mainView.bottomLeftTableView.dataSource = self
-        mainView.bottomLeftTableView.isHidden = true
+        mainView.bottomLeftTableView.isHidden = false
         
         mainView.bottomRightTableView.delegate = self
         mainView.bottomRightTableView.dataSource = self
-//        mainView.bottomRightTableView.isHidden = true
+        mainView.bottomRightTableView.isHidden = true
         
         
-        //MARK: - button 클릭에 따라 table view hidden
-        
-        
-        
+        //MARK: - Call Request
         let group = DispatchGroup()
         
         group.enter()
@@ -73,6 +70,16 @@ class TVDetailViewController: UIViewController {
             self.mainView.bottomLeftTableView.reloadData()
             self.mainView.bottomRightTableView.reloadData()
         }
+        
+        //MARK: - button action, button 클릭에 따라 table view hidden
+        mainView.middleLeftButton.addTarget(self, action: #selector(middleButtonClicked), for: .touchUpInside)
+        mainView.middleRightButton.addTarget(self, action: #selector(middleButtonClicked), for: .touchUpInside)
+        }
+    
+    
+    @objc func middleButtonClicked(sender : UIButton){
+        mainView.bottomLeftTableView.isHidden.toggle()
+        mainView.bottomRightTableView.isHidden.toggle()
     }
 }
 
@@ -129,7 +136,10 @@ extension TVDetailViewController : UICollectionViewDelegate, UICollectionViewDat
             if let aggregateCreditList = aggregateCreditList {
                 
                 if collectionView.tag == MediaAPI.TV.aggregate_credits(id: 0).indexValue { // 출연 및 관련 동영상 구분하기 위한 tag 사용
-                    cell.profileImage.kf.setImage(with: URL(string: MediaAPI.baseImageUrl + aggregateCreditList.cast[indexPath.item].profilePath), placeholder: UIImage(systemName: "heart.fill"))
+                    
+                    
+                    
+                    cell.profileImage.kf.setImage(with: URL(string: MediaAPI.baseImageUrl + (aggregateCreditList.cast[indexPath.item].profilePath ?? "")), placeholder: UIImage(systemName: "heart.fill"))
                     cell.roleLabel.text = aggregateCreditList.cast[indexPath.item].roles[0].characterConvert
                     cell.nameLabel.text = aggregateCreditList.cast[indexPath.item].originalName
                 } else {

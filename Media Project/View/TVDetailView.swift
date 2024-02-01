@@ -58,6 +58,7 @@ class TVDetailView : BaseView {
         view.setTitleColor(.white, for: .normal)
         view.titleLabel?.font = .systemFont(ofSize: 15, weight: .heavy)
         view.backgroundColor = .clear
+        view.layer.name = "left"
         
         return view
     }()
@@ -67,6 +68,7 @@ class TVDetailView : BaseView {
         view.setTitleColor(.white, for: .normal)
         view.titleLabel?.font = .systemFont(ofSize: 15, weight: .heavy)
         view.backgroundColor = .clear
+        view.layer.name = "right"
         
         return view
     }()
@@ -74,7 +76,7 @@ class TVDetailView : BaseView {
     let bottomLeftTableView : UITableView = {
         let view = UITableView()
         view.backgroundColor = .clear
-        view.rowHeight = 250
+        view.rowHeight = UIScreen.main.bounds.height / 3
         view.register(TVDetailTableViewCell.self, forCellReuseIdentifier: TVDetailTableViewCell.identifier)
         
         return view
@@ -83,7 +85,7 @@ class TVDetailView : BaseView {
     let bottomRightTableView : UITableView = {
         let view = UITableView()
         view.backgroundColor = .clear
-        view.rowHeight = 250
+        view.rowHeight = UIScreen.main.bounds.height
         view.register(TVDetailTableViewCell.self, forCellReuseIdentifier: TVDetailTableViewCell.identifier)
         
         return view

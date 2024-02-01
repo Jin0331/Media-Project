@@ -52,7 +52,7 @@ struct Cast : Decodable {
     let id : Int
     let gender : Int
     let originalName : String
-    let profilePath : String
+    let profilePath : String?
     let roles : [Role]
     
     enum CodingKeys : String, CodingKey {
