@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: scene)
         
-        let vc = TVDetailViewController()
+        let vc = TVViewController()
         
         window?.rootViewController = vc
         window?.makeKeyAndVisible()

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TVTableViewCell: UITableViewCell, ViewSetUp {
+class TVTableViewCell: UITableViewCell {
     
     let titleLabel = CommonTextLabel()
     lazy var subCollectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
