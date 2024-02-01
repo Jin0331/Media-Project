@@ -16,20 +16,21 @@ class TVDetailView : BaseView {
     let topViewImage : UIImageView = {
         let view  = UIImageView()
         view.contentMode = .scaleAspectFill
+        view.alpha = 0.6
         
         return view
     }()
     let topViewTitle : UILabel = {
         let view = UILabel()
         view.font = .systemFont(ofSize: 30, weight: .heavy)
-        view.textColor = .black
+        view.textColor = .white
         
         return view
     }()
     let topViewInformation : UILabel = {
         let view = UILabel()
         view.font = .systemFont(ofSize: 12, weight: .heavy)
-        view.textColor = .black
+        view.textColor = .white
         return view
     }()
     let topViewOverView : UILabel = {
@@ -37,7 +38,7 @@ class TVDetailView : BaseView {
         view.numberOfLines = 3
         view.lineBreakMode = .byCharWrapping
         view.font = .systemFont(ofSize: 12, weight: .heavy)
-        view.textColor = .black
+        view.textColor = .white
         view.textAlignment = .center
         return view
     }()
