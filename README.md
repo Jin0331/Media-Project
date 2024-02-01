@@ -15,3 +15,4 @@
 >1. View Controller에서 View 분리
 >2. API Request -> API Manager의 로직개선(generic, enumeration 등등..)을 활용해서 반복적인 구문 개선
 >3. UI는 크게 바뀐 것이 없음..ㅎ
+>4. Search API를 활용하여, 첫 화면의 Collection View Cell을 클릭했을 때 전환하도록 수정해야 할 듯(로직은 다 구성되어 있어서, 조금만 수정하면 될 것 같다. 현재는 고정값으로 id가 박혀있음)
