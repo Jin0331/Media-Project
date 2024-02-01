@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB5D40972B6A203E003B9176 /* TVSeriesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5D40962B6A203E003B9176 /* TVSeriesModel.swift */; };
+		DB5D40992B6A24D6003B9176 /* TVDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5D40982B6A24D6003B9176 /* TVDetailViewController.swift */; };
+		DB5D409C2B6A2511003B9176 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5D409B2B6A2511003B9176 /* BaseViewController.swift */; };
 		DB8151B72B6911390026AAA9 /* TrendTVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8151B62B6911390026AAA9 /* TrendTVModel.swift */; };
 		DB8151B92B69137C0026AAA9 /* MediaAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8151B82B69137C0026AAA9 /* MediaAPIManager.swift */; };
 		DB8151BC2B6913A20026AAA9 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DB8151BB2B6913A20026AAA9 /* Kingfisher */; };
@@ -29,6 +32,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DB5D40962B6A203E003B9176 /* TVSeriesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVSeriesModel.swift; sourceTree = "<group>"; };
+		DB5D40982B6A24D6003B9176 /* TVDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVDetailViewController.swift; sourceTree = "<group>"; };
+		DB5D409B2B6A2511003B9176 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		DB8151B62B6911390026AAA9 /* TrendTVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendTVModel.swift; sourceTree = "<group>"; };
 		DB8151B82B69137C0026AAA9 /* MediaAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaAPIManager.swift; sourceTree = "<group>"; };
 		DB8151C52B6914250026AAA9 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -63,6 +69,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB5D409A2B6A2509003B9176 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				DB5D409B2B6A2511003B9176 /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		DB8151B32B68DDFC0026AAA9 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +91,7 @@
 			children = (
 				DB8151B62B6911390026AAA9 /* TrendTVModel.swift */,
 				DB8151C72B6918E00026AAA9 /* TVSeriesListsModel.swift */,
+				DB5D40962B6A203E003B9176 /* TVSeriesModel.swift */,
 				DB8151B82B69137C0026AAA9 /* MediaAPIManager.swift */,
 				DB8151C52B6914250026AAA9 /* API.swift */,
 			);
@@ -87,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				DBB376DB2B68DCA800DA1C8F /* TVViewController.swift */,
+				DB5D40982B6A24D6003B9176 /* TVDetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -128,6 +144,7 @@
 		DBB376D62B68DCA800DA1C8F /* Media Project */ = {
 			isa = PBXGroup;
 			children = (
+				DB5D409A2B6A2509003B9176 /* Base */,
 				DB8151CC2B6924E30026AAA9 /* CustomView */,
 				DB8151C92B6922FC0026AAA9 /* Resource */,
 				DB8151B52B68DE0A0026AAA9 /* Controller */,
@@ -227,6 +244,8 @@
 				DBB376DC2B68DCA800DA1C8F /* TVViewController.swift in Sources */,
 				DB8151B72B6911390026AAA9 /* TrendTVModel.swift in Sources */,
 				DB8151CB2B6923090026AAA9 /* Protocol.swift in Sources */,
+				DB5D40992B6A24D6003B9176 /* TVDetailViewController.swift in Sources */,
+				DB5D40972B6A203E003B9176 /* TVSeriesModel.swift in Sources */,
 				DB8151D02B69254D0026AAA9 /* TVCollectionViewCell.swift in Sources */,
 				DB8151CE2B6924F80026AAA9 /* PosterImageView.swift in Sources */,
 				DB8151D42B6926270026AAA9 /* UIView + Extension.swift in Sources */,
@@ -234,6 +253,7 @@
 				DB8151D22B6925920026AAA9 /* CommonTextLabel.swift in Sources */,
 				DB8151D82B692E180026AAA9 /* TVTableViewCell.swift in Sources */,
 				DB8151C82B6918E00026AAA9 /* TVSeriesListsModel.swift in Sources */,
+				DB5D409C2B6A2511003B9176 /* BaseViewController.swift in Sources */,
 				DB8151C62B6914250026AAA9 /* API.swift in Sources */,
 				DBB376DA2B68DCA800DA1C8F /* SceneDelegate.swift in Sources */,
 			);
