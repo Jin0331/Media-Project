@@ -80,6 +80,15 @@ class TVDetailView : BaseView {
         return view
     }()
     
+    let bottomRightTableView : UITableView = {
+        let view = UITableView()
+        view.backgroundColor = .clear
+        view.rowHeight = 250
+        view.register(TVDetailTableViewCell.self, forCellReuseIdentifier: TVDetailTableViewCell.identifier)
+        
+        return view
+    }()
+    
     
     
     // bottom table view
@@ -98,6 +107,7 @@ class TVDetailView : BaseView {
         }
         
         self.addSubview(bottomLeftTableView)
+        self.addSubview(bottomRightTableView)
     }
     
     override func configureLayout() {
@@ -134,6 +144,12 @@ class TVDetailView : BaseView {
         }
         
         bottomLeftTableView.snp.makeConstraints { make in
+            make.top.equalTo(middleStackView.snp.bottom)
+            make.horizontalEdges.equalTo(middleStackView)
+            make.bottom.equalTo(self.safeAreaLayoutGuide)
+        }
+        
+        bottomRightTableView.snp.makeConstraints { make in
             make.top.equalTo(middleStackView.snp.bottom)
             make.horizontalEdges.equalTo(middleStackView)
             make.bottom.equalTo(self.safeAreaLayoutGuide)

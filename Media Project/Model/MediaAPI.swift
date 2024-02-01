@@ -73,7 +73,7 @@ enum MediaAPI {
     
     enum TV : CaseIterable{
         static var allCases: [TV] {
-            return [.detail(id: 0), .recommendations(id: 0, page: 0), .aggregate_credits(id: 0)]
+            return [.detail(id: 0), .recommendations(id: 0), .aggregate_credits(id: 0)]
         }
         
         // 여기가 핵심. 구역별로 정하면 될 듯
@@ -83,12 +83,12 @@ enum MediaAPI {
         }
         
         static var relatedContentsAllcases : [TV] {
-            return [.recommendations(id: 0, page: 0)]
+            return [.recommendations(id: 0)]
         }
         
         //MARK: - Case
         case detail(id:Int)
-        case recommendations(id:Int, page : Int)
+        case recommendations(id:Int)
         case aggregate_credits(id:Int)
         case relatedVideo(id:Int) /// 나중에 추가될 경우 ..>!?
         
@@ -109,8 +109,8 @@ enum MediaAPI {
             switch self {
             case  .detail, .relatedVideo :
                 return ["language":"ko-KR"]
-            case .recommendations(let page):
-                return ["language":"ko-KR", "page": page]
+            case .recommendations:
+                return ["language":"ko-KR"]
             case .aggregate_credits :
                 return ["language":"ko-KR"]
                 
@@ -144,6 +144,12 @@ enum MediaAPI {
             }
         }
         
+        var caseValue : String {
+            switch self {
+            default :
+                return String(describing: self)
+            }
+        }
     }
     
 }

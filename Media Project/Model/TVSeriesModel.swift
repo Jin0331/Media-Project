@@ -41,32 +41,6 @@ struct Genres : Decodable {
     let name : String
 }
 
-//MARK: - Recommendations API
-struct TVSeriesRecommendations : Decodable {
-    let page : Int
-    let results : [Recommendations]
-    let totalPages : Int
-    
-    enum CodingKeys : String, CodingKey {
-        case page, results
-        case totalPages = "total_pages"
-    }
-}
-
-struct Recommendations : Decodable {
-    let id : Int
-    let originalName : String
-    let overview : String
-    let posterPath : String
-    
-    enum CodingKeys : String, CodingKey {
-        case id, overview
-        case originalName = "original_name"
-        case posterPath = "poster_path"
-    }
-}
-
-
 //MARK: - Aggregate Credits API
 
 struct TVSeriesAggregateCredit : Decodable {
@@ -98,3 +72,27 @@ struct Role : Decodable {
     }
 }
 
+//MARK: - Recommendations API
+struct TVSeriesRecommendations : Decodable {
+    let page : Int
+    let results : [Recommendations]
+    let totalPages : Int
+    
+    enum CodingKeys : String, CodingKey {
+        case page, results
+        case totalPages = "total_pages"
+    }
+}
+
+struct Recommendations : Decodable {
+    let id : Int
+    let originalName : String
+    let overview : String
+    let posterPath : String
+    
+    enum CodingKeys : String, CodingKey {
+        case id, overview
+        case originalName = "original_name"
+        case posterPath = "poster_path"
+    }
+}

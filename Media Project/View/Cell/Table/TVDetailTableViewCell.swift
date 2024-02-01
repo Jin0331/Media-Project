@@ -20,7 +20,6 @@ class TVDetailTableViewCell: BaseTableViewCell {
     let subCollectionView : UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
         view.backgroundColor = .clear
-        view.register(TVDetailCollectionViewCell.self, forCellWithReuseIdentifier: TVDetailCollectionViewCell.identifier)
         
         return view
     }()
@@ -38,7 +37,7 @@ class TVDetailTableViewCell: BaseTableViewCell {
         }
         subCollectionView.snp.makeConstraints { make in
             make.horizontalEdges.bottom.equalTo(contentView)
-            make.top.equalTo(titleLabel.snp.bottom)
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
         }
     }
     

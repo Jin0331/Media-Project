@@ -16,9 +16,9 @@ class TVDetailViewController: UIViewController {
     //MARK: - Data
     var tvSeriesId = 96102 //TODO: - Search TV API로 값 전달 받으면 됨
     var detailList : TVSeriesDetail?
-    var recommendationsList : TVSeriesRecommendations?
     var aggregateCreditList : TVSeriesAggregateCredit?
-    
+    var recommendationsList : TVSeriesRecommendations?
+
     override func loadView() {
         self.view = mainView
     }
@@ -29,6 +29,16 @@ class TVDetailViewController: UIViewController {
         
         mainView.bottomLeftTableView.delegate = self
         mainView.bottomLeftTableView.dataSource = self
+        mainView.bottomLeftTableView.isHidden = true
+        
+        mainView.bottomRightTableView.delegate = self
+        mainView.bottomRightTableView.dataSource = self
+//        mainView.bottomRightTableView.isHidden = true
+        
+        
+        //MARK: - button 클릭에 따라 table view hidden
+        
+        
         
         let group = DispatchGroup()
         
@@ -48,68 +58,107 @@ class TVDetailViewController: UIViewController {
             }
         }
         
+        group.enter()
+        DispatchQueue.global().async(group: group) {
+            MediaAPIManager.shared.fetchTV(api: .recommendations(id: self.tvSeriesId)) { (item : TVSeriesRecommendations ) in
+                self.recommendationsList = item
+                group.leave()
+            }
+        }
+        
         group.notify(queue: .main) {
             print("갱신완료")
             
             self.mainView.configureView(detailList: self.detailList)
             self.mainView.bottomLeftTableView.reloadData()
+            self.mainView.bottomRightTableView.reloadData()
         }
     }
 }
 
 extension TVDetailViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return MediaAPI.TV.contentsInfoAllcases.count
+        
+        if self.mainView.bottomLeftTableView == tableView{
+            return MediaAPI.TV.contentsInfoAllcases.count
+        } else {
+            return MediaAPI.TV.relatedContentsAllcases.count
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        let cell = tableView.dequeueReusableCell(withIdentifier: TVDetailTableViewCell.identifier, for: indexPath) as! TVDetailTableViewCell
+        cell.subCollectionView.delegate = self
+        cell.subCollectionView.dataSource = self
+        
+        //MARK: - 항목에 따라 register cell 변경
         if self.mainView.bottomLeftTableView == tableView {
-            let cell = tableView.dequeueReusableCell(withIdentifier: TVDetailTableViewCell.identifier, for: indexPath) as! TVDetailTableViewCell
-                   
-            cell.titleLabel.text = MediaAPI.TV.contentsInfoAllcases[indexPath.row].titleValue
-            
-            cell.subCollectionView.delegate = self
-            cell.subCollectionView.dataSource = self
-            cell.subCollectionView.tag = MediaAPI.TV.contentsInfoAllcases[indexPath.row].indexValue
-            
-            cell.subCollectionView.reloadData()
-            
-            return cell
-        } else{
-            return UITableViewCell()
+            cell.subCollectionView.register(TVDetailCollectionViewCell.self, forCellWithReuseIdentifier: TVDetailCollectionViewCell.identifier)
+        } else {
+            cell.subCollectionView.register(CommonCollectionViewCell.self, forCellWithReuseIdentifier: CommonCollectionViewCell.identifier)
         }
         
+        //MARK: - 항목이 2개이므로, 삼항 연산자 가능
+        let dataModel = self.mainView.bottomLeftTableView == tableView ? MediaAPI.TV.contentsInfoAllcases[indexPath.row] : MediaAPI.TV.relatedContentsAllcases[indexPath.row]
+        cell.titleLabel.text = dataModel.titleValue
+        cell.subCollectionView.layer.name = dataModel.caseValue
+        cell.subCollectionView.tag = dataModel.indexValue
+        cell.subCollectionView.reloadData()
+        
+        return cell
     }
 }
 
 extension TVDetailViewController : UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            
-        return aggregateCreditList?.cast.count ?? 0
+        
+        return MediaAPI.TV.contentsInfoAllcases.map({ item in
+            return item.caseValue
+        }).contains(collectionView.layer.name) ? aggregateCreditList?.cast.count ?? 0 : recommendationsList?.results.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TVDetailCollectionViewCell.identifier, for: indexPath) as! TVDetailCollectionViewCell
-        
-        if let aggregateCreditList = aggregateCreditList {
+                        
+        if MediaAPI.TV.contentsInfoAllcases.map({ item in
+            return item.caseValue
+        }).contains(collectionView.layer.name){ // 만약 layer name이 콘텐츠 정보에 포함된다면
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TVDetailCollectionViewCell.identifier, for: indexPath) as! TVDetailCollectionViewCell
             
-            if collectionView.tag == MediaAPI.TV.aggregate_credits(id: 0).indexValue { // 같은 콜렉션 뷰에서 나눠질때
-                cell.profileImage.kf.setImage(with: URL(string: MediaAPI.baseImageUrl + aggregateCreditList.cast[indexPath.item].profilePath), placeholder: UIImage(systemName: "heart.fill"))
-                cell.roleLabel.text = aggregateCreditList.cast[indexPath.item].roles[0].characterConvert
-                cell.nameLabel.text = aggregateCreditList.cast[indexPath.item].originalName
+            if let aggregateCreditList = aggregateCreditList {
                 
-                return cell
+                if collectionView.tag == MediaAPI.TV.aggregate_credits(id: 0).indexValue { // 출연 및 관련 동영상 구분하기 위한 tag 사용
+                    cell.profileImage.kf.setImage(with: URL(string: MediaAPI.baseImageUrl + aggregateCreditList.cast[indexPath.item].profilePath), placeholder: UIImage(systemName: "heart.fill"))
+                    cell.roleLabel.text = aggregateCreditList.cast[indexPath.item].roles[0].characterConvert
+                    cell.nameLabel.text = aggregateCreditList.cast[indexPath.item].originalName
+                } else {
+                    //TODO: - 아직 추가되지 않은 관련 동영상 항목
+                    print("관련 동영상 입니다. - aggregateCreditList")
+                }
+                
             } else {
-                return cell // 여기는 나중에 적절한 API 넣으면 될 듯
+                print("Optional 들어옴 ", #function)
             }
             
-
+            return cell
+            
+            //MARK: - 관련 콘텐츠(비슷한 영상)
         } else {
-          return UICollectionViewCell()
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCollectionViewCell.identifier, for: indexPath) as! CommonCollectionViewCell
+            if let recommendationsList = recommendationsList {
+                if collectionView.tag == MediaAPI.TV.recommendations(id: 0).indexValue { // 출연 및 관련 동영상 구분하기 위한 tag 사용
+                    cell.posterImageView.kf.setImage(with: URL(string: MediaAPI.baseImageUrl + recommendationsList.results[indexPath.item].posterPath), placeholder: UIImage(systemName: "heart.fill"))
+                } else {
+                    //TODO: - 아직 추가되지 않은 관련 동영상 항목
+                    print("관련 동영상 입니다. - recommendations")
+                }
+                
+            } else {
+                print("Optional 들어옴 ", #function)
+            }
+            
+            return cell
         }
-        
     }
-    
-    
 }
