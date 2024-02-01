@@ -7,12 +7,6 @@
 
 import Foundation
 
-protocol ViewSetUp {
-    func configureHirerachy ()
-    func configureLayout()
-    func configureView()
-}
-
 protocol ResuableProtocol {
     static var identifier : String { get }
     var identifier_ : String{ get }

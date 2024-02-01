@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TrendTVModel : Decodable {
+struct TVTrendModel : Decodable {
     let results : [TrendTV]
 }
 

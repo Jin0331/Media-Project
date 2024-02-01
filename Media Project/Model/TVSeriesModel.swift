@@ -27,7 +27,7 @@ struct TVSeriesDetail : Decodable {
     }
     
     var mainText : String {
-        var genreText : String = genres.map { item in
+        let genreText : String = genres.map { item in
             return item.name
         }.joined(separator: "-")
         
@@ -39,6 +39,37 @@ struct TVSeriesDetail : Decodable {
 struct Genres : Decodable {
     let id : Int
     let name : String
+}
+
+//MARK: - Aggregate Credits API
+
+struct TVSeriesAggregateCredit : Decodable {
+    let cast : [Cast]
+    let id : Int
+}
+
+struct Cast : Decodable {
+    let id : Int
+    let gender : Int
+    let originalName : String
+    let profilePath : String?
+    let roles : [Role]
+    
+    enum CodingKeys : String, CodingKey {
+        case id, gender, roles
+        case originalName = "original_name"
+        case profilePath = "profile_path"
+    }
+}
+
+struct Role : Decodable {
+    let character : String
+    
+    var characterConvert : String {
+        get {
+            return "\(character) 役"
+        }
+    }
 }
 
 //MARK: - Recommendations API
@@ -65,26 +96,3 @@ struct Recommendations : Decodable {
         case posterPath = "poster_path"
     }
 }
-
-
-//MARK: - Aggregate Credits API
-
-struct TVSeriesAggregateCredit : Decodable {
-    let cast : [Cast]
-    let id : Int
-}
-
-struct Cast : Decodable {
-    let id : Int
-    let gender : Int
-    let originalName : String
-    let profilePath : String
-    
-    enum CodingKeys : String, CodingKey {
-        case id, gender
-        case originalName = "original_name"
-        case profilePath = "profile_path"
-    }
-}
-
-
