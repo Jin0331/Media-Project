@@ -13,7 +13,7 @@ class MediaAPIManager {
     private init () { }
         
     //MARK: - API Requet Function
-    //TODO: - generic 적용
+    //TODO: - generic 적용 - 완
     func fetchTrend<T : Decodable>(api : MediaAPI.Trend, completionHandler : @escaping (T) -> Void) {
         
         AF.request(api.endPoint,

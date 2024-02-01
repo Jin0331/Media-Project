@@ -11,7 +11,6 @@ class TVDetailView : BaseView {
     //MARK: - UI Variable
     let topView : UIView = {
         let view = UIView()
-        view.backgroundColor = .clear
         return view
     }()
     let topViewImage : UIImageView = {
@@ -22,26 +21,68 @@ class TVDetailView : BaseView {
     }()
     let topViewTitle : UILabel = {
         let view = UILabel()
-        view.font = .systemFont(ofSize: 20, weight: .heavy)
-        view.textColor = .white
+        view.font = .systemFont(ofSize: 30, weight: .heavy)
+        view.textColor = .black
         
         return view
     }()
     let topViewInformation : UILabel = {
         let view = UILabel()
         view.font = .systemFont(ofSize: 12, weight: .heavy)
-        view.textColor = .white
+        view.textColor = .black
         return view
     }()
-    
     let topViewOverView : UILabel = {
         let view = UILabel()
         view.numberOfLines = 3
         view.lineBreakMode = .byCharWrapping
         view.font = .systemFont(ofSize: 12, weight: .heavy)
-        view.textColor = .systemGray2
+        view.textColor = .black
+        view.textAlignment = .center
         return view
     }()
+    
+    // middle button
+    let middleStackView : UIStackView = {
+        let view  = UIStackView()
+        view.axis = .horizontal
+        view.alignment = .fill
+        view.distribution = .fillEqually
+        view.spacing = 8
+        
+        return view
+    }()
+    let middleLeftButton : UIButton = {
+        let view = UIButton()
+        view.setTitle("콘텐츠 정보", for: .normal)
+        view.setTitleColor(.white, for: .normal)
+        view.titleLabel?.font = .systemFont(ofSize: 15, weight: .heavy)
+        view.backgroundColor = .clear
+        
+        return view
+    }()
+    let middleRightButton : UIButton = {
+        let view = UIButton()
+        view.setTitle("관련 콘텐츠", for: .normal)
+        view.setTitleColor(.white, for: .normal)
+        view.titleLabel?.font = .systemFont(ofSize: 15, weight: .heavy)
+        view.backgroundColor = .clear
+        
+        return view
+    }()
+    
+    let bottomLeftTableView : UITableView = {
+        let view = UITableView()
+        view.backgroundColor = .clear
+        view.rowHeight = 250
+        view.register(TVDetailTableViewCell.self, forCellReuseIdentifier: TVDetailTableViewCell.identifier)
+        
+        return view
+    }()
+    
+    
+    
+    // bottom table view
     
     override func configureHierarch() {
         self.addSubview(topView)
@@ -49,38 +90,55 @@ class TVDetailView : BaseView {
         [topViewImage, topViewTitle, topViewInformation, topViewOverView].forEach { item in
             topView.addSubview(item)
         }
+        
+        self.addSubview(middleStackView)
+        
+        [middleLeftButton, middleRightButton].forEach { item in
+            middleStackView.addArrangedSubview(item)
+        }
+        
+        self.addSubview(bottomLeftTableView)
     }
     
     override func configureLayout() {
         // topView
         topView.snp.makeConstraints { make in
             make.horizontalEdges.top.equalTo(self.safeAreaLayoutGuide)
-            make.height.equalTo(200)
+            make.height.equalTo(UIScreen.main.bounds.height / 3 * 1)
         }
         
         topViewImage.snp.makeConstraints { make in
-            make.verticalEdges.trailing.equalToSuperview().inset(30)
-            make.width.equalTo(50)
+            make.horizontalEdges.top.equalToSuperview()
         }
         
         topViewTitle.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(30)
-            make.leading.equalToSuperview().inset(15)
-            make.height.equalTo(50)
+            make.centerX.equalTo(topView)
+            make.centerY.equalTo(topView).offset(40)
         }
         
         topViewInformation.snp.makeConstraints { make in
-            make.top.equalTo(topViewTitle.snp.bottom).offset(5)
-            make.leading.equalTo(topViewTitle)
-            make.height.equalTo(15)
+            make.centerX.equalTo(topView)
+            make.top.equalTo(topViewTitle.snp.bottom).offset(10)
         }
         
         topViewOverView.snp.makeConstraints { make in
-            make.top.equalTo(topViewInformation.snp.bottom).offset(3)
-            make.leading.equalTo(topViewInformation)
-            make.trailing.equalToSuperview().inset(180)
-            make.bottom.greaterThanOrEqualToSuperview().inset(5)
+            make.centerX.equalTo(topView)
+            make.horizontalEdges.equalTo(topView).inset(10)
+            make.top.equalTo(topViewInformation.snp.bottom).offset(10)
         }
+        
+        middleStackView.snp.makeConstraints { make in
+            make.top.equalTo(topView.snp.bottom)
+            make.horizontalEdges.equalTo(topView)
+            make.height.equalTo(60)
+        }
+        
+        bottomLeftTableView.snp.makeConstraints { make in
+            make.top.equalTo(middleStackView.snp.bottom)
+            make.horizontalEdges.equalTo(middleStackView)
+            make.bottom.equalTo(self.safeAreaLayoutGuide)
+        }
+        
     }
 
     override func configureView(detailList : TVSeriesDetail?) {
@@ -105,89 +163,4 @@ class TVDetailView : BaseView {
         
         return layout
     }
-    
-    
-    //    func configureHirerachy() {
-    
-    //
-    //        view.addSubview(middleView)
-    //        // middleSubView
-    //        [middleLabel,middleCollectionView].map { item in
-    //            return middleView.addSubview(item)
-    //        }
-    //
-    //        view.addSubview(bottomView)
-    
-    
 }
-
-//    override func configureLayout() {
-//        // topView
-//        topView.snp.makeConstraints { make in
-//            make.horizontalEdges.top.equalTo(view.safeAreaLayoutGuide)
-//            make.height.equalTo(200)
-//        }
-//
-//        topViewImage.snp.makeConstraints { make in
-//            make.verticalEdges.trailing.equalToSuperview().inset(30)
-//            make.width.equalTo(50)
-//        }
-//
-//        topViewTitle.snp.makeConstraints { make in
-//            make.top.equalToSuperview().inset(30)
-//            make.leading.equalToSuperview().inset(15)
-//            make.height.equalTo(50)
-//        }
-//
-//        topViewInformation.snp.makeConstraints { make in
-//            make.top.equalTo(topViewTitle.snp.bottom).offset(5)
-//            make.leading.equalTo(topViewTitle)
-//            make.height.equalTo(15)
-//        }
-//
-//        topViewOverView.snp.makeConstraints { make in
-//            make.top.equalTo(topViewInformation.snp.bottom).offset(3)
-//            make.leading.equalTo(topViewInformation)
-//            make.trailing.equalToSuperview().inset(180)
-//            make.bottom.greaterThanOrEqualToSuperview().inset(5)
-//        }
-//
-//        // middleView
-//        middleView.snp.makeConstraints { make in
-//            make.top.equalTo(topView.snp.bottom).offset(15)
-//            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-//            make.height.equalTo(200)
-//        }
-//
-//        middleLabel.snp.makeConstraints { make in
-//            make.top.equalToSuperview()
-//            make.leading.equalToSuperview().inset(15)
-//            make.height.equalTo(20)
-//        }
-//
-//        middleCollectionView.snp.makeConstraints { make in
-//            make.top.equalTo(middleLabel.snp.bottom).offset(10)
-//            make.horizontalEdges.equalToSuperview().inset(15)
-//            make.height.equalTo(100)
-//        }
-//
-//        bottomView.snp.makeConstraints { make in
-//            make.top.equalTo(middleView.snp.bottom).offset(15)
-//            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-//            make.height.equalTo(200)
-//        }
-//
-//
-//    }
-//
-//    override func configureView() {
-//        guard let detailList = detailList else { return }
-//
-//        let url = URL(string: MediaAPIManager.CommonVariable.imageURL + detailList.backdropPath)!
-//        topViewImage.kf.setImage(with: url, placeholder: UIImage(systemName: "star.fill"))
-//        topViewTitle.text = detailList.originalName
-//        topViewInformation.text = detailList.mainText
-//        topViewOverView.text = detailList.overview
-//
-//    }
-//}

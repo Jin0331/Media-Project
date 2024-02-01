@@ -57,6 +57,7 @@ enum MediaAPI {
 
             }
         }
+        
         var textValue : String {
             switch self {
             case .top_rated:
@@ -72,17 +73,29 @@ enum MediaAPI {
     
     enum TV : CaseIterable{
         static var allCases: [TV] {
-            return [.detail(id: 0), recommendations(id: 0, page: 0), .aggregate_credits(id: 0, page: 0)]
+            return [.detail(id: 0), .recommendations(id: 0, page: 0), .aggregate_credits(id: 0)]
         }
         
+        // 여기가 핵심. 구역별로 정하면 될 듯
+        // 추가되는 항목을 아래의 리스트에 추가하면 될 듯
+        static var contentsInfoAllcases : [TV] {
+            return [.aggregate_credits(id: 0), .relatedVideo(id: 0)]
+        }
+        
+        static var relatedContentsAllcases : [TV] {
+            return [.recommendations(id: 0, page: 0)]
+        }
+        
+        //MARK: - Case
         case detail(id:Int)
         case recommendations(id:Int, page : Int)
-        case aggregate_credits(id:Int, page : Int)
+        case aggregate_credits(id:Int)
+        case relatedVideo(id:Int) /// 나중에 추가될 경우 ..>!?
         
         var endPoint : URL {
             get {
                 switch self {
-                case .detail(let id):
+                case .detail(let id),.relatedVideo(id: let id):
                     return URL(string: MediaAPI.baseUrl + "tv/\(id)")!
                 case .recommendations(let id):
                     return URL(string: MediaAPI.baseUrl + "tv/\(id)/recommendations")!
@@ -94,28 +107,40 @@ enum MediaAPI {
         
         var parameter : Parameters {
             switch self {
-            case  .detail :
+            case  .detail, .relatedVideo :
                 return ["language":"ko-KR"]
-            case .recommendations(let page), .aggregate_credits(let page):
+            case .recommendations(let page):
                 return ["language":"ko-KR", "page": page]
+            case .aggregate_credits :
+                return ["language":"ko-KR"]
+                
             }
         }
         
-        var caseValue : String {
+        var indexValue : Int {
             switch self {
-            default :
-                return String(describing: self)
+            case .detail :
+                return 0
+            case .recommendations :
+                return 1
+            case .aggregate_credits :
+                return 2
+            case .relatedVideo :
+                return 99
+
             }
         }
         
-        var textValue : String {
+        var titleValue : String {
             switch self {
+            case .detail :
+                return "detail - None"
             case .recommendations :
                 return "비슷한 콘텐츠"
             case .aggregate_credits :
                 return "출연"
-            default:
-                return "None"
+            case .relatedVideo :
+                return "관련 동영상"
             }
         }
         

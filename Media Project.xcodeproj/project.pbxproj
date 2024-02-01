@@ -27,6 +27,10 @@
 		DB8151D22B6925920026AAA9 /* CommonTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8151D12B6925920026AAA9 /* CommonTextLabel.swift */; };
 		DB8151D42B6926270026AAA9 /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8151D32B6926270026AAA9 /* UIView + Extension.swift */; };
 		DB8151D82B692E180026AAA9 /* TVTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8151D72B692E180026AAA9 /* TVTableViewCell.swift */; };
+		DB9CEE472B6BCF4300B0E0A1 /* TVDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9CEE462B6BCF4300B0E0A1 /* TVDetailTableViewCell.swift */; };
+		DBA65C152B6BBB1D00D3143D /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA65C142B6BBB1D00D3143D /* BaseTableViewCell.swift */; };
+		DBA65C192B6BCCC700D3143D /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA65C182B6BCCC700D3143D /* BaseCollectionViewCell.swift */; };
+		DBA65C1C2B6BCD9E00D3143D /* TVDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA65C1B2B6BCD9E00D3143D /* TVDetailCollectionViewCell.swift */; };
 		DBB376D82B68DCA800DA1C8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB376D72B68DCA800DA1C8F /* AppDelegate.swift */; };
 		DBB376DA2B68DCA800DA1C8F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB376D92B68DCA800DA1C8F /* SceneDelegate.swift */; };
 		DBB376DC2B68DCA800DA1C8F /* TVViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB376DB2B68DCA800DA1C8F /* TVViewController.swift */; };
@@ -51,6 +55,10 @@
 		DB8151D12B6925920026AAA9 /* CommonTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTextLabel.swift; sourceTree = "<group>"; };
 		DB8151D32B6926270026AAA9 /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
 		DB8151D72B692E180026AAA9 /* TVTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVTableViewCell.swift; sourceTree = "<group>"; };
+		DB9CEE462B6BCF4300B0E0A1 /* TVDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVDetailTableViewCell.swift; sourceTree = "<group>"; };
+		DBA65C142B6BBB1D00D3143D /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		DBA65C182B6BCCC700D3143D /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		DBA65C1B2B6BCD9E00D3143D /* TVDetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		DBB376D42B68DCA800DA1C8F /* Media Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Media Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBB376D72B68DCA800DA1C8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBB376D92B68DCA800DA1C8F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +88,8 @@
 			children = (
 				DB5D409B2B6A2511003B9176 /* BaseViewController.swift */,
 				DB22C2452B6B4B5E0011970E /* BaseView.swift */,
+				DBA65C142B6BBB1D00D3143D /* BaseTableViewCell.swift */,
+				DBA65C182B6BCCC700D3143D /* BaseCollectionViewCell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -87,8 +97,7 @@
 		DB8151B32B68DDFC0026AAA9 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DB8151CF2B69254D0026AAA9 /* CommonCollectionViewCell.swift */,
-				DB8151D72B692E180026AAA9 /* TVTableViewCell.swift */,
+				DBA65C1A2B6BCD5000D3143D /* Cell */,
 				DB22C2432B6B4B010011970E /* TVDetailView.swift */,
 			);
 			path = View;
@@ -98,10 +107,9 @@
 			isa = PBXGroup;
 			children = (
 				DB8151B62B6911390026AAA9 /* TVTrendModel.swift */,
-				DB8151C72B6918E00026AAA9 /* TVSeriesListsModel.swift */,
 				DB5D40962B6A203E003B9176 /* TVSeriesModel.swift */,
+				DB8151C72B6918E00026AAA9 /* TVSeriesListsModel.swift */,
 				DB8151B82B69137C0026AAA9 /* MediaAPIManager.swift */,
-				DB8151C52B6914250026AAA9 /* API.swift */,
 				DB1FCA5B2B6B764D00755D80 /* MediaAPI.swift */,
 			);
 			path = Model;
@@ -121,6 +129,7 @@
 			children = (
 				DB8151CA2B6923090026AAA9 /* Protocol.swift */,
 				DB8151D32B6926270026AAA9 /* UIView + Extension.swift */,
+				DB8151C52B6914250026AAA9 /* API.swift */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -132,6 +141,33 @@
 				DB8151D12B6925920026AAA9 /* CommonTextLabel.swift */,
 			);
 			path = CustomView;
+			sourceTree = "<group>";
+		};
+		DB9CEE482B6BCF5700B0E0A1 /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				DB8151D72B692E180026AAA9 /* TVTableViewCell.swift */,
+				DB9CEE462B6BCF4300B0E0A1 /* TVDetailTableViewCell.swift */,
+			);
+			path = Table;
+			sourceTree = "<group>";
+		};
+		DB9CEE492B6BCF5E00B0E0A1 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				DBA65C1B2B6BCD9E00D3143D /* TVDetailCollectionViewCell.swift */,
+				DB8151CF2B69254D0026AAA9 /* CommonCollectionViewCell.swift */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
+		DBA65C1A2B6BCD5000D3143D /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DB9CEE492B6BCF5E00B0E0A1 /* Collection */,
+				DB9CEE482B6BCF5700B0E0A1 /* Table */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		DBB376CB2B68DCA800DA1C8F = {
@@ -156,9 +192,9 @@
 				DB5D409A2B6A2509003B9176 /* Base */,
 				DB8151CC2B6924E30026AAA9 /* CustomView */,
 				DB8151C92B6922FC0026AAA9 /* Resource */,
-				DB8151B52B68DE0A0026AAA9 /* Controller */,
 				DB8151B42B68DE030026AAA9 /* Model */,
 				DB8151B32B68DDFC0026AAA9 /* View */,
+				DB8151B52B68DE0A0026AAA9 /* Controller */,
 				DBB376D72B68DCA800DA1C8F /* AppDelegate.swift */,
 				DBB376D92B68DCA800DA1C8F /* SceneDelegate.swift */,
 				DBB376E02B68DCAA00DA1C8F /* Assets.xcassets */,
@@ -257,15 +293,19 @@
 				DB5D40972B6A203E003B9176 /* TVSeriesModel.swift in Sources */,
 				DB8151D02B69254D0026AAA9 /* CommonCollectionViewCell.swift in Sources */,
 				DB8151CE2B6924F80026AAA9 /* PosterImageView.swift in Sources */,
+				DBA65C152B6BBB1D00D3143D /* BaseTableViewCell.swift in Sources */,
 				DB8151D42B6926270026AAA9 /* UIView + Extension.swift in Sources */,
 				DB22C2442B6B4B010011970E /* TVDetailView.swift in Sources */,
 				DBB376D82B68DCA800DA1C8F /* AppDelegate.swift in Sources */,
 				DB8151D22B6925920026AAA9 /* CommonTextLabel.swift in Sources */,
 				DB8151D82B692E180026AAA9 /* TVTableViewCell.swift in Sources */,
+				DBA65C192B6BCCC700D3143D /* BaseCollectionViewCell.swift in Sources */,
+				DBA65C1C2B6BCD9E00D3143D /* TVDetailCollectionViewCell.swift in Sources */,
 				DB1FCA5C2B6B764D00755D80 /* MediaAPI.swift in Sources */,
 				DB8151C82B6918E00026AAA9 /* TVSeriesListsModel.swift in Sources */,
 				DB5D409C2B6A2511003B9176 /* BaseViewController.swift in Sources */,
 				DB22C2462B6B4B5E0011970E /* BaseView.swift in Sources */,
+				DB9CEE472B6BCF4300B0E0A1 /* TVDetailTableViewCell.swift in Sources */,
 				DB8151C62B6914250026AAA9 /* API.swift in Sources */,
 				DBB376DA2B68DCA800DA1C8F /* SceneDelegate.swift in Sources */,
 			);

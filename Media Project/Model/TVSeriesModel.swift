@@ -79,12 +79,22 @@ struct Cast : Decodable {
     let gender : Int
     let originalName : String
     let profilePath : String
+    let roles : [Role]
     
     enum CodingKeys : String, CodingKey {
-        case id, gender
+        case id, gender, roles
         case originalName = "original_name"
         case profilePath = "profile_path"
     }
 }
 
+struct Role : Decodable {
+    let character : String
+    
+    var characterConvert : String {
+        get {
+            return "\(character) 役"
+        }
+    }
+}
 

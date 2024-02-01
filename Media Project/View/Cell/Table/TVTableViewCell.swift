@@ -7,32 +7,19 @@
 
 import UIKit
 
-class TVTableViewCell: UITableViewCell {
+class TVTableViewCell: BaseTableViewCell {
     
     let titleLabel = CommonTextLabel()
     lazy var subCollectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        configureHirerachy()
-        configureLayout()
-        configureView()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    
-    func configureHirerachy() {
+    override func configureHierarchy() {
         contentView.addSubview(titleLabel)
         contentView.addSubview(subCollectionView)
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         titleLabel.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalTo(contentView).inset(30)
+            make.top.leading.equalTo(contentView).inset(10)
             make.height.equalTo(30)
         }
         subCollectionView.snp.makeConstraints { make in
@@ -41,13 +28,13 @@ class TVTableViewCell: UITableViewCell {
         }
     }
     
-    func configureView() {
+    override func configureView() {
         backgroundColor = .clear
         subCollectionView.backgroundColor = .clear
         titleLabel.backgroundColor = .systemGray4
     }
     
-    func configureCollectionViewLayout() -> UICollectionViewFlowLayout {
+    override func configureCollectionViewLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 180, height: 240)
         layout.minimumLineSpacing = 10
@@ -57,6 +44,4 @@ class TVTableViewCell: UITableViewCell {
         
         return layout
     }
-
-
 }
