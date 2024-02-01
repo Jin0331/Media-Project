@@ -13,7 +13,7 @@ class BaseView : UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        configureHierarch()
+        configureHierarchy()
         configureLayout()
         configureView()
     }
@@ -22,7 +22,7 @@ class BaseView : UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureHierarch() {
+    func configureHierarchy() {
         
     }
     
@@ -38,53 +38,15 @@ class BaseView : UIView {
     func configureView(detailList : TVSeriesDetail) {
 
     }
+    
+    func configureCollectionViewLayout() -> UICollectionViewFlowLayout {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 200)
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.scrollDirection = .horizontal
+        
+        return layout
+    }
 }
-
-
-
-
-//
-//
-////MARK: - UI Variable
-//let middleView : UIView = {
-//    let view = UIView()
-////        view.backgroundColor = .red
-//    return view
-//}()
-//
-//let middleLabel : UILabel = {
-//    let view = UILabel()
-////        view.backgroundColor = .blue
-//    view.textColor = .white
-//    view.font = .systemFont(ofSize: 20, weight: .heavy)
-//    view.text = "관련 콘텐츠"
-//    
-//    return view
-//}()
-//
-//lazy var middleCollectionView : UICollectionView = {
-//    let view = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
-//    view.delegate = self
-//    view.dataSource = self
-//    view.register(CommonCollectionViewCell.self, forCellWithReuseIdentifier: CommonCollectionViewCell.identifier)
-//    view.reloadData()
-////        print(#function, CommonCollectionViewCell.identifier)
-//    
-//    return view
-//}()
-//
-//let bottomView : UIView = {
-//    let view = UIView()
-//    view.backgroundColor = .blue
-//    return view
-//}()
-////    let bottomLabel = UILabel()
-////    lazy var bottomCollectionView : UICollectionView = {
-////        let view = UICollectionView(frame: .zero, collectionViewLayout: <#T##UICollectionViewLayout#>)
-////        view.delegate = self
-////        view.dataSource = self
-////        view.register(SearchViewCollectionViewCell.self, forCellWithReuseIdentifier: "Search")
-////
-////        return view
-////    }()
-////

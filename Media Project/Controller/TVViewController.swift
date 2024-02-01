@@ -15,35 +15,26 @@ import Kingfisher
 
 class TVViewController: UIViewController{
     
+    let mainView = TVView()
     
-    lazy var mainCollectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
-    lazy var mainTableView = UITableView()
-    
-    var mainList : [TrendTV] = [] { // trend TV
-        didSet {
-            mainCollectionView.reloadData()
-        }
-    }
-    var popularList : [TVSeriesLists] = [] {
-        didSet {
-            mainTableView.reloadData()
-        }
-    }
-    var topRatedList : [TVSeriesLists] = [] {
-        didSet {
-            mainTableView.reloadData()
-        }
-    }
-    
+    var mainList : [TrendTV] = []
+    var popularList : [TVSeriesLists] = []
+    var topRatedList : [TVSeriesLists] = []
     var popularStart = 1 // pagination 변수
     var topRatedStart = 1 // pagination 변수
+    
+    override func loadView() {
+        self.view = mainView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureHirerachy()
-        configureLayout()
-        configureView()
+        mainView.mainCollectionView.delegate = self
+        mainView.mainCollectionView.dataSource = self
+        
+        mainView.mainTableView.delegate = self
+        mainView.mainTableView.dataSource = self
         
         let group = DispatchGroup()
         
@@ -74,39 +65,14 @@ class TVViewController: UIViewController{
             }
         }
         
-        print(MediaAPI.Trend.popular(page: 0).indexValue)
-    }
-    
-    func configureHirerachy() {
-        view.addSubview(mainCollectionView)
-        view.addSubview(mainTableView)
-    }
-    
-    func configureLayout() {
-        mainCollectionView.snp.makeConstraints { make in
-            make.horizontalEdges.top.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(200)
-        }
-        
-        mainTableView.snp.makeConstraints { make in
-            make.top.equalTo(mainCollectionView.snp.bottom)
-            make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
+        group.notify(queue: .main) {
+            print("조회 완료")
+            self.mainView.mainCollectionView.reloadData()
+            self.mainView.mainTableView.reloadData()
         }
     }
     
-    func configureView() {
-        mainCollectionView.delegate = self
-        mainCollectionView.dataSource = self
-        mainCollectionView.register(CommonCollectionViewCell.self, forCellWithReuseIdentifier: CommonCollectionViewCell.identifier)
-        
-        mainCollectionView.backgroundColor = .clear
-        mainCollectionView.isPagingEnabled = true
-        
-        mainTableView.delegate = self
-        mainTableView.dataSource = self
-        mainTableView.rowHeight = 300
-        mainTableView.register(TVTableViewCell.self, forCellReuseIdentifier: TVTableViewCell.identifier)
-    }
+
 }
 
 //MARK: - table View
@@ -136,7 +102,7 @@ extension TVViewController : UITableViewDelegate, UITableViewDataSource {
 extension TVViewController : UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
                
-        if self.mainCollectionView == collectionView {
+        if self.mainView.mainCollectionView == collectionView {
             return mainList.count
         } else if collectionView.tag == MediaAPI.Trend.popular(page: 0).indexValue {
             return popularList.count
@@ -148,7 +114,7 @@ extension TVViewController : UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCollectionViewCell.identifier, for: indexPath) as! CommonCollectionViewCell
         
-        if self.mainCollectionView == collectionView {
+        if self.mainView.mainCollectionView == collectionView {
             let item = mainList[indexPath.item]
             let url = URL(string: "\(MediaAPI.baseImageUrl)\(item.backdropPath)")
             
@@ -163,23 +129,14 @@ extension TVViewController : UICollectionViewDelegate, UICollectionViewDataSourc
         return cell
     }
     
-    func configureCollectionViewLayout() -> UICollectionViewFlowLayout {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 200)
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        layout.scrollDirection = .horizontal
-        
-        return layout
-    }
+
 }
 
 //MARK: - collection View pagination
 extension TVViewController : UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         
-        if self.mainCollectionView != collectionView {
+        if self.mainView.mainCollectionView != collectionView {
             let currentCount = collectionView.tag == MediaAPI.Trend.popular(page: 0).indexValue ? popularList.count : topRatedList.count
             var start : Int
             

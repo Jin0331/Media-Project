@@ -28,6 +28,7 @@
 		DB8151D42B6926270026AAA9 /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8151D32B6926270026AAA9 /* UIView + Extension.swift */; };
 		DB8151D82B692E180026AAA9 /* TVTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8151D72B692E180026AAA9 /* TVTableViewCell.swift */; };
 		DB9CEE472B6BCF4300B0E0A1 /* TVDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9CEE462B6BCF4300B0E0A1 /* TVDetailTableViewCell.swift */; };
+		DB9CEE4B2B6BF40E00B0E0A1 /* TVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9CEE4A2B6BF40E00B0E0A1 /* TVView.swift */; };
 		DBA65C152B6BBB1D00D3143D /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA65C142B6BBB1D00D3143D /* BaseTableViewCell.swift */; };
 		DBA65C192B6BCCC700D3143D /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA65C182B6BCCC700D3143D /* BaseCollectionViewCell.swift */; };
 		DBA65C1C2B6BCD9E00D3143D /* TVDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA65C1B2B6BCD9E00D3143D /* TVDetailCollectionViewCell.swift */; };
@@ -56,6 +57,7 @@
 		DB8151D32B6926270026AAA9 /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
 		DB8151D72B692E180026AAA9 /* TVTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVTableViewCell.swift; sourceTree = "<group>"; };
 		DB9CEE462B6BCF4300B0E0A1 /* TVDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVDetailTableViewCell.swift; sourceTree = "<group>"; };
+		DB9CEE4A2B6BF40E00B0E0A1 /* TVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVView.swift; sourceTree = "<group>"; };
 		DBA65C142B6BBB1D00D3143D /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		DBA65C182B6BCCC700D3143D /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		DBA65C1B2B6BCD9E00D3143D /* TVDetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVDetailCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			children = (
 				DBA65C1A2B6BCD5000D3143D /* Cell */,
 				DB22C2432B6B4B010011970E /* TVDetailView.swift */,
+				DB9CEE4A2B6BF40E00B0E0A1 /* TVView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				DB8151D42B6926270026AAA9 /* UIView + Extension.swift in Sources */,
 				DB22C2442B6B4B010011970E /* TVDetailView.swift in Sources */,
 				DBB376D82B68DCA800DA1C8F /* AppDelegate.swift in Sources */,
+				DB9CEE4B2B6BF40E00B0E0A1 /* TVView.swift in Sources */,
 				DB8151D22B6925920026AAA9 /* CommonTextLabel.swift in Sources */,
 				DB8151D82B692E180026AAA9 /* TVTableViewCell.swift in Sources */,
 				DBA65C192B6BCCC700D3143D /* BaseCollectionViewCell.swift in Sources */,

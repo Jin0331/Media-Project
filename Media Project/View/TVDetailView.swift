@@ -95,7 +95,7 @@ class TVDetailView : BaseView {
     
     // bottom table view
     
-    override func configureHierarch() {
+    override func configureHierarchy() {
         self.addSubview(topView)
         
         [topViewImage, topViewTitle, topViewInformation, topViewOverView].forEach { item in
@@ -170,7 +170,7 @@ class TVDetailView : BaseView {
         }
     }
     
-    func configureCollectionViewLayout() -> UICollectionViewFlowLayout {
+    override func configureCollectionViewLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         
         layout.itemSize = CGSize(width: 50, height: 50)

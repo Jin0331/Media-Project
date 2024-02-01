@@ -31,7 +31,9 @@ class TVTableViewCell: BaseTableViewCell {
     override func configureView() {
         backgroundColor = .clear
         subCollectionView.backgroundColor = .clear
-        titleLabel.backgroundColor = .systemGray4
+        titleLabel.backgroundColor = .clear
+        titleLabel.font = .systemFont(ofSize: 22, weight: .heavy)
+        titleLabel.textColor = .white
     }
     
     override func configureCollectionViewLayout() -> UICollectionViewFlowLayout {
