@@ -44,6 +44,11 @@ class BaseViewController: UIViewController{
             NSAttributedString.Key.foregroundColor : UIColor.white,
             NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25, weight: .heavy)
         ]
+        
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil) // title 부분 수정
+        backBarButtonItem.tintColor = .white
+        self.navigationItem.backBarButtonItem = backBarButtonItem
+        
         navigationItem.title = "고래밥님"
         
     }
