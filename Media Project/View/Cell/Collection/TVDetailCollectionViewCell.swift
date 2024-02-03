@@ -10,8 +10,8 @@ import UIKit
 class TVDetailCollectionViewCell: BaseCollectionViewCell {
     
     
-    let profileImage : UIImageView = {
-        let view = UIImageView(frame: .zero)
+    let profileImage : PosterImageView = {
+        let view = PosterImageView(frame: .zero)
 //        view.contentMode = .scaleAspectFill
         
         return view

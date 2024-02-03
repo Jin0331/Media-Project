@@ -136,6 +136,13 @@ extension TVViewController : UICollectionViewDelegate, UICollectionViewDataSourc
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let item = collectionView.layer.name! == MediaAPI.Trend.popular(page: 0).caseValue ? popularList[indexPath.item] : topRatedList[indexPath.item]
+        let vc = TVDetailViewController()
+        vc.tvSeriesId = item.id
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
 }
 

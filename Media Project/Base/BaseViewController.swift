@@ -34,6 +34,7 @@ class BaseViewController: UIViewController{
     func configureNavigation () {
         // background color
         navigationController?.navigationBar.scrollEdgeAppearance?.backgroundColor = .black
+        navigationController?.navigationBar.barTintColor = UIColor.black
         
         // font setting
         navigationController?.navigationBar.titleTextAttributes = [
@@ -41,7 +42,7 @@ class BaseViewController: UIViewController{
             NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25, weight: .heavy)
         ]
         navigationItem.title = "고래밥님"
-
+        
     }
 }
 
