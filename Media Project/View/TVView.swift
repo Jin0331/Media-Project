@@ -6,18 +6,15 @@
 //
 
 import UIKit
+import Then
 
-class TVView : BaseView {
-
-    let mainTableView : UITableView = {
-        let view = UITableView()
-        view.rowHeight = 300
-        view.register(TVTableViewCell.self, forCellReuseIdentifier: TVTableViewCell.identifier)
-        view.backgroundColor = .clear
-        
-        return view
-    }()
-    
+class TVView : BaseView {    
+    lazy var mainTableView = UITableView().then {
+        $0.register(TVTableViewCell.self, forCellReuseIdentifier: TVTableViewCell.identifier)
+        $0.register(PosterTableViewCell.self, forCellReuseIdentifier: PosterTableViewCell.identifier)
+//        $0.rowHeight = 300
+        $0.backgroundColor = .clear
+    }
     
     override func configureHierarchy() {
         self.addSubview(mainTableView)

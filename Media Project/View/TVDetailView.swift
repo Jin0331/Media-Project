@@ -6,92 +6,69 @@
 //
 
 import UIKit
+import Then
 
 class TVDetailView : BaseView {
+    
     //MARK: - UI Variable
-    let topView : UIView = {
-        let view = UIView()
-        return view
-    }()
-    let topViewImage : PosterImageView = {
-        let view  = PosterImageView(frame: .zero)
-        view.alpha = 0.6
-        
-        return view
-    }()
-    let topViewTitle : UILabel = {
-        let view = UILabel()
-        view.font = .systemFont(ofSize: 30, weight: .heavy)
-        view.textColor = .white
-        
-        return view
-    }()
-    let topViewInformation : UILabel = {
-        let view = UILabel()
-        view.font = .systemFont(ofSize: 12, weight: .heavy)
-        view.textColor = .white
-        return view
-    }()
-    let topViewOverView : UILabel = {
-        let view = UILabel()
-        view.numberOfLines = 3
-        view.lineBreakMode = .byCharWrapping
-        view.font = .systemFont(ofSize: 12, weight: .heavy)
-        view.textColor = .white
-        view.textAlignment = .center
-        return view
-    }()
+    let topView = UIView().then {view in}
+    let topViewImage = PosterImageView(frame: .zero).then {
+        $0.alpha = 0.6
+    }
+    
+    let topViewTitle = UILabel().then {
+        $0.font = .systemFont(ofSize: 30, weight: .heavy)
+        $0.textColor = .white
+    }
+    
+    let topViewInformation = UILabel().then {
+        $0.font = .systemFont(ofSize: 12, weight: .heavy)
+        $0.textColor = .white
+    }
+    
+    let topViewOverView = UILabel().then {
+        $0.numberOfLines = 3
+        $0.lineBreakMode = .byCharWrapping
+        $0.font = .systemFont(ofSize: 12, weight: .heavy)
+        $0.textColor = .white
+        $0.textAlignment = .center
+    }
     
     // middle button
-    let middleStackView : UIStackView = {
-        let view  = UIStackView()
-        view.axis = .horizontal
-        view.alignment = .fill
-        view.distribution = .fillEqually
-        view.spacing = 8
-        
-        return view
-    }()
-    let middleLeftButton : UIButton = {
-        let view = UIButton()
-        view.setTitle("콘텐츠 정보", for: .normal)
-        view.setTitleColor(.white, for: .normal)
-        view.titleLabel?.font = .systemFont(ofSize: 15, weight: .heavy)
-        view.backgroundColor = .clear
-        view.layer.name = "left"
-        
-        return view
-    }()
-    let middleRightButton : UIButton = {
-        let view = UIButton()
-        view.setTitle("관련 콘텐츠", for: .normal)
-        view.setTitleColor(.white, for: .normal)
-        view.titleLabel?.font = .systemFont(ofSize: 15, weight: .heavy)
-        view.backgroundColor = .clear
-        view.layer.name = "right"
-        
-        return view
-    }()
+    let middleStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.alignment = .fill
+        $0.distribution = .fillEqually
+        $0.spacing = 8
+    }
     
-    let bottomLeftTableView : UITableView = {
-        let view = UITableView()
-        view.backgroundColor = .clear
-        view.rowHeight = UIScreen.main.bounds.height / 3
-        view.register(TVDetailTableViewCell.self, forCellReuseIdentifier: TVDetailTableViewCell.identifier)
-        
-        return view
-    }()
+    let middleLeftButton = UIButton().then {
+        $0.setTitle("콘텐츠 정보", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = .systemFont(ofSize: 15, weight: .heavy)
+        $0.backgroundColor = .clear
+        $0.layer.name = "left"
+    }
     
-    let bottomRightTableView : UITableView = {
-        let view = UITableView()
-        view.backgroundColor = .clear
-        view.rowHeight = UIScreen.main.bounds.height
-        view.register(TVDetailTableViewCell.self, forCellReuseIdentifier: TVDetailTableViewCell.identifier)
-        
-        return view
-    }()
+    let middleRightButton = UIButton().then {
+        $0.setTitle("관련 콘텐츠", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = .systemFont(ofSize: 15, weight: .heavy)
+        $0.backgroundColor = .clear
+        $0.layer.name = "right"
+    }
     
+    let bottomLeftTableView = UITableView().then {
+        $0.backgroundColor = .clear
+        $0.rowHeight = UIScreen.main.bounds.height / 3
+        $0.register(TVDetailTableViewCell.self, forCellReuseIdentifier: TVDetailTableViewCell.identifier)
+    }
     
+    let bottomRightTableView = UITableView().then {
+        $0.backgroundColor = .clear
+        $0.rowHeight = UIScreen.main.bounds.height
+        $0.register(TVDetailTableViewCell.self, forCellReuseIdentifier: TVDetailTableViewCell.identifier)
+    }
     
     // bottom table view
     
@@ -116,7 +93,7 @@ class TVDetailView : BaseView {
         // topView
         topView.snp.makeConstraints { make in
             make.horizontalEdges.top.equalTo(self.safeAreaLayoutGuide)
-            make.height.equalTo(UIScreen.main.bounds.height / 3 * 1)
+            make.height.equalTo(UIScreen.main.bounds.height / 3)
         }
         
         topViewImage.snp.makeConstraints { make in
@@ -159,7 +136,7 @@ class TVDetailView : BaseView {
         
     }
 
-    override func configureView(detailList : TVSeriesDetail?) {
+    func configureView(detailList : TVSeriesDetail?) {
         
         if let detailList = detailList {
             let url = URL(string: MediaAPI.baseImageUrl + detailList.backdropPath)!
@@ -171,14 +148,13 @@ class TVDetailView : BaseView {
     }
     
     override func configureCollectionViewLayout() -> UICollectionViewFlowLayout {
-        let layout = UICollectionViewFlowLayout()
-        
-        layout.itemSize = CGSize(width: 50, height: 50)
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        layout.scrollDirection = .horizontal
-        
+        let layout = UICollectionViewFlowLayout().then {
+            $0.itemSize = CGSize(width: 50, height: 50)
+            $0.minimumLineSpacing = 0
+            $0.minimumInteritemSpacing = 0
+            $0.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            $0.scrollDirection = .horizontal
+        }        
         return layout
     }
 }

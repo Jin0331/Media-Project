@@ -13,13 +13,14 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class TVViewController: UIViewController{
+class TVViewController: BaseViewController{
     
     let mainView = TVView()
     
-    var mainList : [TrendTV] = []
+    var mainList : TVTrendModel?
     var popularList : [TVSeriesLists] = []
     var topRatedList : [TVSeriesLists] = []
+    
     var popularStart = 1 // pagination 변수
     var topRatedStart = 1 // pagination 변수
     
@@ -30,9 +31,6 @@ class TVViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        mainView.mainCollectionView.delegate = self
-        //        mainView.mainCollectionView.dataSource = self
-        //
         mainView.mainTableView.delegate = self
         mainView.mainTableView.dataSource = self
         
@@ -42,7 +40,7 @@ class TVViewController: UIViewController{
         DispatchQueue.global().async(group: group) {
             MediaAPIManager.shared.fetchTrend(api: .trend) { (item:TVTrendModel) in
                 print(#function, "TV-trend")
-                self.mainList = item.results
+                self.mainList = item
                 group.leave()
             }
         }
@@ -67,34 +65,51 @@ class TVViewController: UIViewController{
         
         group.notify(queue: .main) {
             print("조회 완료")
-            //            self.mainView.mainCollectionView.reloadData()
             self.mainView.mainTableView.reloadData()
         }
     }
     
+    override func configureNavigation() {
+        super.configureNavigation()
+        navigationItem.title = "홈"
+    }
     
 }
 
 //MARK: - table View
 extension TVViewController : UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return MediaAPI.Trend.allCases.count - 1
+        return MediaAPI.Trend.allCases.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return  MediaAPI.Trend.trend.indexValue == indexPath.row ? 550 : 300
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: TVTableViewCell.identifier, for: indexPath) as! TVTableViewCell
-        
-        cell.subCollectionView.delegate = self
-        cell.subCollectionView.dataSource = self
-        cell.subCollectionView.prefetchDataSource = self
-        
-        cell.subCollectionView.tag = indexPath.row
-        
-        cell.subCollectionView.register(CommonCollectionViewCell.self, forCellWithReuseIdentifier: CommonCollectionViewCell.identifier)
-        cell.titleLabel.text = MediaAPI.Trend.allCases[indexPath.row + 1].textValue
-        cell.subCollectionView.reloadData()
-        
-        return cell
+                
+        if MediaAPI.Trend.trend.indexValue == indexPath.row {
+            let cell = tableView.dequeueReusableCell(withIdentifier: PosterTableViewCell.identifier, for: indexPath) as! PosterTableViewCell
+            cell.configureView(dataList: mainList)
+            cell.titleLabel.text = MediaAPI.Trend.searchByIndex(value: indexPath.row).textValue
+            
+            return cell
+            
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: TVTableViewCell.identifier, for: indexPath) as! TVTableViewCell
+            
+            cell.subCollectionView.delegate = self
+            cell.subCollectionView.dataSource = self
+            cell.subCollectionView.prefetchDataSource = self
+            cell.subCollectionView.register(CommonCollectionViewCell.self, forCellWithReuseIdentifier: CommonCollectionViewCell.identifier)
+            
+            cell.subCollectionView.layer.name = MediaAPI.Trend.searchByIndex(value: indexPath.row).caseValue // collection cell의 layer name
+            cell.titleLabel.text = MediaAPI.Trend.searchByIndex(value: indexPath.row).textValue
+            cell.subCollectionView.reloadData()
+            
+            return cell
+        }
     }
 }
 
@@ -102,7 +117,7 @@ extension TVViewController : UITableViewDelegate, UITableViewDataSource {
 extension TVViewController : UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if collectionView.tag == MediaAPI.Trend.popular(page: 0).indexValue {
+        if collectionView.layer.name! == MediaAPI.Trend.popular(page: 0).caseValue {
             return popularList.count
         } else {
             return topRatedList.count
@@ -112,7 +127,7 @@ extension TVViewController : UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCollectionViewCell.identifier, for: indexPath) as! CommonCollectionViewCell
         
-        let item = collectionView.tag == MediaAPI.Trend.popular(page: 0).indexValue ? popularList[indexPath.item] : topRatedList[indexPath.item] // case가 2개기때문에 가능함. case가 늘어나면 switch 사용하면 될 듯
+        let item = collectionView.layer.name! == MediaAPI.Trend.popular(page: 0).caseValue ? popularList[indexPath.item] : topRatedList[indexPath.item] // case가 2개기때문에 가능함. case가 늘어나면 switch 사용하면 될 듯
         
         let url = URL(string: "\(MediaAPI.baseImageUrl)\(item.posterPath ?? "")")
         cell.posterImageView.kf.setImage(with: url, placeholder: UIImage(systemName: "star.fill"))
@@ -128,21 +143,22 @@ extension TVViewController : UICollectionViewDelegate, UICollectionViewDataSourc
 extension TVViewController : UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         
+        print(#function, collectionView.layer.name!)
         
-        let currentCount = collectionView.tag == MediaAPI.Trend.popular(page: 0).indexValue ? popularList.count : topRatedList.count
+        let currentCount = collectionView.layer.name! == MediaAPI.Trend.popular(page: 0).caseValue ? popularList.count : topRatedList.count
         var start : Int
         
         for item in indexPaths {
             if currentCount - 5 == item.item && currentCount < 9000 { //TODO: - totalPage는 따로 구현해야됨... 일단 러프하게 값 줌
-                if collectionView.tag == MediaAPI.Trend.popular(page: 0).indexValue {
+                if collectionView.layer.name! == MediaAPI.Trend.popular(page: 0).caseValue {
                     self.popularStart += 1
                 } else {
                     self.topRatedStart += 1
                 }
                 
-                start = collectionView.tag == MediaAPI.Trend.popular(page: 0).indexValue ? self.popularStart : self.topRatedStart
+                start = collectionView.layer.name! == MediaAPI.Trend.popular(page: 0).caseValue ? self.popularStart : self.topRatedStart
                 
-                let mediaTrendCase = collectionView.tag == MediaAPI.Trend.popular(page: 0).indexValue ? MediaAPI.Trend.popular(page: start) : MediaAPI.Trend.top_rated(page: start)
+                let mediaTrendCase = collectionView.layer.name! == MediaAPI.Trend.popular(page: 0).caseValue ? MediaAPI.Trend.popular(page: start) : MediaAPI.Trend.top_rated(page: start)
                 
                 
                 MediaAPIManager.shared.fetchTrend(api: mediaTrendCase) { (item : TVSeriesListsModel) in

@@ -16,6 +16,7 @@ class BaseViewController: UIViewController{
         configureHirerachy()
         configureLayout()
         configureView()
+        configureNavigation ()
     }
     
     func configureHirerachy() {
@@ -28,6 +29,19 @@ class BaseViewController: UIViewController{
     
     func configureView() {
         print(#function, "base")
+    }
+    
+    func configureNavigation () {
+        // background color
+        navigationController?.navigationBar.scrollEdgeAppearance?.backgroundColor = .black
+        
+        // font setting
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor : UIColor.white,
+            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25, weight: .heavy)
+        ]
+        navigationItem.title = "고래밥님"
+
     }
 }
 

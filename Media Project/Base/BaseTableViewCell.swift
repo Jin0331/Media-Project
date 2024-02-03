@@ -30,7 +30,14 @@ class BaseTableViewCell : UITableViewCell {
     }
     
     func configureView() {
+        backgroundColor = .clear
+        selectionStyle = .none
         
+    }
+    
+    // overload
+    func configureView<T:Decodable>(detailList : T) {
+
     }
     
     func configureCollectionViewLayout() -> UICollectionViewFlowLayout {

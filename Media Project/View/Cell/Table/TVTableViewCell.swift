@@ -24,7 +24,7 @@ class TVTableViewCell: BaseTableViewCell {
         }
         subCollectionView.snp.makeConstraints { make in
             make.horizontalEdges.bottom.equalTo(contentView)
-            make.top.equalTo(titleLabel.snp.bottom)
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
         }
     }
     

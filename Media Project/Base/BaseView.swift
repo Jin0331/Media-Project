@@ -35,7 +35,7 @@ class BaseView : UIView {
     }
     
     // overload
-    func configureView(detailList : TVSeriesDetail) {
+    func configureView<T:Decodable>(detailList : T) {
 
     }
     
