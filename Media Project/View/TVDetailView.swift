@@ -13,9 +13,8 @@ class TVDetailView : BaseView {
         let view = UIView()
         return view
     }()
-    let topViewImage : UIImageView = {
-        let view  = UIImageView()
-        view.contentMode = .scaleAspectFill
+    let topViewImage : PosterImageView = {
+        let view  = PosterImageView(frame: .zero)
         view.alpha = 0.6
         
         return view
