@@ -130,7 +130,7 @@ extension TVViewController : UICollectionViewDelegate, UICollectionViewDataSourc
         let item = collectionView.layer.name! == MediaAPI.Trend.popular(page: 0).caseValue ? popularList[indexPath.item] : topRatedList[indexPath.item] // case가 2개기때문에 가능함. case가 늘어나면 switch 사용하면 될 듯
         
         let url = URL(string: "\(MediaAPI.baseImageUrl)\(item.posterPath ?? "")")
-        cell.posterImageView.kf.setImage(with: url, placeholder: UIImage(systemName: "star.fill"))
+        cell.posterImageView.kf.setImage(with: url, options: [.transition(.fade(1))])
         
         
         return cell
@@ -139,9 +139,7 @@ extension TVViewController : UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let item = collectionView.layer.name! == MediaAPI.Trend.popular(page: 0).caseValue ? popularList[indexPath.item] : topRatedList[indexPath.item]
-        let vc = TVDetailViewController()
-        vc.tvSeriesId = item.id
-        navigationController?.pushViewController(vc, animated: true)
+        tvViewTransition(style: .push, viewController: TVDetailViewController.self, tvID: item.id)
     }
     
 }

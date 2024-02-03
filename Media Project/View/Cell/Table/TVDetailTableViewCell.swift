@@ -9,20 +9,17 @@ import UIKit
 
 class TVDetailTableViewCell: BaseTableViewCell {
     
-    let titleLabel : CommonTextLabel = {
-        let view = CommonTextLabel()
-        view.backgroundColor = .clear
-        view.font = .systemFont(ofSize: 22, weight: .heavy)
-        view.textColor = .white
+    let titleLabel = CommonTextLabel().then {
+        $0.backgroundColor = .clear
+        $0.font = .systemFont(ofSize: 22, weight: .heavy)
+        $0.textColor = .white
+    }
+    let subCollectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout()).then {
+        $0.backgroundColor = .clear
+        $0.register(TVDetailCollectionViewCell.self, forCellWithReuseIdentifier: TVDetailCollectionViewCell.identifier)
+        $0.register(CommonCollectionViewCell.self, forCellWithReuseIdentifier: CommonCollectionViewCell.identifier)
         
-        return view
-    }()
-    let subCollectionView : UICollectionView = {
-        let view = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
-        view.backgroundColor = .clear
-        
-        return view
-    }()
+    }
     
     override func configureHierarchy() {
         contentView.addSubview(titleLabel)

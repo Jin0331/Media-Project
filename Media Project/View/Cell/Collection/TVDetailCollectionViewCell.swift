@@ -10,31 +10,19 @@ import UIKit
 class TVDetailCollectionViewCell: BaseCollectionViewCell {
     
     
-    let profileImage : PosterImageView = {
-        let view = PosterImageView(frame: .zero)
-//        view.contentMode = .scaleAspectFill
+    let profileImage = PosterImageView(frame: .zero).then {_ in
         
-        return view
-    }()
+    }
     
+    let roleLabel = CommonTextLabel().then {
+        $0.font = .systemFont(ofSize: 12, weight: .heavy)
+        $0.textColor = .white
+    }
     
-    let roleLabel : CommonTextLabel = {
-        let view = CommonTextLabel()
-        view.font = .systemFont(ofSize: 12, weight: .heavy)
-        view.textColor = .white
-        
-        return view
-    }()
-    
-    let nameLabel : CommonTextLabel = {
-        let view = CommonTextLabel()
-        view.font = .systemFont(ofSize: 10, weight: .heavy)
-        view.textColor = .systemGray2
-        
-        return view
-    }()
-    
-
+    let nameLabel = CommonTextLabel().then {
+        $0.font = .systemFont(ofSize: 10, weight: .heavy)
+        $0.textColor = .systemGray2
+    }
     
     override func configureHierarchy() {
         contentView.addSubview(profileImage)

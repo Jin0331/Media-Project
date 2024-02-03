@@ -8,6 +8,9 @@
 import UIKit
 
 class BaseViewController: UIViewController{
+    
+    var tvID : Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,3 +49,30 @@ class BaseViewController: UIViewController{
     }
 }
 
+extension BaseViewController {
+    
+    enum TransitionStyle {
+        case present
+        case presentNavigation // 네비게이션 임베드한 채로 present
+        case presentFullNavigation // 네비게이션 임베드 된 full presesnt
+        case push
+    }
+    
+    func tvViewTransition<T:BaseViewController>(style : TransitionStyle, viewController : T.Type, tvID : Int) {
+        let vc = T()
+        vc.tvID = tvID
+        switch style {
+        case .present:
+            present(vc, animated: true)
+        case .presentNavigation:
+            let nav = UINavigationController(rootViewController: vc)
+            present(vc, animated: true)
+        case .presentFullNavigation:
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            present(vc, animated: true)
+        case .push:
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+}

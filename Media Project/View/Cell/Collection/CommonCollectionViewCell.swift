@@ -9,7 +9,9 @@ import UIKit
 import SnapKit
 
 class CommonCollectionViewCell: UICollectionViewCell {
-    let posterImageView = PosterImageView(frame: .zero)
+    let posterImageView = PosterImageView(frame: .zero).then{
+        $0.image = UIImage(systemName: "person")
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,7 +27,7 @@ class CommonCollectionViewCell: UICollectionViewCell {
     
         
     func configureView(){
-        posterImageView.image = UIImage(systemName: "person")
+        
     }
     
     func configureHierarchy() {

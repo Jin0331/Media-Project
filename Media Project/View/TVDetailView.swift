@@ -140,7 +140,7 @@ class TVDetailView : BaseView {
         
         if let detailList = detailList {
             let url = URL(string: MediaAPI.baseImageUrl + detailList.backdropPath)!
-            topViewImage.kf.setImage(with: url, placeholder: UIImage(systemName: "star.fill"))
+            topViewImage.kf.setImage(with: url, options: [.transition(.fade(1))])
             topViewTitle.text = detailList.originalName
             topViewInformation.text = detailList.mainText
             topViewOverView.text = detailList.overview

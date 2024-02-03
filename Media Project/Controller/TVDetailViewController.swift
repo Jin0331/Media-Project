@@ -10,11 +10,10 @@ import SnapKit
 import Kingfisher
 
 
-class TVDetailViewController: UIViewController {
+class TVDetailViewController: BaseViewController {
     
     let mainView = TVDetailView()
-    //MARK: - Data
-    var tvSeriesId = 96462 //TODO: - Search TV API로 값 전달 받으면 됨
+//    override var tvID: Int =
     var detailList : TVSeriesDetail?
     var aggregateCreditList : TVSeriesAggregateCredit?
     var recommendationsList : TVSeriesRecommendations?
@@ -41,7 +40,7 @@ class TVDetailViewController: UIViewController {
         
         group.enter()
         DispatchQueue.global().async(group: group) {
-            MediaAPIManager.shared.fetchTV(api: .detail(id: self.tvSeriesId)) { (item : TVSeriesDetail ) in
+            MediaAPIManager.shared.fetchTV(api: .detail(id: self.tvID)) { (item : TVSeriesDetail ) in
                 self.detailList = item
                 group.leave()
             }
@@ -49,7 +48,7 @@ class TVDetailViewController: UIViewController {
         
         group.enter()
         DispatchQueue.global().async(group: group) {
-            MediaAPIManager.shared.fetchTV(api: .aggregate_credits(id: self.tvSeriesId)) { (item : TVSeriesAggregateCredit ) in
+            MediaAPIManager.shared.fetchTV(api: .aggregate_credits(id: self.tvID)) { (item : TVSeriesAggregateCredit ) in
                 self.aggregateCreditList = item
                 group.leave()
             }
@@ -57,7 +56,7 @@ class TVDetailViewController: UIViewController {
         
         group.enter()
         DispatchQueue.global().async(group: group) {
-            MediaAPIManager.shared.fetchTV(api: .recommendations(id: self.tvSeriesId)) { (item : TVSeriesRecommendations ) in
+            MediaAPIManager.shared.fetchTV(api: .recommendations(id: self.tvID)) { (item : TVSeriesRecommendations ) in
                 self.recommendationsList = item
                 group.leave()
             }
@@ -77,6 +76,11 @@ class TVDetailViewController: UIViewController {
         }
     
     
+    override func configureNavigation() {
+        super.configureNavigation()
+        navigationItem.title = ""
+    }
+    
     @objc func middleButtonClicked(sender : UIButton){
         mainView.bottomLeftTableView.isHidden.toggle()
         mainView.bottomRightTableView.isHidden.toggle()
@@ -91,7 +95,6 @@ extension TVDetailViewController : UITableViewDelegate, UITableViewDataSource {
         } else {
             return MediaAPI.TV.relatedContentsAllcases.count
         }
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -99,13 +102,6 @@ extension TVDetailViewController : UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: TVDetailTableViewCell.identifier, for: indexPath) as! TVDetailTableViewCell
         cell.subCollectionView.delegate = self
         cell.subCollectionView.dataSource = self
-        
-        //MARK: - 항목에 따라 register cell 변경
-        if self.mainView.bottomLeftTableView == tableView {
-            cell.subCollectionView.register(TVDetailCollectionViewCell.self, forCellWithReuseIdentifier: TVDetailCollectionViewCell.identifier)
-        } else {
-            cell.subCollectionView.register(CommonCollectionViewCell.self, forCellWithReuseIdentifier: CommonCollectionViewCell.identifier)
-        }
         
         //MARK: - 항목이 2개이므로, 삼항 연산자 가능
         let dataModel = self.mainView.bottomLeftTableView == tableView ? MediaAPI.TV.contentsInfoAllcases[indexPath.row] : MediaAPI.TV.relatedContentsAllcases[indexPath.row]
@@ -126,6 +122,16 @@ extension TVDetailViewController : UICollectionViewDelegate, UICollectionViewDat
         }).contains(collectionView.layer.name) ? aggregateCreditList?.cast.count ?? 0 : recommendationsList?.results.count ?? 0
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if let recommendationsList {
+            MediaAPI.TV.relatedContentsAllcases.map({ item in
+                return item.caseValue
+            }).contains(collectionView.layer.name) ? tvViewTransition(style: .present, viewController: TVDetailViewController.self, tvID: recommendationsList.results[indexPath.item].id) : nil
+        }
+    }
+    
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
                         
         if MediaAPI.TV.contentsInfoAllcases.map({ item in
@@ -137,9 +143,7 @@ extension TVDetailViewController : UICollectionViewDelegate, UICollectionViewDat
                 
                 if collectionView.tag == MediaAPI.TV.aggregate_credits(id: 0).indexValue { // 출연 및 관련 동영상 구분하기 위한 tag 사용
                     
-                    
-                    
-                    cell.profileImage.kf.setImage(with: URL(string: MediaAPI.baseImageUrl + (aggregateCreditList.cast[indexPath.item].profilePath ?? "")), placeholder: UIImage(systemName: "heart.fill"))
+                    cell.profileImage.kf.setImage(with: URL(string: MediaAPI.baseImageUrl + (aggregateCreditList.cast[indexPath.item].profilePath ?? "")), options: [.transition(.fade(1))])
                     cell.roleLabel.text = aggregateCreditList.cast[indexPath.item].roles[0].characterConvert
                     cell.nameLabel.text = aggregateCreditList.cast[indexPath.item].originalName
                 } else {
@@ -158,7 +162,7 @@ extension TVDetailViewController : UICollectionViewDelegate, UICollectionViewDat
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCollectionViewCell.identifier, for: indexPath) as! CommonCollectionViewCell
             if let recommendationsList = recommendationsList {
                 if collectionView.tag == MediaAPI.TV.recommendations(id: 0).indexValue { // 출연 및 관련 동영상 구분하기 위한 tag 사용
-                    cell.posterImageView.kf.setImage(with: URL(string: MediaAPI.baseImageUrl + recommendationsList.results[indexPath.item].posterPath), placeholder: UIImage(systemName: "heart.fill"))
+                    cell.posterImageView.kf.setImage(with: URL(string: MediaAPI.baseImageUrl + recommendationsList.results[indexPath.item].posterPath), options: [.transition(.fade(1))])
                 } else {
                     //TODO: - 아직 추가되지 않은 관련 동영상 항목
                     print("관련 동영상 입니다. - recommendations")
@@ -171,4 +175,6 @@ extension TVDetailViewController : UICollectionViewDelegate, UICollectionViewDat
             return cell
         }
     }
+    
+    
 }
