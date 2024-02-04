@@ -28,7 +28,7 @@ enum MediaAPI {
             get {
                 switch self {
                 case .trend:
-                    return URL(string: MediaAPI.baseUrl + "trending/tv/week")!
+                    return URL(string: MediaAPI.baseUrl + "trending/tv/day")!
                 case .top_rated:
                     return URL(string: MediaAPI.baseUrl + "tv/top_rated")!
                 case .popular:
@@ -61,11 +61,32 @@ enum MediaAPI {
         var textValue : String {
             switch self {
             case .top_rated:
-                return "Top Rated TV SERIES"
+                return "청중의 극찬을 받은 TV 시리즈"
             case .popular :
-                return "Popular TV SERIES"
+                return "인기 TV 시리즈"
             case .trend :
-                return "Trend"
+                return "오늘의 추천작"
+            }
+        }
+        
+        var caseValue : String {
+            switch self {
+            default :
+                return String(describing: self)
+            }
+        }
+        
+        static func searchByIndex(value : Int) -> MediaAPI.Trend {
+            
+            switch value {
+            case 0 :
+                return .trend
+            case 1 :
+                return .popular(page: 0)
+            case 2 :
+                return .top_rated(page: 0)
+            default :
+                return .trend
             }
         }
         

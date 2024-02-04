@@ -9,8 +9,15 @@ import UIKit
 
 class TVTableViewCell: BaseTableViewCell {
     
-    let titleLabel = CommonTextLabel()
-    lazy var subCollectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
+    let titleLabel = CommonTextLabel().then {
+        $0.backgroundColor = .clear
+        $0.font = .systemFont(ofSize: 22, weight: .heavy)
+        $0.textColor = .white
+    }
+    
+    lazy var subCollectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout()).then {
+        $0.backgroundColor = .clear
+    }
     
     override func configureHierarchy() {
         contentView.addSubview(titleLabel)
@@ -24,16 +31,12 @@ class TVTableViewCell: BaseTableViewCell {
         }
         subCollectionView.snp.makeConstraints { make in
             make.horizontalEdges.bottom.equalTo(contentView)
-            make.top.equalTo(titleLabel.snp.bottom)
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
         }
     }
     
     override func configureView() {
         backgroundColor = .clear
-        subCollectionView.backgroundColor = .clear
-        titleLabel.backgroundColor = .clear
-        titleLabel.font = .systemFont(ofSize: 22, weight: .heavy)
-        titleLabel.textColor = .white
     }
     
     override func configureCollectionViewLayout() -> UICollectionViewFlowLayout {

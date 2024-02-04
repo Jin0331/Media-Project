@@ -29,6 +29,7 @@ class BaseCollectionViewCell : UICollectionViewCell {
     }
     
     func configureView() {
+        backgroundColor = .clear
         
     }
 
