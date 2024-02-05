@@ -93,6 +93,10 @@ extension TVViewController : UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: PosterTableViewCell.identifier, for: indexPath) as! PosterTableViewCell
             cell.configureView(dataList: mainList)
             cell.titleLabel.text = MediaAPI.Trend.searchByIndex(value: indexPath.row).textValue
+            cell.emptyButton.tag = mainList?.results[indexPath.row].id ?? 0
+            
+            //TODO: - 해당 부분은 delegate pattern으로 수정해야 됨
+            cell.emptyButton.addTarget(self, action: #selector(emptyButtonClicked), for: .touchUpInside)
             
             return cell
             
@@ -111,6 +115,12 @@ extension TVViewController : UITableViewDelegate, UITableViewDataSource {
             return cell
         }
     }
+    
+    @objc func emptyButtonClicked(_ sender : UIButton) {
+        print("hi")
+        tvViewTransition(style: .push, viewController: TVDetailViewController.self, tvID: sender.tag)
+    }
+    
 }
 
 //MARK: -collection View
@@ -148,8 +158,6 @@ extension TVViewController : UICollectionViewDelegate, UICollectionViewDataSourc
 extension TVViewController : UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         
-        print(#function, collectionView.layer.name!)
-        
         let currentCount = collectionView.layer.name! == MediaAPI.Trend.popular(page: 0).caseValue ? popularList.count : topRatedList.count
         var start : Int
         
@@ -168,7 +176,7 @@ extension TVViewController : UICollectionViewDataSourcePrefetching {
                 
                 MediaAPIManager.shared.fetchTrend(api: mediaTrendCase) { (item : TVSeriesListsModel) in
                     
-                    collectionView.tag == MediaAPI.Trend.popular(page: 0).indexValue ? self.popularList.append(contentsOf: item.results) : self.topRatedList.append(contentsOf: item.results)
+                    collectionView.layer.name! == MediaAPI.Trend.popular(page: 0).caseValue ? self.popularList.append(contentsOf: item.results) : self.topRatedList.append(contentsOf: item.results)
                 }
             }
         }

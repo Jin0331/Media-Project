@@ -19,18 +19,15 @@ class PosterTableViewCell : BaseTableViewCell {
     let posterImageView =  PosterImageView(frame: .zero).then {_ in
     }
     
-    let overviewLabel = CommonTextLabel().then {
+    let emptyButton = UIButton().then {
         $0.backgroundColor = .clear
-        $0.font = .systemFont(ofSize: 12, weight: .heavy)
-        $0.textColor = .systemGray2
+        $0.setTitle("", for: .normal)
     }
-    
-    
     
     override func configureHierarchy() {
         addSubview(titleLabel)
         addSubview(posterImageView)
-        addSubview(overviewLabel)
+        addSubview(emptyButton)
     }
     
     //TODO: - 동적 이미지 필요?
@@ -46,10 +43,14 @@ class PosterTableViewCell : BaseTableViewCell {
             make.horizontalEdges.equalTo(contentView)
             make.bottom.equalTo(contentView.safeAreaLayoutGuide)
         }
+        
+        emptyButton.snp.makeConstraints { make in
+            make.edges.equalTo(posterImageView)
+        }
     }
     
     func configureView(dataList : TVTrendModel?) {
-    
+        
         if let dataList = dataList {
             let randomTrendTV = dataList.results.randomElement()!
             let url = URL(string: MediaAPI.baseImageUrl + randomTrendTV.posterPath)!
