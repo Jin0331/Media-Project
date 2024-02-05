@@ -173,5 +173,53 @@ enum MediaAPI {
         }
     }
     
+    enum Configuration : CaseIterable {
+        case countries
+        
+        var endPoint : URL {
+            get {
+                switch self {
+                case .countries:
+                    return URL(string: MediaAPI.baseUrl + "configuration/countries")!
+                }
+            }
+        }
+        
+        var parameter : Parameters {
+            switch self {
+            case  .countries :
+                return ["language":"ko-KR"]
+            }
+        }
+        
+//        var indexValue : Int {
+//            switch self {
+//            case .detail :
+//                return 0
+//            case .recommendations :
+//                return 1
+//            case .aggregate_credits :
+//                return 2
+//            case .relatedVideo :
+//                return 99
+//
+//            }
+//        }
+        
+        var titleValue : String {
+            switch self {
+            case .countries :
+                return "detail - None"
+            }
+        }
+        
+        var caseValue : String {
+            switch self {
+            default :
+                return String(describing: self)
+            }
+        }
+    }
+    
 }
 
