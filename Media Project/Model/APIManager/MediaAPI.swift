@@ -241,9 +241,9 @@ enum MediaAPI {
             
             switch value {
             case 0 :
-                return .countries
-            case 1 :
                 return .tv
+            case 1 :
+                return .countries
             default :
                 return .countries
             }

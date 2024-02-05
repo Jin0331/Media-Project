@@ -63,7 +63,7 @@ extension BaseViewController {
         case push
     }
     
-    func tvViewTransition<T:BaseViewController>(style : TransitionStyle, viewController : T.Type, tvID : Int) {
+    func ViewTransition<T:BaseViewController>(style : TransitionStyle, viewController : T.Type, tvID : Int) {
         let vc = T()
         vc.tvID = tvID
         switch style {
@@ -71,11 +71,29 @@ extension BaseViewController {
             present(vc, animated: true)
         case .presentNavigation:
             let nav = UINavigationController(rootViewController: vc)
-            present(vc, animated: true)
+            present(nav, animated: true)
         case .presentFullNavigation:
             let nav = UINavigationController(rootViewController: vc)
             nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: true)
+        case .push:
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func ViewTransition<T:BaseViewController>(style : TransitionStyle, viewController : T.Type) {
+        let vc = T()
+        
+        switch style {
+        case .present:
             present(vc, animated: true)
+        case .presentNavigation:
+            let nav = UINavigationController(rootViewController: vc)
+            present(nav, animated: true)
+        case .presentFullNavigation:
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: true)
         case .push:
             navigationController?.pushViewController(vc, animated: true)
         }

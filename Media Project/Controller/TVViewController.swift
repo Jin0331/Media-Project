@@ -117,8 +117,7 @@ extension TVViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     @objc func emptyButtonClicked(_ sender : UIButton) {
-        print("hi")
-        tvViewTransition(style: .push, viewController: TVDetailViewController.self, tvID: sender.tag)
+        ViewTransition(style: .push, viewController: TVDetailViewController.self, tvID: sender.tag)
     }
     
 }
@@ -149,7 +148,7 @@ extension TVViewController : UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let item = collectionView.layer.name! == MediaAPI.Trend.popular(page: 0).caseValue ? popularList[indexPath.item] : topRatedList[indexPath.item]
-        tvViewTransition(style: .push, viewController: TVDetailViewController.self, tvID: item.id)
+        ViewTransition(style: .push, viewController: TVDetailViewController.self, tvID: item.id)
     }
     
 }

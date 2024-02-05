@@ -35,11 +35,7 @@ class TVSearchTableViewCell : BaseTableViewCell {
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
         }
     }
-    
-    override func configureView() {
-        backgroundColor = .clear
-    }
-    
+        
     func configureTVSearchCollectionViewLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 200, height: 150)

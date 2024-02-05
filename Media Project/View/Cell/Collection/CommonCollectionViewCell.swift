@@ -10,9 +10,9 @@ import SnapKit
 
 class CommonCollectionViewCell: BaseCollectionViewCell {
     let posterImageView = PosterImageView(frame: .zero).then{
-        $0.backgroundColor = UIColor(red: CGFloat.random(in: 0..<0.5),
-                                     green: CGFloat.random(in: 0..<0.5),
-                                     blue: CGFloat.random(in: 0..<0.5),
+        $0.backgroundColor = UIColor(red: CGFloat.random(in: 0..<0.9),
+                                     green: CGFloat.random(in: 0..<0.9),
+                                     blue: CGFloat.random(in: 0..<0.9),
                                      alpha: 1)
     }
     
@@ -26,13 +26,14 @@ class CommonCollectionViewCell: BaseCollectionViewCell {
         contentView.addSubview(posterImageView)
         contentView.addSubview(titleLabel)
     }
-    
+        
     override func configureLayout() {
         posterImageView.snp.makeConstraints { make in
             make.edges.equalTo(contentView)
         }
         titleLabel.snp.makeConstraints { make in
-            make.top.leading.equalTo(posterImageView).inset(30)
+            make.top.equalTo(posterImageView.snp.top).inset(30)
+            make.leading.equalTo(posterImageView).inset(15)
         }
     }
 }

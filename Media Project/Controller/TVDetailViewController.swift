@@ -127,7 +127,7 @@ extension TVDetailViewController : UICollectionViewDelegate, UICollectionViewDat
         if let recommendationsList {
             MediaAPI.TV.relatedContentsAllcases.map({ item in
                 return item.caseValue
-            }).contains(collectionView.layer.name) ? tvViewTransition(style: .present, viewController: TVDetailViewController.self, tvID: recommendationsList.results[indexPath.item].id) : nil
+            }).contains(collectionView.layer.name) ? ViewTransition(style: .present, viewController: TVDetailViewController.self, tvID: recommendationsList.results[indexPath.item].id) : nil
         }
     }
     
