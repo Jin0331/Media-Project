@@ -38,7 +38,7 @@ class TVViewController: BaseViewController{
         
         group.enter()
         DispatchQueue.global().async(group: group) {
-            MediaAPIManager.shared.fetchTrend(api: .trend) { (item:TVTrendModel) in
+            MediaAPIManager.shared.fetchAF(api: .trend) { (item:TVTrendModel) in
                 print(#function, "TV-trend")
                 self.mainList = item
                 group.leave()
@@ -47,7 +47,7 @@ class TVViewController: BaseViewController{
         
         group.enter()
         DispatchQueue.global().async(group: group) {
-            MediaAPIManager.shared.fetchTrend(api: .popular(page: self.popularStart)) { (item:TVSeriesListsModel) in
+            MediaAPIManager.shared.fetchAF(api: .popular(page: self.popularStart)) { (item:TVSeriesListsModel) in
                 print(#function, "TV-Popular")
                 self.popularList = item.results
                 group.leave()
@@ -56,7 +56,7 @@ class TVViewController: BaseViewController{
         
         group.enter()
         DispatchQueue.global().async(group: group) {
-            MediaAPIManager.shared.fetchTrend(api: .top_rated(page: self.topRatedStart)) { (item:TVSeriesListsModel) in
+            MediaAPIManager.shared.fetchAF(api: .top_rated(page: self.topRatedStart)) { (item:TVSeriesListsModel) in
                 print(#function, "TV-Popular")
                 self.topRatedList = item.results
                 group.leave()
@@ -117,8 +117,7 @@ extension TVViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     @objc func emptyButtonClicked(_ sender : UIButton) {
-        print("hi")
-        tvViewTransition(style: .push, viewController: TVDetailViewController.self, tvID: sender.tag)
+        ViewTransition(style: .push, viewControllerType: TVDetailViewController.self, tvID: sender.tag)
     }
     
 }
@@ -149,7 +148,7 @@ extension TVViewController : UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let item = collectionView.layer.name! == MediaAPI.Trend.popular(page: 0).caseValue ? popularList[indexPath.item] : topRatedList[indexPath.item]
-        tvViewTransition(style: .push, viewController: TVDetailViewController.self, tvID: item.id)
+        ViewTransition(style: .push, viewControllerType: TVDetailViewController.self, tvID: item.id)
     }
     
 }
@@ -174,9 +173,10 @@ extension TVViewController : UICollectionViewDataSourcePrefetching {
                 let mediaTrendCase = collectionView.layer.name! == MediaAPI.Trend.popular(page: 0).caseValue ? MediaAPI.Trend.popular(page: start) : MediaAPI.Trend.top_rated(page: start)
                 
                 
-                MediaAPIManager.shared.fetchTrend(api: mediaTrendCase) { (item : TVSeriesListsModel) in
+                MediaAPIManager.shared.fetchAF(api: mediaTrendCase) { (item : TVSeriesListsModel) in
                     
                     collectionView.layer.name! == MediaAPI.Trend.popular(page: 0).caseValue ? self.popularList.append(contentsOf: item.results) : self.topRatedList.append(contentsOf: item.results)
+                    collectionView.reloadData()
                 }
             }
         }

@@ -40,7 +40,7 @@ class TVDetailViewController: BaseViewController {
         
         group.enter()
         DispatchQueue.global().async(group: group) {
-            MediaAPIManager.shared.fetchTV(api: .detail(id: self.tvID)) { (item : TVSeriesDetail ) in
+            MediaAPIManager.shared.fetchAF(api: .detail(id: self.tvID)) { (item : TVSeriesDetail ) in
                 self.detailList = item
                 group.leave()
             }
@@ -48,7 +48,7 @@ class TVDetailViewController: BaseViewController {
         
         group.enter()
         DispatchQueue.global().async(group: group) {
-            MediaAPIManager.shared.fetchTV(api: .aggregate_credits(id: self.tvID)) { (item : TVSeriesAggregateCredit ) in
+            MediaAPIManager.shared.fetchAF(api: .aggregate_credits(id: self.tvID)) { (item : TVSeriesAggregateCredit ) in
                 self.aggregateCreditList = item
                 group.leave()
             }
@@ -56,7 +56,7 @@ class TVDetailViewController: BaseViewController {
         
         group.enter()
         DispatchQueue.global().async(group: group) {
-            MediaAPIManager.shared.fetchTV(api: .recommendations(id: self.tvID)) { (item : TVSeriesRecommendations ) in
+            MediaAPIManager.shared.fetchAF(api: .recommendations(id: self.tvID)) { (item : TVSeriesRecommendations ) in
                 self.recommendationsList = item
                 group.leave()
             }
@@ -127,7 +127,7 @@ extension TVDetailViewController : UICollectionViewDelegate, UICollectionViewDat
         if let recommendationsList {
             MediaAPI.TV.relatedContentsAllcases.map({ item in
                 return item.caseValue
-            }).contains(collectionView.layer.name) ? tvViewTransition(style: .present, viewController: TVDetailViewController.self, tvID: recommendationsList.results[indexPath.item].id) : nil
+            }).contains(collectionView.layer.name) ? ViewTransition(style: .present, viewControllerType: TVDetailViewController.self, tvID: recommendationsList.results[indexPath.item].id) : nil
         }
     }
     

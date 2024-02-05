@@ -15,8 +15,9 @@ class TVSearchTableViewCell : BaseTableViewCell {
         $0.textColor = .white
     }
     
-    lazy var subCollectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout()).then {
+    lazy var subCollectionView = UICollectionView(frame: .zero, collectionViewLayout: configureTVSearchCollectionViewLayout()).then {
         $0.backgroundColor = .clear
+        $0.register(CommonCollectionViewCell.self, forCellWithReuseIdentifier: CommonCollectionViewCell.identifier)
     }
     
     override func configureHierarchy() {
@@ -34,16 +35,12 @@ class TVSearchTableViewCell : BaseTableViewCell {
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
         }
     }
-    
-    override func configureView() {
-        backgroundColor = .clear
-    }
-    
-    override func configureCollectionViewLayout() -> UICollectionViewFlowLayout {
+        
+    func configureTVSearchCollectionViewLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 60, height: 120)
-        layout.minimumLineSpacing = 10
-        layout.minimumInteritemSpacing = 5
+        layout.itemSize = CGSize(width: 200, height: 150)
+        layout.minimumLineSpacing = 10 // item간 간격
+        layout.minimumInteritemSpacing = 0
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.scrollDirection = .horizontal
         

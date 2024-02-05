@@ -16,14 +16,14 @@ class TVSearchView : BaseView {
         $0.backgroundColor = .clear
         $0.showsCancelButton = false
         $0.barStyle = .black
+        $0.searchBarStyle = .minimal
     }
     
     lazy var mainTableView = UITableView().then {
         //TODO: - Cell 변경 해야됨
-        $0.register(TVTableViewCell.self, forCellReuseIdentifier: TVTableViewCell.identifier)
-        $0.register(PosterTableViewCell.self, forCellReuseIdentifier: PosterTableViewCell.identifier)
-        //        $0.rowHeight = 300
-        $0.backgroundColor = .red
+        $0.register(TVSearchTableViewCell.self, forCellReuseIdentifier: TVSearchTableViewCell.identifier)
+        $0.rowHeight = 200
+        $0.backgroundColor = .clear
     }
     
     override func configureHierarchy() {

@@ -8,10 +8,8 @@
 import Foundation
 
 
-struct Countries : Decodable {
-    let iso_3166_1 : String
-    let englishName : String
-    let nativeName : String
+struct CountriesElement : Decodable {
+    let iso_3166_1, englishName, nativeName : String
     
     enum CodingKeys : String, CodingKey {
         case iso_3166_1
@@ -20,3 +18,4 @@ struct Countries : Decodable {
     }
 }
 
+typealias Countries = [CountriesElement]

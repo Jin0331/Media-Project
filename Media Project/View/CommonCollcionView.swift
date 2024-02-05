@@ -1,49 +1,32 @@
 //
-//  TVTableViewCell.swift
+//  CommonCollcionView.swift
 //  Media Project
 //
-//  Created by JinwooLee on 1/30/24.
+//  Created by JinwooLee on 2/6/24.
 //
 
 import UIKit
+import SnapKit
+import Then
 
-class TVDetailTableViewCell: BaseTableViewCell {
+class CommonCollcionView : BaseView {
     
-    let titleLabel = CommonTextLabel().then {
+    lazy var mainCollectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCommonCollectionViewLayout()).then {
         $0.backgroundColor = .clear
-        $0.font = .systemFont(ofSize: 22, weight: .heavy)
-        $0.textColor = .white
-    }
-    lazy var subCollectionView = UICollectionView(frame: .zero, collectionViewLayout: configureTVDetailCollectionViewLayout()).then {
-        $0.backgroundColor = .clear
-        $0.register(TVDetailCollectionViewCell.self, forCellWithReuseIdentifier: TVDetailCollectionViewCell.identifier)
         $0.register(CommonCollectionViewCell.self, forCellWithReuseIdentifier: CommonCollectionViewCell.identifier)
-        
     }
     
     override func configureHierarchy() {
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(subCollectionView)
+        addSubview(mainCollectionView)
     }
     
     override func configureLayout() {
-        titleLabel.snp.makeConstraints { make in
-            make.top.leading.equalTo(contentView).inset(10)
-            make.height.equalTo(30)
-            make.trailing.lessThanOrEqualToSuperview()
-        }
-        subCollectionView.snp.makeConstraints { make in
-            make.horizontalEdges.bottom.equalTo(contentView)
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+        mainCollectionView.snp.makeConstraints { make in
+            make.edges.equalTo(self.safeAreaLayoutGuide)
         }
     }
     
-    override func configureView() {
-        backgroundColor = .clear
-
-    }
-    
-    func configureTVDetailCollectionViewLayout() -> UICollectionViewFlowLayout {
+    func configureCommonCollectionViewLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         
         let rowCount : Double = 3
@@ -65,6 +48,4 @@ class TVDetailTableViewCell: BaseTableViewCell {
         return layout
         
     }
-    
-    
 }

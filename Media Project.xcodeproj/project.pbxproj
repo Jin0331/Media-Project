@@ -33,6 +33,10 @@
 		DB8151D82B692E180026AAA9 /* TVTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8151D72B692E180026AAA9 /* TVTableViewCell.swift */; };
 		DB9CEE472B6BCF4300B0E0A1 /* TVDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9CEE462B6BCF4300B0E0A1 /* TVDetailTableViewCell.swift */; };
 		DB9CEE4B2B6BF40E00B0E0A1 /* TVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9CEE4A2B6BF40E00B0E0A1 /* TVView.swift */; };
+		DBA5B4782B711579004C3B8C /* TVSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA5B4772B711579004C3B8C /* TVSearchTableViewCell.swift */; };
+		DBA5B47A2B712EAA004C3B8C /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA5B4792B712EAA004C3B8C /* UIViewController + Extension.swift */; };
+		DBA5B47C2B713279004C3B8C /* CommonCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA5B47B2B713279004C3B8C /* CommonCollectionViewController.swift */; };
+		DBA5B47E2B71342D004C3B8C /* CommonCollcionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA5B47D2B71342D004C3B8C /* CommonCollcionView.swift */; };
 		DBA65C152B6BBB1D00D3143D /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA65C142B6BBB1D00D3143D /* BaseTableViewCell.swift */; };
 		DBA65C192B6BCCC700D3143D /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA65C182B6BCCC700D3143D /* BaseCollectionViewCell.swift */; };
 		DBA65C1C2B6BCD9E00D3143D /* TVDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA65C1B2B6BCD9E00D3143D /* TVDetailCollectionViewCell.swift */; };
@@ -44,8 +48,8 @@
 		DBDB26B82B70A1A3001B901F /* TVSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB26B72B70A1A3001B901F /* TVSearchView.swift */; };
 		DBDB26BA2B70A46B001B901F /* TVSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB26B92B70A46B001B901F /* TVSearchViewController.swift */; };
 		DBDB26BC2B70A958001B901F /* ConfigurationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB26BB2B70A958001B901F /* ConfigurationModel.swift */; };
-		DBDB26BE2B70AB6D001B901F /* TVSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB26BD2B70AB6D001B901F /* TVSearchTableViewCell.swift */; };
 		DBDB26C02B70AEE6001B901F /* MediaSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB26BF2B70AEE6001B901F /* MediaSessionManager.swift */; };
+		DBDB26C22B70BD02001B901F /* GenresModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB26C12B70BD02001B901F /* GenresModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +74,10 @@
 		DB8151D72B692E180026AAA9 /* TVTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVTableViewCell.swift; sourceTree = "<group>"; };
 		DB9CEE462B6BCF4300B0E0A1 /* TVDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVDetailTableViewCell.swift; sourceTree = "<group>"; };
 		DB9CEE4A2B6BF40E00B0E0A1 /* TVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVView.swift; sourceTree = "<group>"; };
+		DBA5B4772B711579004C3B8C /* TVSearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVSearchTableViewCell.swift; sourceTree = "<group>"; };
+		DBA5B4792B712EAA004C3B8C /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
+		DBA5B47B2B713279004C3B8C /* CommonCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonCollectionViewController.swift; sourceTree = "<group>"; };
+		DBA5B47D2B71342D004C3B8C /* CommonCollcionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonCollcionView.swift; sourceTree = "<group>"; };
 		DBA65C142B6BBB1D00D3143D /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		DBA65C182B6BCCC700D3143D /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		DBA65C1B2B6BCD9E00D3143D /* TVDetailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TVDetailCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -83,8 +91,8 @@
 		DBDB26B72B70A1A3001B901F /* TVSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVSearchView.swift; sourceTree = "<group>"; };
 		DBDB26B92B70A46B001B901F /* TVSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVSearchViewController.swift; sourceTree = "<group>"; };
 		DBDB26BB2B70A958001B901F /* ConfigurationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationModel.swift; sourceTree = "<group>"; };
-		DBDB26BD2B70AB6D001B901F /* TVSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVSearchTableViewCell.swift; sourceTree = "<group>"; };
 		DBDB26BF2B70AEE6001B901F /* MediaSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSessionManager.swift; sourceTree = "<group>"; };
+		DBDB26C12B70BD02001B901F /* GenresModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +128,7 @@
 				DB9CEE4A2B6BF40E00B0E0A1 /* TVView.swift */,
 				DB22C2432B6B4B010011970E /* TVDetailView.swift */,
 				DBDB26B72B70A1A3001B901F /* TVSearchView.swift */,
+				DBA5B47D2B71342D004C3B8C /* CommonCollcionView.swift */,
 				DB8151CC2B6924E30026AAA9 /* CustomView */,
 				DBA65C1A2B6BCD5000D3143D /* Cell */,
 			);
@@ -129,13 +138,12 @@
 		DB8151B42B68DE030026AAA9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DBDB26C32B70BD0C001B901F /* APIManager */,
 				DB8151B62B6911390026AAA9 /* TVTrendModel.swift */,
 				DB5D40962B6A203E003B9176 /* TVSeriesModel.swift */,
 				DB8151C72B6918E00026AAA9 /* TVSeriesListsModel.swift */,
 				DBDB26BB2B70A958001B901F /* ConfigurationModel.swift */,
-				DB8151B82B69137C0026AAA9 /* MediaAPIManager.swift */,
-				DBDB26BF2B70AEE6001B901F /* MediaSessionManager.swift */,
-				DB1FCA5B2B6B764D00755D80 /* MediaAPI.swift */,
+				DBDB26C12B70BD02001B901F /* GenresModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -146,6 +154,7 @@
 				DBB376DB2B68DCA800DA1C8F /* TVViewController.swift */,
 				DB5D40982B6A24D6003B9176 /* TVDetailViewController.swift */,
 				DBDB26B92B70A46B001B901F /* TVSearchViewController.swift */,
+				DBA5B47B2B713279004C3B8C /* CommonCollectionViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -157,6 +166,7 @@
 				DB8151D32B6926270026AAA9 /* UIView + Extension.swift */,
 				DB7482AD2B6E862A002CDD2D /* UIImage + Extension.swift */,
 				DB7482AF2B6E8DE9002CDD2D /* UITabBarController + Extension.swift */,
+				DBA5B4792B712EAA004C3B8C /* UIViewController + Extension.swift */,
 				DB8151C52B6914250026AAA9 /* API.swift */,
 			);
 			path = Resource;
@@ -174,9 +184,9 @@
 		DB9CEE482B6BCF5700B0E0A1 /* Table */ = {
 			isa = PBXGroup;
 			children = (
+				DBA5B4772B711579004C3B8C /* TVSearchTableViewCell.swift */,
 				DB8151D72B692E180026AAA9 /* TVTableViewCell.swift */,
 				DB9CEE462B6BCF4300B0E0A1 /* TVDetailTableViewCell.swift */,
-				DBDB26BD2B70AB6D001B901F /* TVSearchTableViewCell.swift */,
 				DB7482AB2B6E2228002CDD2D /* PosterTableViewCell.swift */,
 			);
 			path = Table;
@@ -231,6 +241,16 @@
 				DBB376E52B68DCAA00DA1C8F /* Info.plist */,
 			);
 			path = "Media Project";
+			sourceTree = "<group>";
+		};
+		DBDB26C32B70BD0C001B901F /* APIManager */ = {
+			isa = PBXGroup;
+			children = (
+				DB1FCA5B2B6B764D00755D80 /* MediaAPI.swift */,
+				DB8151B82B69137C0026AAA9 /* MediaAPIManager.swift */,
+				DBDB26BF2B70AEE6001B901F /* MediaSessionManager.swift */,
+			);
+			path = APIManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -320,15 +340,19 @@
 				DBB376DC2B68DCA800DA1C8F /* TVViewController.swift in Sources */,
 				DB8151B72B6911390026AAA9 /* TVTrendModel.swift in Sources */,
 				DB8151CB2B6923090026AAA9 /* Protocol.swift in Sources */,
+				DBDB26C22B70BD02001B901F /* GenresModel.swift in Sources */,
 				DB5D40992B6A24D6003B9176 /* TVDetailViewController.swift in Sources */,
+				DBA5B47E2B71342D004C3B8C /* CommonCollcionView.swift in Sources */,
 				DB5D40972B6A203E003B9176 /* TVSeriesModel.swift in Sources */,
 				DB8151D02B69254D0026AAA9 /* CommonCollectionViewCell.swift in Sources */,
 				DB7482AC2B6E2228002CDD2D /* PosterTableViewCell.swift in Sources */,
 				DB7482AE2B6E862A002CDD2D /* UIImage + Extension.swift in Sources */,
 				DB8151CE2B6924F80026AAA9 /* PosterImageView.swift in Sources */,
 				DBA65C152B6BBB1D00D3143D /* BaseTableViewCell.swift in Sources */,
+				DBA5B47C2B713279004C3B8C /* CommonCollectionViewController.swift in Sources */,
 				DB8151D42B6926270026AAA9 /* UIView + Extension.swift in Sources */,
 				DB22C2442B6B4B010011970E /* TVDetailView.swift in Sources */,
+				DBA5B47A2B712EAA004C3B8C /* UIViewController + Extension.swift in Sources */,
 				DBB376D82B68DCA800DA1C8F /* AppDelegate.swift in Sources */,
 				DBDB26BC2B70A958001B901F /* ConfigurationModel.swift in Sources */,
 				DB9CEE4B2B6BF40E00B0E0A1 /* TVView.swift in Sources */,
@@ -342,12 +366,12 @@
 				DB8151C82B6918E00026AAA9 /* TVSeriesListsModel.swift in Sources */,
 				DBDB26B82B70A1A3001B901F /* TVSearchView.swift in Sources */,
 				DB5D409C2B6A2511003B9176 /* BaseViewController.swift in Sources */,
+				DBA5B4782B711579004C3B8C /* TVSearchTableViewCell.swift in Sources */,
 				DB22C2462B6B4B5E0011970E /* BaseView.swift in Sources */,
 				DB9CEE472B6BCF4300B0E0A1 /* TVDetailTableViewCell.swift in Sources */,
 				DB8151C62B6914250026AAA9 /* API.swift in Sources */,
 				DB7482B02B6E8DE9002CDD2D /* UITabBarController + Extension.swift in Sources */,
 				DBB376DA2B68DCA800DA1C8F /* SceneDelegate.swift in Sources */,
-				DBDB26BE2B70AB6D001B901F /* TVSearchTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

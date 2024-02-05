@@ -10,6 +10,8 @@ import UIKit
 class BaseViewController: UIViewController{
     
     var tvID : Int = 0
+    var genreID : Int = 0
+    var countryID : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +56,7 @@ class BaseViewController: UIViewController{
     }
 }
 
+//MARK: - 화면전환관련
 extension BaseViewController {
     
     enum TransitionStyle {
@@ -63,7 +66,9 @@ extension BaseViewController {
         case push
     }
     
-    func tvViewTransition<T:BaseViewController>(style : TransitionStyle, viewController : T.Type, tvID : Int) {
+    //MARK: - overload로 진행함.
+    // tvID
+    func ViewTransition<T:BaseViewController>(style : TransitionStyle, viewControllerType : T.Type, tvID : Int) {
         let vc = T()
         vc.tvID = tvID
         switch style {
@@ -71,11 +76,68 @@ extension BaseViewController {
             present(vc, animated: true)
         case .presentNavigation:
             let nav = UINavigationController(rootViewController: vc)
-            present(vc, animated: true)
+            present(nav, animated: true)
         case .presentFullNavigation:
             let nav = UINavigationController(rootViewController: vc)
             nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: true)
+        case .push:
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    // genreID
+    func ViewTransition<T:BaseViewController>(style : TransitionStyle, viewControllerType : T.Type, genreID : Int) {
+        let vc = T()
+        vc.genreID = genreID
+        switch style {
+        case .present:
             present(vc, animated: true)
+        case .presentNavigation:
+            let nav = UINavigationController(rootViewController: vc)
+            present(nav, animated: true)
+        case .presentFullNavigation:
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: true)
+        case .push:
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    // courntryID
+    func ViewTransition<T:BaseViewController>(style : TransitionStyle, viewControllerType : T.Type, countryID : String) {
+        let vc = T()
+        vc.countryID = countryID
+        switch style {
+        case .present:
+            present(vc, animated: true)
+        case .presentNavigation:
+            let nav = UINavigationController(rootViewController: vc)
+            present(nav, animated: true)
+        case .presentFullNavigation:
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: true)
+        case .push:
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    // 매개 변수 x
+    func ViewTransition<T:BaseViewController>(style : TransitionStyle, viewController : T.Type) {
+        let vc = T()
+        
+        switch style {
+        case .present:
+            present(vc, animated: true)
+        case .presentNavigation:
+            let nav = UINavigationController(rootViewController: vc)
+            present(nav, animated: true)
+        case .presentFullNavigation:
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: true)
         case .push:
             navigationController?.pushViewController(vc, animated: true)
         }

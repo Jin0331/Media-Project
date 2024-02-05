@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 
+
 enum MediaAPI {
     
     static var baseImageUrl = "https://image.tmdb.org/t/p/w500/"
@@ -15,6 +16,17 @@ enum MediaAPI {
     static var header : HTTPHeaders = ["Authorization" : API.TMDBAPI]
     static var method : HTTPMethod = .get
     
+    //MARK: - Error 관련 Enum
+    enum APIError : Error {
+        case failedRequeset
+        case noData
+        case invalidResponse
+        case invalidData
+        case invalidDecodable
+    }
+
+    
+    //MARK: - 화면별로 API 관리됨.일단은
     enum Trend : CaseIterable{
         static var allCases : [Trend] {
             return [.trend, .popular(page: 1), .top_rated(page: 1)]
@@ -173,43 +185,48 @@ enum MediaAPI {
         }
     }
     
-    enum Configuration : CaseIterable {
+    enum Search : CaseIterable {
+        
+        static var allCases: [Search] {
+            return [.tv, .countries]
+        }
+        
         case countries
+        case tv
         
         var endPoint : URL {
             get {
                 switch self {
                 case .countries:
                     return URL(string: MediaAPI.baseUrl + "configuration/countries")!
+                case .tv:
+                    return URL(string: MediaAPI.baseUrl + "genre/tv/list")!
                 }
             }
         }
         
         var parameter : Parameters {
             switch self {
-            case  .countries :
+            default :
                 return ["language":"ko-KR"]
             }
         }
         
-//        var indexValue : Int {
-//            switch self {
-//            case .detail :
-//                return 0
-//            case .recommendations :
-//                return 1
-//            case .aggregate_credits :
-//                return 2
-//            case .relatedVideo :
-//                return 99
-//
-//            }
-//        }
-        
         var titleValue : String {
             switch self {
             case .countries :
-                return "detail - None"
+                return "비디오 국가"
+            case .tv :
+                return "비디오 장르"
+            }
+        }
+        
+        var indexValue : Int {
+            switch self {
+            case .countries :
+                return 0
+            case .tv :
+                return 1
             }
         }
         
@@ -219,7 +236,69 @@ enum MediaAPI {
                 return String(describing: self)
             }
         }
+        
+        static func searchByIndex(value : Int) -> MediaAPI.Search {
+            
+            switch value {
+            case 0 :
+                return .tv
+            case 1 :
+                return .countries
+            default :
+                return .countries
+            }
+        }
     }
     
+    enum SearchDetail : CaseIterable {
+        
+        static var allCases: [SearchDetail] {
+            return [.countries(id: ""), .genere(id: 0), .detail(id: 0)]
+        }
+        
+        case countries(id:String)
+        case genere(id:Int)
+        case detail(id:Int)
+        
+        var endPoint : URL {
+            get {
+                switch self {
+                case .countries,.genere:
+                    return URL(string: MediaAPI.baseUrl + "discover/tv")!
+                case .detail(let id):
+                    return URL(string: MediaAPI.baseUrl + "tv/\(id)")!
+                }
+            }
+        }
+        
+        
+        //TODO: -parameter 추가 필요!!!!!!!!!! ⭕️⭕️⭕️⭕️⭕️⭕️⭕️⭕️⭕️⭕️⭕️
+        var parameter : Parameters {
+            switch self {
+            default :
+                return ["language":"ko-KR"]
+            }
+        }
+        
+        var caseValue : String {
+            switch self {
+            default :
+                return String(describing: self)
+            }
+        }
+        
+        static func searchByIndex(value : Int) -> MediaAPI.SearchDetail {
+            switch value {
+            case 0 :
+                return .countries(id: "")
+            case 1 :
+                return .genere(id: 0)
+            case 2 :
+                return .detail(id: 0)
+            default:
+                return .countries(id: "")
+            }
+        }
+    }
 }
 
