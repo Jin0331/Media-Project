@@ -14,7 +14,53 @@ class MediaSessionManager {
     
     private init () {}
        
-    //MARK: - Configuration
+    func fetchURLSession<T: Decodable>(api : MediaAPI.SearchDetail, completionHandler : @escaping (T?, MediaAPI.APIError?) -> Void) {
+        
+        // ✅ query 추가 !!! 이모지!?
+        var urlComponents = URLComponents(string: api.endPoint.absoluteString)
+        let queryItems = api.parameter.map { (key: String, value: Any) in
+            return URLQueryItem(name: key, value: value as! String)
+        }
+        urlComponents?.queryItems = queryItems
+        
+        var url = URLRequest(url: (urlComponents?.url)!)
+        url.httpMethod = "GET"
+        url.addValue(API.TMDBAPI, forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            DispatchQueue.main.async {
+                
+                guard error == nil else {
+                    completionHandler(nil, .failedRequeset)
+                    return
+                }
+                
+                guard let data = data else {
+                    completionHandler(nil, .noData)
+                    return
+                }
+                
+                guard let response = response as? HTTPURLResponse else {
+                    completionHandler(nil, .invalidResponse)
+                    return
+                }
+                
+                guard response.statusCode == 200 else {
+                    completionHandler(nil, .invalidData)
+                    return
+                }
+                
+                do {
+                    let result = try JSONDecoder().decode(T.self, from: data)
+                    completionHandler(result, nil)
+                } catch {
+                    completionHandler(nil, .invalidDecodable)
+                }
+            }
+        }.resume()
+    }
+    
+    //MARK: - Search
     func fetchURLSession<T: Decodable>(api : MediaAPI.Search, completionHandler : @escaping (T?, MediaAPI.APIError?) -> Void) {
         
         // ✅ query 추가 !!! 이모지!?

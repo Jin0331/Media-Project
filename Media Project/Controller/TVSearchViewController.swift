@@ -26,7 +26,9 @@ class TVSearchViewController : BaseViewController {
         
         mainView.mainTableView.dataSource = self
         mainView.mainTableView.delegate = self
-//        hideKeyboardWhenTappedAround() // 키보드 숨기기
+        
+        mainView.searchBar.delegate = self
+        hideKeyboardWhenTappedAround() // 키보드 숨기기
         
         let group = DispatchGroup()
         
@@ -123,9 +125,20 @@ extension TVSearchViewController : UICollectionViewDelegate, UICollectionViewDat
         return cell
     }
     
+    
+    //TODO: - genreID, countryID 2가지의 경우.
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        ViewTransition(style: .push, viewController: CommonCollectionViewController.self)
+
+        if collectionView.layer.name! == MediaAPI.Search.countries.caseValue {
+            ViewTransition(style: .push, viewControllerType: CommonCollectionViewController.self, countryID: countries?[indexPath.row].iso_3166_1 ?? "")
+        } else {
+            ViewTransition(style: .push, viewControllerType: CommonCollectionViewController.self, genreID: genres?.genres[indexPath.row].id ?? 0)
+        }
     }
 }
 
+
+//TODO: - 서치 진행했을 때,검색결과 아래에 나타나도록
+extension TVSearchViewController : UISearchBarDelegate {
+    
+}

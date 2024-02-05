@@ -249,5 +249,56 @@ enum MediaAPI {
             }
         }
     }
+    
+    enum SearchDetail : CaseIterable {
+        
+        static var allCases: [SearchDetail] {
+            return [.countries(id: ""), .genere(id: 0), .detail(id: 0)]
+        }
+        
+        case countries(id:String)
+        case genere(id:Int)
+        case detail(id:Int)
+        
+        var endPoint : URL {
+            get {
+                switch self {
+                case .countries,.genere:
+                    return URL(string: MediaAPI.baseUrl + "discover/tv")!
+                case .detail(let id):
+                    return URL(string: MediaAPI.baseUrl + "tv/\(id)")!
+                }
+            }
+        }
+        
+        
+        //TODO: -parameter 추가 필요!!!!!!!!!! ⭕️⭕️⭕️⭕️⭕️⭕️⭕️⭕️⭕️⭕️⭕️
+        var parameter : Parameters {
+            switch self {
+            default :
+                return ["language":"ko-KR"]
+            }
+        }
+        
+        var caseValue : String {
+            switch self {
+            default :
+                return String(describing: self)
+            }
+        }
+        
+        static func searchByIndex(value : Int) -> MediaAPI.SearchDetail {
+            switch value {
+            case 0 :
+                return .countries(id: "")
+            case 1 :
+                return .genere(id: 0)
+            case 2 :
+                return .detail(id: 0)
+            default:
+                return .countries(id: "")
+            }
+        }
+    }
 }
 
