@@ -35,14 +35,17 @@ struct TVSeriesDetail : Decodable {
     }
     
 }
-//MARK: - Genre
 struct Genres : Decodable {
     let id : Int
     let name : String
 }
 
-//MARK: - Aggregate Credits API
+//MARK: - TVGenres
+struct TVGeneres : Decodable {
+    let genres : [Genres]
+}
 
+//MARK: - Aggregate Credits API
 struct TVSeriesAggregateCredit : Decodable {
     let cast : [Cast]
     let id : Int

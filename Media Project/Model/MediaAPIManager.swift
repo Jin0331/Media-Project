@@ -14,7 +14,7 @@ class MediaAPIManager {
         
     //MARK: - API Requet Function
     //TODO: - generic 적용 - 완
-    func fetchTrend<T : Decodable>(api : MediaAPI.Trend, completionHandler : @escaping (T) -> Void) {
+    func fetchAF<T : Decodable>(api : MediaAPI.Trend, completionHandler : @escaping (T) -> Void) {
         
         AF.request(api.endPoint,
                    method: MediaAPI.method,
@@ -35,7 +35,7 @@ class MediaAPIManager {
         }
     }
     
-    func fetchTV<T : Decodable>(api : MediaAPI.TV, completionHandler : @escaping (T) -> Void) {
+    func fetchAF<T : Decodable>(api : MediaAPI.TV, completionHandler : @escaping (T) -> Void) {
         
         AF.request(api.endPoint,
                    method: MediaAPI.method,

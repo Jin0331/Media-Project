@@ -40,7 +40,7 @@ class TVDetailViewController: BaseViewController {
         
         group.enter()
         DispatchQueue.global().async(group: group) {
-            MediaAPIManager.shared.fetchTV(api: .detail(id: self.tvID)) { (item : TVSeriesDetail ) in
+            MediaAPIManager.shared.fetchAF(api: .detail(id: self.tvID)) { (item : TVSeriesDetail ) in
                 self.detailList = item
                 group.leave()
             }
@@ -48,7 +48,7 @@ class TVDetailViewController: BaseViewController {
         
         group.enter()
         DispatchQueue.global().async(group: group) {
-            MediaAPIManager.shared.fetchTV(api: .aggregate_credits(id: self.tvID)) { (item : TVSeriesAggregateCredit ) in
+            MediaAPIManager.shared.fetchAF(api: .aggregate_credits(id: self.tvID)) { (item : TVSeriesAggregateCredit ) in
                 self.aggregateCreditList = item
                 group.leave()
             }
@@ -56,7 +56,7 @@ class TVDetailViewController: BaseViewController {
         
         group.enter()
         DispatchQueue.global().async(group: group) {
-            MediaAPIManager.shared.fetchTV(api: .recommendations(id: self.tvID)) { (item : TVSeriesRecommendations ) in
+            MediaAPIManager.shared.fetchAF(api: .recommendations(id: self.tvID)) { (item : TVSeriesRecommendations ) in
                 self.recommendationsList = item
                 group.leave()
             }

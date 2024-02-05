@@ -20,23 +20,41 @@ class TVSearchViewController : BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let group = DispatchGroup()
         
-        print()
-        
-        MediaSessionManager.shared.configuration(api: MediaAPI.Configuration.countries) { (item : Countries?, error : MediaAPI.APIError?) in
-            if error == nil {
-                guard let item = item else { return }
-                
-                dump(item)
-            } else {
-                dump(error)
+        //MARK: - Configuration API request
+        group.enter()
+        DispatchQueue.global().async(group: group) {
+            MediaSessionManager.shared.fetchURLSession(api: MediaAPI.Configuration.countries) { (item : Countries?, error : MediaAPI.APIError?) in
+                if error == nil {
+                    guard let item = item else { return }
+                    self.countries = item
+                } else {
+                    dump(error)
+                }
+                group.leave()
             }
         }
         
+        //MARK: - Genres API request
+        group.enter()
+        DispatchQueue.global().async(group: group) {
+            MediaSessionManager.shared.fetchURLSession(api: MediaAPI.Configuration.countries) { (item : Countries?, error : MediaAPI.APIError?) in
+                if error == nil {
+                    guard let item = item else { return }
+                    self.countries = item
+                } else {
+                    dump(error)
+                }
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .main) {
+            print("갱신 완료")
+            dump(self.countries)
+        }
     }
-    
-    
-    
     
     override func configureNavigation() {
         super.configureNavigation()
