@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 
+
 enum MediaAPI {
     
     static var baseImageUrl = "https://image.tmdb.org/t/p/w500/"
@@ -25,6 +26,7 @@ enum MediaAPI {
     }
 
     
+    //MARK: - 화면별로 API 관리됨.일단은
     enum Trend : CaseIterable{
         static var allCases : [Trend] {
             return [.trend, .popular(page: 1), .top_rated(page: 1)]
@@ -183,49 +185,20 @@ enum MediaAPI {
         }
     }
     
-    enum Configuration : CaseIterable {
+    enum Search : CaseIterable {
+        
+        static var allCases: [Search] {
+            return [.countries, .tv]
+        }
+        
         case countries
+        case tv
         
         var endPoint : URL {
             get {
                 switch self {
                 case .countries:
                     return URL(string: MediaAPI.baseUrl + "configuration/countries")!
-                }
-            }
-        }
-        
-        var parameter : Parameters {
-            switch self {
-            case  .countries :
-                return ["language":"ko-KR"]
-            }
-        }
-        
-        var titleValue : String {
-            switch self {
-            case .countries :
-                return "비디오 국가"
-            }
-        }
-        
-        var caseValue : String {
-            switch self {
-            default :
-                return String(describing: self)
-            }
-        }
-    }
-    
-    enum Genres : CaseIterable {
-        case movie
-        case tv
-        
-        var endPoint : URL {
-            get {
-                switch self {
-                case .movie:
-                    return URL(string: MediaAPI.baseUrl + "genre/movie/list")!
                 case .tv:
                     return URL(string: MediaAPI.baseUrl + "genre/tv/list")!
                 }
@@ -241,8 +214,19 @@ enum MediaAPI {
         
         var titleValue : String {
             switch self {
-            default :
+            case .countries :
+                return "비디오 국가"
+            case .tv :
                 return "비디오 장르"
+            }
+        }
+        
+        var indexValue : Int {
+            switch self {
+            case .countries :
+                return 0
+            case .tv :
+                return 1
             }
         }
         
@@ -252,7 +236,18 @@ enum MediaAPI {
                 return String(describing: self)
             }
         }
+        
+        static func searchByIndex(value : Int) -> MediaAPI.Search {
+            
+            switch value {
+            case 0 :
+                return .countries
+            case 1 :
+                return .tv
+            default :
+                return .countries
+            }
+        }
     }
-    
 }
 
