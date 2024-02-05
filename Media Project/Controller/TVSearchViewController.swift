@@ -21,6 +21,17 @@ class TVSearchViewController : BaseViewController {
         super.viewDidLoad()
         
         
+        print()
+        
+        MediaSessionManager.shared.configuration(api: MediaAPI.Configuration.countries) { (item : Countries?, error : MediaAPI.APIError?) in
+            if error == nil {
+                guard let item = item else { return }
+                
+                dump(item)
+            } else {
+                dump(error)
+            }
+        }
         
     }
     

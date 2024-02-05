@@ -10,21 +10,12 @@ import Alamofire
 
 class MediaSessionManager {
     
-    let shared = MediaSessionManager()
+    static let shared = MediaSessionManager()
     
     private init () {}
-    
-    //MARK: - Error 관련 Enum
-    enum APICError : Error {
-        case failedRequeset
-        case noData
-        case invalidResponse
-        case invalidData
-        case invalidDecodable
-    }
-    
+       
     //TODO: - Configuration URL세션으로 구성
-    func configuration<T: Decodable>(api : MediaAPI.Configuration, completionHandler : @escaping (T?, APICError?) -> Void) {
+    func configuration<T: Decodable>(api : MediaAPI.Configuration, completionHandler : @escaping (T?, MediaAPI.APIError?) -> Void) {
         var url = URLRequest(url: api.endPoint)
         url.httpMethod = "GET"
         url.addValue(API.TMDBAPI, forHTTPHeaderField: "Authorization")

@@ -15,6 +15,16 @@ enum MediaAPI {
     static var header : HTTPHeaders = ["Authorization" : API.TMDBAPI]
     static var method : HTTPMethod = .get
     
+    //MARK: - Error 관련 Enum
+    enum APIError : Error {
+        case failedRequeset
+        case noData
+        case invalidResponse
+        case invalidData
+        case invalidDecodable
+    }
+
+    
     enum Trend : CaseIterable{
         static var allCases : [Trend] {
             return [.trend, .popular(page: 1), .top_rated(page: 1)]
