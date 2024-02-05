@@ -17,9 +17,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: scene)
         
-        let vc = TVViewController()
+        let firstVC = UINavigationController(rootViewController: TVViewController())
         
-        window?.rootViewController = vc
+        // Tabbar controller
+        let tabbarController = UITabBarController()
+        tabbarController.setViewControllers([firstVC], animated: true)
+        tabbarController.configureItemDesign(tabBar: tabbarController.tabBar)
+        
+        window?.rootViewController = tabbarController
         window?.makeKeyAndVisible()
     }
 

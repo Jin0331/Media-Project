@@ -8,9 +8,10 @@
 import UIKit
 import SnapKit
 
-class TVCollectionViewCell: UICollectionViewCell {
-    let posterImageView = PosterImageView(frame: .zero)
-    let titleLabel = CommonTextLabel()
+class CommonCollectionViewCell: UICollectionViewCell {
+    let posterImageView = PosterImageView(frame: .zero).then{
+        $0.image = UIImage(systemName: "person")
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,23 +27,16 @@ class TVCollectionViewCell: UICollectionViewCell {
     
         
     func configureView(){
-        posterImageView.image = UIImage(systemName: "person")
-        titleLabel.text = "임시 테스트"
+        
     }
     
     func configureHierarchy() {
         contentView.addSubview(posterImageView)
-        contentView.addSubview(titleLabel)
     }
     
     func setUpConstraint() {
         posterImageView.snp.makeConstraints { make in
             make.edges.equalTo(contentView)
-        }
-        
-        titleLabel.snp.makeConstraints { make in
-            make.horizontalEdges.bottom.equalTo(contentView)
-            make.height.equalTo(20)
         }
     }
 }

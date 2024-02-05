@@ -7,6 +7,7 @@
 
 import Foundation
 
+// popular & top rate 동일
 struct TVSeriesListsModel : Decodable {
     let page : Int
     let results : [TVSeriesLists]
