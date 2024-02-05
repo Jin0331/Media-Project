@@ -14,7 +14,7 @@ class TVDetailTableViewCell: BaseTableViewCell {
         $0.font = .systemFont(ofSize: 22, weight: .heavy)
         $0.textColor = .white
     }
-    let subCollectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout()).then {
+    lazy var subCollectionView = UICollectionView(frame: .zero, collectionViewLayout: configureTVDetailCollectionViewLayout()).then {
         $0.backgroundColor = .clear
         $0.register(TVDetailCollectionViewCell.self, forCellWithReuseIdentifier: TVDetailCollectionViewCell.identifier)
         $0.register(CommonCollectionViewCell.self, forCellWithReuseIdentifier: CommonCollectionViewCell.identifier)
@@ -43,12 +43,12 @@ class TVDetailTableViewCell: BaseTableViewCell {
 
     }
     
-    static func configureCollectionViewLayout() -> UICollectionViewFlowLayout {
+    func configureTVDetailCollectionViewLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         
         let rowCount : Double = 3
-        let sectionSpacing : CGFloat = 1
-        let itemSpacing : CGFloat = 1
+        let sectionSpacing : CGFloat = 10
+        let itemSpacing : CGFloat = 10
         let width : CGFloat = UIScreen.main.bounds.width - (itemSpacing * (rowCount - 1)) - (sectionSpacing * 2)
         let itemWidth: CGFloat = width / rowCount
         

@@ -8,35 +8,31 @@
 import UIKit
 import SnapKit
 
-class CommonCollectionViewCell: UICollectionViewCell {
+class CommonCollectionViewCell: BaseCollectionViewCell {
     let posterImageView = PosterImageView(frame: .zero).then{
-        $0.image = UIImage(systemName: "person")
+        $0.backgroundColor = UIColor(red: CGFloat.random(in: 0..<0.5),
+                                     green: CGFloat.random(in: 0..<0.5),
+                                     blue: CGFloat.random(in: 0..<0.5),
+                                     alpha: 1)
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        configureHierarchy()
-        setUpConstraint()
-        configureView()
+    let titleLabel = CommonTextLabel().then {
+        $0.backgroundColor = .clear
+        $0.font = .systemFont(ofSize: 18, weight: .heavy)
+        $0.textColor = .white
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-        
-    func configureView(){
-        
-    }
-    
-    func configureHierarchy() {
+    override func configureHierarchy() {
         contentView.addSubview(posterImageView)
+        contentView.addSubview(titleLabel)
     }
     
-    func setUpConstraint() {
+    override func configureLayout() {
         posterImageView.snp.makeConstraints { make in
             make.edges.equalTo(contentView)
+        }
+        titleLabel.snp.makeConstraints { make in
+            make.top.leading.equalTo(posterImageView).inset(30)
         }
     }
 }

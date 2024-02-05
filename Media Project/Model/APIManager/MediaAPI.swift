@@ -188,7 +188,7 @@ enum MediaAPI {
     enum Search : CaseIterable {
         
         static var allCases: [Search] {
-            return [.countries, .tv]
+            return [.tv, .countries]
         }
         
         case countries

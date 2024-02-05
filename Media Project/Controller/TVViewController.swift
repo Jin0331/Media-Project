@@ -177,6 +177,7 @@ extension TVViewController : UICollectionViewDataSourcePrefetching {
                 MediaAPIManager.shared.fetchAF(api: mediaTrendCase) { (item : TVSeriesListsModel) in
                     
                     collectionView.layer.name! == MediaAPI.Trend.popular(page: 0).caseValue ? self.popularList.append(contentsOf: item.results) : self.topRatedList.append(contentsOf: item.results)
+                    collectionView.reloadData()
                 }
             }
         }
