@@ -202,24 +202,47 @@ enum MediaAPI {
             }
         }
         
-//        var indexValue : Int {
-//            switch self {
-//            case .detail :
-//                return 0
-//            case .recommendations :
-//                return 1
-//            case .aggregate_credits :
-//                return 2
-//            case .relatedVideo :
-//                return 99
-//
-//            }
-//        }
-        
         var titleValue : String {
             switch self {
             case .countries :
-                return "detail - None"
+                return "비디오 국가"
+            }
+        }
+        
+        var caseValue : String {
+            switch self {
+            default :
+                return String(describing: self)
+            }
+        }
+    }
+    
+    enum Genres : CaseIterable {
+        case movie
+        case tv
+        
+        var endPoint : URL {
+            get {
+                switch self {
+                case .movie:
+                    return URL(string: MediaAPI.baseUrl + "genre/movie/list")!
+                case .tv:
+                    return URL(string: MediaAPI.baseUrl + "genre/tv/list")!
+                }
+            }
+        }
+        
+        var parameter : Parameters {
+            switch self {
+            default :
+                return ["language":"ko-KR"]
+            }
+        }
+        
+        var titleValue : String {
+            switch self {
+            default :
+                return "비디오 장르"
             }
         }
         

@@ -46,6 +46,7 @@
 		DBDB26BC2B70A958001B901F /* ConfigurationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB26BB2B70A958001B901F /* ConfigurationModel.swift */; };
 		DBDB26BE2B70AB6D001B901F /* TVSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB26BD2B70AB6D001B901F /* TVSearchTableViewCell.swift */; };
 		DBDB26C02B70AEE6001B901F /* MediaSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB26BF2B70AEE6001B901F /* MediaSessionManager.swift */; };
+		DBDB26C22B70BD02001B901F /* GenresModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB26C12B70BD02001B901F /* GenresModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +86,7 @@
 		DBDB26BB2B70A958001B901F /* ConfigurationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationModel.swift; sourceTree = "<group>"; };
 		DBDB26BD2B70AB6D001B901F /* TVSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVSearchTableViewCell.swift; sourceTree = "<group>"; };
 		DBDB26BF2B70AEE6001B901F /* MediaSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSessionManager.swift; sourceTree = "<group>"; };
+		DBDB26C12B70BD02001B901F /* GenresModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,13 +131,12 @@
 		DB8151B42B68DE030026AAA9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DBDB26C32B70BD0C001B901F /* APIManager */,
 				DB8151B62B6911390026AAA9 /* TVTrendModel.swift */,
 				DB5D40962B6A203E003B9176 /* TVSeriesModel.swift */,
 				DB8151C72B6918E00026AAA9 /* TVSeriesListsModel.swift */,
 				DBDB26BB2B70A958001B901F /* ConfigurationModel.swift */,
-				DB8151B82B69137C0026AAA9 /* MediaAPIManager.swift */,
-				DBDB26BF2B70AEE6001B901F /* MediaSessionManager.swift */,
-				DB1FCA5B2B6B764D00755D80 /* MediaAPI.swift */,
+				DBDB26C12B70BD02001B901F /* GenresModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -233,6 +234,16 @@
 			path = "Media Project";
 			sourceTree = "<group>";
 		};
+		DBDB26C32B70BD0C001B901F /* APIManager */ = {
+			isa = PBXGroup;
+			children = (
+				DB1FCA5B2B6B764D00755D80 /* MediaAPI.swift */,
+				DB8151B82B69137C0026AAA9 /* MediaAPIManager.swift */,
+				DBDB26BF2B70AEE6001B901F /* MediaSessionManager.swift */,
+			);
+			path = APIManager;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -320,6 +331,7 @@
 				DBB376DC2B68DCA800DA1C8F /* TVViewController.swift in Sources */,
 				DB8151B72B6911390026AAA9 /* TVTrendModel.swift in Sources */,
 				DB8151CB2B6923090026AAA9 /* Protocol.swift in Sources */,
+				DBDB26C22B70BD02001B901F /* GenresModel.swift in Sources */,
 				DB5D40992B6A24D6003B9176 /* TVDetailViewController.swift in Sources */,
 				DB5D40972B6A203E003B9176 /* TVSeriesModel.swift in Sources */,
 				DB8151D02B69254D0026AAA9 /* CommonCollectionViewCell.swift in Sources */,

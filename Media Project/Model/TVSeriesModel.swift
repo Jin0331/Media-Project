@@ -10,7 +10,7 @@ import Foundation
 //MARK: - Detail API
 struct TVSeriesDetail : Decodable {
     let backdropPath : String
-    let genres : [Genres]
+    let genres : [TVGenres]
     let id : Int
     let originalName : String
     let overview : String
@@ -35,14 +35,9 @@ struct TVSeriesDetail : Decodable {
     }
     
 }
-struct Genres : Decodable {
+struct TVGenres : Decodable {
     let id : Int
     let name : String
-}
-
-//MARK: - TVGenres
-struct TVGeneres : Decodable {
-    let genres : [Genres]
 }
 
 //MARK: - Aggregate Credits API

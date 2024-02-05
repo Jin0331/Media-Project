@@ -11,7 +11,7 @@ class TVSearchViewController : BaseViewController {
     
     let mainView = TVSearchView()
     var countries : Countries?
-    var genre : Genres?
+    var genres : Genres?
     
     override func loadView() {
         self.view = mainView
@@ -39,10 +39,10 @@ class TVSearchViewController : BaseViewController {
         //MARK: - Genres API request
         group.enter()
         DispatchQueue.global().async(group: group) {
-            MediaSessionManager.shared.fetchURLSession(api: MediaAPI.Configuration.countries) { (item : Countries?, error : MediaAPI.APIError?) in
+            MediaSessionManager.shared.fetchURLSession(api: MediaAPI.Genres.tv) { (item : Genres?, error : MediaAPI.APIError?) in
                 if error == nil {
                     guard let item = item else { return }
-                    self.countries = item
+                    self.genres = item
                 } else {
                     dump(error)
                 }
@@ -52,7 +52,9 @@ class TVSearchViewController : BaseViewController {
         
         group.notify(queue: .main) {
             print("갱신 완료")
+//            dump(self.countries)
             dump(self.countries)
+            dump(self.genres)
         }
     }
     
