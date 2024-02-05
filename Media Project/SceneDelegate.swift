@@ -18,10 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene)
         
         let firstVC = UINavigationController(rootViewController: TVViewController())
+        let secondVC = UINavigationController(rootViewController: TVSearchViewController())
         
         // Tabbar controller
         let tabbarController = UITabBarController()
-        tabbarController.setViewControllers([firstVC], animated: true)
+        tabbarController.setViewControllers([firstVC, secondVC], animated: true)
         tabbarController.configureItemDesign(tabBar: tabbarController.tabBar)
         
         window?.rootViewController = tabbarController

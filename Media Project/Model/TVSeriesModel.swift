@@ -35,7 +35,7 @@ struct TVSeriesDetail : Decodable {
     }
     
 }
-
+//MARK: - Genre
 struct Genres : Decodable {
     let id : Int
     let name : String
