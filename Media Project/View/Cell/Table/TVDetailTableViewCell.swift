@@ -40,7 +40,7 @@ class TVDetailTableViewCell: BaseTableViewCell {
     
     override func configureView() {
         backgroundColor = .clear
-        selectionStyle = .none
+
     }
     
     static func configureCollectionViewLayout() -> UICollectionViewFlowLayout {
