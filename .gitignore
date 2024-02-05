@@ -9,3 +9,6 @@ API*.swift
 .DS_Store
 .AppleDouble
 .LSOverride
+
+### xcode
+*.xcuserstate
