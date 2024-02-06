@@ -13,12 +13,12 @@ struct TVTrendModel : Decodable {
 
 struct TrendTV : Decodable {
     let adult : Bool
-    let backdropPath : String
+    let backdropPath : String?
     let id : Int
     let name : String?
     let originalName : String?
     let overview : String
-    let posterPath : String
+    let posterPath : String?
     let voteAverage : Double
     let voteCount : Int
     

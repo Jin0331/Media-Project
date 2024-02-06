@@ -64,24 +64,8 @@ class CommonCollectionViewController: BaseViewController {
             }
         }
         
-//        // detail
-//        group.enter()
-//        DispatchQueue.global().async(group: group) {
-//            MediaSessionManager.shared.fetchURLSession(api: MediaAPI.SearchDetail.genere(id: self.genreID)) { (item : TVSeriesRecommendations?, error : MediaAPI.APIError?) in
-//                if error == nil {
-//                    guard let item = item else { return }
-//                    self.genereList = item
-//
-//                } else {
-//                    dump(error)
-//                }
-//                group.leave()
-//            }
-//        }
-//
         group.notify(queue: .main) {
             print(#function, " - 갱신완료")
-            dump(self.dataList)
             self.mainView.mainCollectionView.reloadData()
         }
     }

@@ -35,6 +35,27 @@ class MediaAPIManager {
         }
     }
     
+    func fetchAF<T : Decodable>(api : MediaAPI.Search, completionHandler : @escaping (T) -> Void) {
+        
+        AF.request(api.endPoint,
+                   method: MediaAPI.method,
+                   parameters: api.parameter,
+                   encoding: URLEncoding(destination: .queryString),
+                   headers: MediaAPI.header)
+        .responseDecodable(of: T.self) { response in
+            
+            switch response.result {
+            case .success(let success):
+                print("조회 성공")
+                
+                completionHandler(success)
+                
+            case .failure(let failure):
+                print(failure)
+            }
+        }
+    }
+    
     func fetchAF<T : Decodable>(api : MediaAPI.TV, completionHandler : @escaping (T) -> Void) {
         
         AF.request(api.endPoint,

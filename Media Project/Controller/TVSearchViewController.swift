@@ -14,6 +14,7 @@ class TVSearchViewController : BaseViewController {
     
     var countries : Countries?
     var genres : Genres?
+    var searchList : TVTrendModel?
     
     //    var dataList : [String : Decodable] = [:] //TODO: - String을 관리하는 Enum이 필요할까?? ❓
     
@@ -27,6 +28,10 @@ class TVSearchViewController : BaseViewController {
         mainView.mainTableView.dataSource = self
         mainView.mainTableView.delegate = self
         
+        mainView.mainCollectionView.dataSource = self
+        mainView.mainCollectionView.delegate = self
+        mainView.mainCollectionView.isHidden = true
+        
         mainView.searchBar.delegate = self
         hideKeyboardWhenTappedAround() // 키보드 숨기기
         
@@ -39,7 +44,6 @@ class TVSearchViewController : BaseViewController {
                 if error == nil {
                     guard let item = item else { return }
                     self.countries = item
-                    //                    self.dataList["countries"] = item
                 } else {
                     dump(error)
                 }
@@ -54,7 +58,6 @@ class TVSearchViewController : BaseViewController {
                 if error == nil {
                     guard let item = item else { return }
                     self.genres = item
-//                    self.dataList["genres"] = item
                 } else {
                     dump(error)
                 }
@@ -103,40 +106,61 @@ extension TVSearchViewController : UITableViewDelegate, UITableViewDataSource {
 
 extension TVSearchViewController : UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        print(#function)
-        //MARK: - Dictionary를 사용해서 데이터를 한번에 처리하면, 복잡해진다.;;; 일단 끝까지 해보자 -> 일단포기,, Optional Binding에서 하나의 분기가 끝나면 return되므로, 2가지 동시표현 불가능한 듯.
-        return collectionView.layer.name! == MediaAPI.Search.countries.caseValue ? countries?.count ?? 0 : genres?.genres.count ?? 0
+        if collectionView ==  mainView.mainCollectionView {
+            
+            guard let data = searchList else { return 0}
+            return data.results.count
+        } else {
+            //MARK: - Dictionary를 사용해서 데이터를 한번에 처리하면, 복잡해진다.;;; 일단 끝까지 해보자 -> 일단포기,, Optional Binding에서 하나의 분기가 끝나면 return되므로, 2가지 동시표현 불가능한 듯.
+            return collectionView.layer.name! == MediaAPI.Search.countries.caseValue ? countries?.count ?? 0 : genres?.genres.count ?? 0
+            
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCollectionViewCell.identifier, for: indexPath) as! CommonCollectionViewCell
-
-        if collectionView.layer.name! == MediaAPI.Search.countries.caseValue {
-            if let countries {
-                cell.titleLabel.text = countries[indexPath.row].nativeName
+        
+        if mainView.mainCollectionView == collectionView {
+            if let searchList {
+                let item = searchList.results[indexPath.item]
+                if let posterPath = item.posterPath {
+                    let url = URL(string: MediaAPI.baseImageUrl + posterPath)!
+                    cell.posterImageView.kf.setImage(with: url, options: [.transition(.fade(1))])
+                }
             }
         } else {
-            if let genres {
-                cell.titleLabel.text = genres.genres[indexPath.row].name
+            if collectionView.layer.name! == MediaAPI.Search.countries.caseValue {
+                if let countries {
+                    cell.titleLabel.text = countries[indexPath.row].nativeName
+                }
+            } else {
+                if let genres {
+                    cell.titleLabel.text = genres.genres[indexPath.row].name
+                }
             }
         }
-        
         return cell
     }
     
     
     //TODO: - genreID, countryID 2가지의 경우.
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-        if collectionView.layer.name! == MediaAPI.Search.countries.caseValue {
-            ViewTransition(style: .push, viewControllerType: CommonCollectionViewController.self, countryID: countries?[indexPath.row].iso_3166_1 ?? "")
-            print("country 호출")
-            print(countries?[indexPath.row].iso_3166_1 ?? "")
+        
+        if mainView.mainCollectionView == collectionView {
+            if let searchList {
+                let item = searchList.results[indexPath.item]
+                ViewTransition(style: .push, viewControllerType: TVDetailViewController.self, tvID: item.id)
+            }
         } else {
-            ViewTransition(style: .push, viewControllerType: CommonCollectionViewController.self, genreID: genres?.genres[indexPath.row].id ?? 0)
-            print("genre 호출")
-            print(genres?.genres[indexPath.row].id ?? 0)
+            if collectionView.layer.name! == MediaAPI.Search.countries.caseValue {
+                ViewTransition(style: .push, viewControllerType: CommonCollectionViewController.self, countryID: countries?[indexPath.row].iso_3166_1 ?? "")
+                print("country 호출")
+                print(countries?[indexPath.row].iso_3166_1 ?? "")
+            } else {
+                ViewTransition(style: .push, viewControllerType: CommonCollectionViewController.self, genreID: genres?.genres[indexPath.row].id ?? 0)
+                print("genre 호출")
+                print(genres?.genres[indexPath.row].id ?? 0)
+            }
         }
     }
 }
@@ -144,5 +168,23 @@ extension TVSearchViewController : UICollectionViewDelegate, UICollectionViewDat
 
 //TODO: - 서치 진행했을 때,검색결과 아래에 나타나도록
 extension TVSearchViewController : UISearchBarDelegate {
-    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        mainView.mainTableView.isHidden = searchBar.text == "" ? false : true
+        mainView.mainCollectionView.isHidden = searchBar.text == "" ? true : false
+        let queryText = searchBar.text!
+        
+        //MARK: - Genres API request
+        DispatchQueue.global().async {
+            MediaAPIManager.shared.fetchAF(api: .search(query: queryText)) { (item : TVTrendModel ) in
+                self.searchList = item
+            }
+        }
+        
+        self.mainView.mainCollectionView.reloadData()
+    }
 }
+
+
+
+
+

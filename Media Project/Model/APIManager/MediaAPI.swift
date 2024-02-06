@@ -189,11 +189,12 @@ enum MediaAPI {
     enum Search : CaseIterable {
         
         static var allCases: [Search] {
-            return [.tv, .countries]
+            return [.tv, .countries, .search(query: "")]
         }
         
         case countries
         case tv
+        case search(query : String)
         
         var endPoint : URL {
             get {
@@ -202,12 +203,16 @@ enum MediaAPI {
                     return URL(string: MediaAPI.baseUrl + "configuration/countries")!
                 case .tv:
                     return URL(string: MediaAPI.baseUrl + "genre/tv/list")!
+                case .search :
+                    return URL(string: baseUrl + "search/tv")!
                 }
             }
         }
         
         var parameter : Parameters {
             switch self {
+            case .search(let query):
+                return ["language":"ko-KR","query":query]
             default :
                 return ["language":"ko-KR"]
             }
@@ -219,6 +224,8 @@ enum MediaAPI {
                 return "비디오 국가"
             case .tv :
                 return "비디오 장르"
+            case .search :
+                return "검색"
             }
         }
         
@@ -228,6 +235,8 @@ enum MediaAPI {
                 return 0
             case .tv :
                 return 1
+            case .search:
+                return 2
             }
         }
         
@@ -245,6 +254,8 @@ enum MediaAPI {
                 return .tv
             case 1 :
                 return .countries
+            case 2:
+                return .search(query: "")
             default :
                 return .countries
             }
