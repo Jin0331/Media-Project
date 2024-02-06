@@ -31,7 +31,7 @@ class BaseView : UIView {
     }
     
     func configureView() {
-        
+        backgroundColor = .black
     }
     
     // overload

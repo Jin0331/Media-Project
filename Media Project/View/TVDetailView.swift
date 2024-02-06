@@ -60,7 +60,7 @@ class TVDetailView : BaseView {
     
     let bottomLeftTableView = UITableView().then {
         $0.backgroundColor = .clear
-        $0.rowHeight = UIScreen.main.bounds.height / 3
+        $0.rowHeight = UIScreen.main.bounds.height / 2
         $0.register(TVDetailTableViewCell.self, forCellReuseIdentifier: TVDetailTableViewCell.identifier)
     }
     

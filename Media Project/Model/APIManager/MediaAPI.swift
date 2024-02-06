@@ -112,7 +112,8 @@ enum MediaAPI {
         // 여기가 핵심. 구역별로 정하면 될 듯
         // 추가되는 항목을 아래의 리스트에 추가하면 될 듯
         static var contentsInfoAllcases : [TV] {
-            return [.aggregate_credits(id: 0), .relatedVideo(id: 0)]
+//            return [.aggregate_credits(id: 0), .relatedVideo(id: 0)] //MARK: -
+            return [.aggregate_credits(id: 0)] //MARK: - 관련 동영상은 추후 구현
         }
         
         static var relatedContentsAllcases : [TV] {
@@ -188,11 +189,12 @@ enum MediaAPI {
     enum Search : CaseIterable {
         
         static var allCases: [Search] {
-            return [.tv, .countries]
+            return [.tv, .countries, .search(query: "")]
         }
         
         case countries
         case tv
+        case search(query : String)
         
         var endPoint : URL {
             get {
@@ -201,12 +203,16 @@ enum MediaAPI {
                     return URL(string: MediaAPI.baseUrl + "configuration/countries")!
                 case .tv:
                     return URL(string: MediaAPI.baseUrl + "genre/tv/list")!
+                case .search :
+                    return URL(string: baseUrl + "search/tv")!
                 }
             }
         }
         
         var parameter : Parameters {
             switch self {
+            case .search(let query):
+                return ["language":"ko-KR","query":query]
             default :
                 return ["language":"ko-KR"]
             }
@@ -218,6 +224,8 @@ enum MediaAPI {
                 return "비디오 국가"
             case .tv :
                 return "비디오 장르"
+            case .search :
+                return "검색"
             }
         }
         
@@ -227,6 +235,8 @@ enum MediaAPI {
                 return 0
             case .tv :
                 return 1
+            case .search:
+                return 2
             }
         }
         
@@ -244,17 +254,20 @@ enum MediaAPI {
                 return .tv
             case 1 :
                 return .countries
+            case 2:
+                return .search(query: "")
             default :
                 return .countries
             }
         }
     }
     
-    enum SearchDetail : CaseIterable {
+    enum SearchDetail
+    {
         
-        static var allCases: [SearchDetail] {
-            return [.countries(id: ""), .genere(id: 0), .detail(id: 0)]
-        }
+//        static var allCases: [SearchDetail] {
+//            return [.countries(id: ""), .genere(id: 0), .detail(id: 0)]
+//        }
         
         case countries(id:String)
         case genere(id:Int)
@@ -275,6 +288,10 @@ enum MediaAPI {
         //TODO: -parameter 추가 필요!!!!!!!!!! ⭕️⭕️⭕️⭕️⭕️⭕️⭕️⭕️⭕️⭕️⭕️
         var parameter : Parameters {
             switch self {
+            case .countries(let id) :
+                return ["with_origin_country": "\(id)", "sort_by" : "popularity.desc", "language":"ko-KR"]
+            case .genere(let id) :
+                return ["with_genres" : "\(id)", "sort_by" : "popularity.desc", "language":"ko-KR"]
             default :
                 return ["language":"ko-KR"]
             }

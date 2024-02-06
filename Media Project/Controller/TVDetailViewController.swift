@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-
+//TODO: - Empty 추가
 class TVDetailViewController: BaseViewController {
     
     let mainView = TVDetailView()
@@ -89,6 +89,8 @@ class TVDetailViewController: BaseViewController {
 
 extension TVDetailViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        //MARK: - 일단은 관련동영상은 구현할 시간이 없으므로, 출연 목록 구현
         
         if self.mainView.bottomLeftTableView == tableView{
             return MediaAPI.TV.contentsInfoAllcases.count

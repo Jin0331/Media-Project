@@ -15,8 +15,7 @@ class CommonCollectionViewController: BaseViewController {
     let mainView = CommonCollcionView()
     
     //MARK: -데이터 목록
-    var genereList : TVSeriesRecommendations?
-    
+    var dataList : TVSeriesRecommendations? //MARK: - Discover API를 통해 데이터가 들어옴
     
     override func loadView() {
         self.view = mainView
@@ -28,14 +27,36 @@ class CommonCollectionViewController: BaseViewController {
         
         let group = DispatchGroup()
         
-        //MARK: - Configuration API request
+        //MARK: - Configuration API request\
+        //TODO: - 💄 Detail 또는 Discover로 값 호출해야 됨
+        
+        // genre
         group.enter()
         DispatchQueue.global().async(group: group) {
-            MediaSessionManager.shared.fetchURLSession(api: MediaAPI.SearchDetail.genere(id: 35)) { (item : TVSeriesRecommendations?, error : MediaAPI.APIError?) in
+            print(self.genreID)
+            MediaSessionManager.shared.fetchURLSession(api: MediaAPI.SearchDetail.genere(id: self.genreID)) { (item : TVSeriesRecommendations?, error : MediaAPI.APIError?) in
                 if error == nil {
-                    guard let item = item else { return }
-                    self.genereList = item
-
+                    if self.genreID != 0 {
+                        guard let item = item else { return }
+                        self.dataList = item
+                        print("여기 실행됨???????", #function)
+                    }
+                } else {
+                    dump(error)
+                }
+                group.leave()
+            }
+        }
+        
+        // country
+        group.enter()
+        DispatchQueue.global().async(group: group) {
+            MediaSessionManager.shared.fetchURLSession(api: MediaAPI.SearchDetail.countries(id: self.countryID)) { (item : TVSeriesRecommendations?, error : MediaAPI.APIError?) in
+                if error == nil {
+                    if self.countryID != "" {
+                        guard let item = item else { return }
+                        self.dataList = item
+                    }
                 } else {
                     dump(error)
                 }
@@ -44,26 +65,40 @@ class CommonCollectionViewController: BaseViewController {
         }
         
         group.notify(queue: .main) {
-            print("갱신완료")
-            
-            dump(self.genereList)
-            
+            print(#function, " - 갱신완료")
+            self.mainView.mainCollectionView.reloadData()
         }
-        
     }
     
 }
 
 extension CommonCollectionViewController : UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9
+        
+        guard let data = dataList else { return 1 }
+        
+        return data.results.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCollectionViewCell.identifier, for: indexPath) as! CommonCollectionViewCell
         
+        if let dataList {
+            let item = dataList.results[indexPath.item]
+            
+            let url = URL(string: MediaAPI.baseImageUrl + item.posterPath)!
+            cell.posterImageView.kf.setImage(with: url, options: [.transition(.fade(1))])
+        }
+
         return cell
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if let dataList {
+            let item = dataList.results[indexPath.item]
+            ViewTransition(style: .present, viewControllerType: TVDetailViewController.self, tvID: item.id)
+
+        }
+    }
 }
