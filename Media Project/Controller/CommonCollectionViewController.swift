@@ -108,4 +108,13 @@ extension CommonCollectionViewController : UICollectionViewDelegate, UICollectio
 
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if let dataList {
+            let item = dataList.results[indexPath.item]
+            ViewTransition(style: .present, viewControllerType: TVDetailViewController.self, tvID: item.id)
+
+        }
+    }
 }
