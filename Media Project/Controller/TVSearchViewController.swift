@@ -131,8 +131,12 @@ extension TVSearchViewController : UICollectionViewDelegate, UICollectionViewDat
 
         if collectionView.layer.name! == MediaAPI.Search.countries.caseValue {
             ViewTransition(style: .push, viewControllerType: CommonCollectionViewController.self, countryID: countries?[indexPath.row].iso_3166_1 ?? "")
+            print("country 호출")
+            print(countries?[indexPath.row].iso_3166_1 ?? "")
         } else {
             ViewTransition(style: .push, viewControllerType: CommonCollectionViewController.self, genreID: genres?.genres[indexPath.row].id ?? 0)
+            print("genre 호출")
+            print(genres?.genres[indexPath.row].id ?? 0)
         }
     }
 }

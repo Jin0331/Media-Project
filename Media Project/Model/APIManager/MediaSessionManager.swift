@@ -16,11 +16,21 @@ class MediaSessionManager {
        
     func fetchURLSession<T: Decodable>(api : MediaAPI.SearchDetail, completionHandler : @escaping (T?, MediaAPI.APIError?) -> Void) {
         
+        print(api.parameter)
+        
         // ✅ query 추가 !!! 이모지!?
         var urlComponents = URLComponents(string: api.endPoint.absoluteString)
         let queryItems = api.parameter.map { (key: String, value: Any) in
-            return URLQueryItem(name: key, value: value as! String)
+            
+            if let value = value as? String {
+                return URLQueryItem(name: key, value: value)
+            } else {
+                return URLQueryItem(name: key, value: "")
+            }
+             //TODO: - Optional binding 필요 💄
         }
+        print(queryItems)
+        
         urlComponents?.queryItems = queryItems
         
         var url = URLRequest(url: (urlComponents?.url)!)
