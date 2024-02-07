@@ -138,7 +138,6 @@
 		DB8151B42B68DE030026AAA9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DBDB26C32B70BD0C001B901F /* APIManager */,
 				DB8151B62B6911390026AAA9 /* TVTrendModel.swift */,
 				DB5D40962B6A203E003B9176 /* TVSeriesModel.swift */,
 				DB8151C72B6918E00026AAA9 /* TVSeriesListsModel.swift */,
@@ -162,6 +161,7 @@
 		DB8151C92B6922FC0026AAA9 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				DBDB26C32B70BD0C001B901F /* APIManager */,
 				DB8151CA2B6923090026AAA9 /* Protocol.swift */,
 				DB8151D32B6926270026AAA9 /* UIView + Extension.swift */,
 				DB7482AD2B6E862A002CDD2D /* UIImage + Extension.swift */,

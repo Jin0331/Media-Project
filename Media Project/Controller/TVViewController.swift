@@ -95,8 +95,9 @@ extension TVViewController : UITableViewDelegate, UITableViewDataSource {
             cell.titleLabel.text = MediaAPI.Trend.searchByIndex(value: indexPath.row).textValue
             cell.emptyButton.tag = mainList?.results[indexPath.row].id ?? 0
             
-            //TODO: - 해당 부분은 delegate pattern으로 수정해야 됨
-            cell.emptyButton.addTarget(self, action: #selector(emptyButtonClicked), for: .touchUpInside)
+            print(cell.emptyButton)
+//            //TODO: - 해당 부분은 delegate pattern으로 수정해야 됨
+//            cell.emptyButton.addTarget(self, action: #selector(emptyButtonClicked), for: .touchUpInside)
             
             return cell
             
@@ -114,9 +115,18 @@ extension TVViewController : UITableViewDelegate, UITableViewDataSource {
             
             return cell
         }
+        
+        
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if MediaAPI.Trend.trend.indexValue == indexPath.row {
+            let tvID = mainList?.results[indexPath.row].id ?? 0
+            ViewTransition(style: .push, viewControllerType: TVDetailViewController.self, tvID: tvID)
+        }
+    }
     @objc func emptyButtonClicked(_ sender : UIButton) {
+        print(#function, sender.tag)
         ViewTransition(style: .push, viewControllerType: TVDetailViewController.self, tvID: sender.tag)
     }
     
