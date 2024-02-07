@@ -93,9 +93,8 @@ extension TVViewController : UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: PosterTableViewCell.identifier, for: indexPath) as! PosterTableViewCell
             cell.configureView(dataList: mainList)
             cell.titleLabel.text = MediaAPI.Trend.searchByIndex(value: indexPath.row).textValue
-            cell.emptyButton.tag = mainList?.results[indexPath.row].id ?? 0
-            
-            print(cell.emptyButton)
+//            cell.emptyButton.tag = mainList?.results[indexPath.row].id ?? 0
+//            print(cell.emptyButton)
 //            //TODO: - 해당 부분은 delegate pattern으로 수정해야 됨
 //            cell.emptyButton.addTarget(self, action: #selector(emptyButtonClicked), for: .touchUpInside)
             
@@ -115,8 +114,6 @@ extension TVViewController : UITableViewDelegate, UITableViewDataSource {
             
             return cell
         }
-        
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -125,10 +122,12 @@ extension TVViewController : UITableViewDelegate, UITableViewDataSource {
             ViewTransition(style: .push, viewControllerType: TVDetailViewController.self, tvID: tvID)
         }
     }
-    @objc func emptyButtonClicked(_ sender : UIButton) {
-        print(#function, sender.tag)
-        ViewTransition(style: .push, viewControllerType: TVDetailViewController.self, tvID: sender.tag)
-    }
+
+// ⭕️ cell에서 empty button을 클릭했을 때 사용하려고 만든 method
+//    @objc func emptyButtonClicked(_ sender : UIButton) {
+//        print(#function, sender.tag)
+//        ViewTransition(style: .push, viewControllerType: TVDetailViewController.self, tvID: sender.tag)
+//    }
     
 }
 
