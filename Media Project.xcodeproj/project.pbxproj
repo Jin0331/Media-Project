@@ -50,6 +50,7 @@
 		DBCC22922B773FC0007F61B2 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCC22912B773FC0007F61B2 /* LabelTableViewCell.swift */; };
 		DBCC22942B77429E007F61B2 /* Label+TextfieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCC22932B77429E007F61B2 /* Label+TextfieldTableViewCell.swift */; };
 		DBCC22962B774EF9007F61B2 /* UITextField + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCC22952B774EF9007F61B2 /* UITextField + Extension.swift */; };
+		DBCC22982B7751DA007F61B2 /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCC22972B7751DA007F61B2 /* ProfileDetailViewController.swift */; };
 		DBDB26B82B70A1A3001B901F /* TVSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB26B72B70A1A3001B901F /* TVSearchView.swift */; };
 		DBDB26BA2B70A46B001B901F /* TVSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB26B92B70A46B001B901F /* TVSearchViewController.swift */; };
 		DBDB26BC2B70A958001B901F /* ConfigurationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB26BB2B70A958001B901F /* ConfigurationModel.swift */; };
@@ -99,6 +100,7 @@
 		DBCC22912B773FC0007F61B2 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		DBCC22932B77429E007F61B2 /* Label+TextfieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label+TextfieldTableViewCell.swift"; sourceTree = "<group>"; };
 		DBCC22952B774EF9007F61B2 /* UITextField + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField + Extension.swift"; sourceTree = "<group>"; };
+		DBCC22972B7751DA007F61B2 /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
 		DBDB26B72B70A1A3001B901F /* TVSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVSearchView.swift; sourceTree = "<group>"; };
 		DBDB26B92B70A46B001B901F /* TVSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVSearchViewController.swift; sourceTree = "<group>"; };
 		DBDB26BB2B70A958001B901F /* ConfigurationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationModel.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				DBDB26B92B70A46B001B901F /* TVSearchViewController.swift */,
 				DBA5B47B2B713279004C3B8C /* CommonCollectionViewController.swift */,
 				DBDD00A62B7729CD0040FA51 /* ProfileViewController.swift */,
+				DBCC22972B7751DA007F61B2 /* ProfileDetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				DB5D40992B6A24D6003B9176 /* TVDetailViewController.swift in Sources */,
 				DBCC22922B773FC0007F61B2 /* LabelTableViewCell.swift in Sources */,
 				DBA5B47E2B71342D004C3B8C /* CommonCollcionView.swift in Sources */,
+				DBCC22982B7751DA007F61B2 /* ProfileDetailViewController.swift in Sources */,
 				DB5D40972B6A203E003B9176 /* TVSeriesModel.swift in Sources */,
 				DB8151D02B69254D0026AAA9 /* CommonCollectionViewCell.swift in Sources */,
 				DBCC22902B773D5A007F61B2 /* ProfileTableViewCell.swift in Sources */,
