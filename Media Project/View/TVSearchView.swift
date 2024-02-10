@@ -9,7 +9,7 @@ import UIKit
 import Then
 import SnapKit
 
-class TVSearchView : BaseView {
+final class TVSearchView : BaseView {
     
     let searchBar = UISearchBar().then {
         $0.placeholder = "TV 콘텐츠, 태그(not yet), 인물(not yet) 검색"

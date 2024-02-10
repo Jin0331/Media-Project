@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class CommonCollcionView : BaseView {
+final class CommonCollcionView : BaseView {
     
     lazy var mainCollectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCommonCollectionViewLayout()).then {
         $0.backgroundColor = .clear

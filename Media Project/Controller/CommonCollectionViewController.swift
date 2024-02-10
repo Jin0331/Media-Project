@@ -10,7 +10,7 @@ import SnapKit
 import Kingfisher
 
 
-class CommonCollectionViewController: BaseViewController {
+final class CommonCollectionViewController: BaseViewController {
     
     let mainView = CommonCollcionView()
     

@@ -8,7 +8,7 @@
 import UIKit
 import Then
 
-class TVView : BaseView {    
+final class TVView : BaseView {    
     lazy var mainTableView = UITableView().then {
         $0.register(TVTableViewCell.self, forCellReuseIdentifier: TVTableViewCell.identifier)
         $0.register(PosterTableViewCell.self, forCellReuseIdentifier: PosterTableViewCell.identifier)

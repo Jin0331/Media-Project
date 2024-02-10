@@ -13,7 +13,7 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class TVViewController: BaseViewController{
+final class TVViewController: BaseViewController{
     
     let mainView = TVView()
     

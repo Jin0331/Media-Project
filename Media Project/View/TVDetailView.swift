@@ -8,7 +8,7 @@
 import UIKit
 import Then
 
-class TVDetailView : BaseView {
+final class TVDetailView : BaseView {
     
     //MARK: - UI Variable
     let topView = UIView().then {view in}

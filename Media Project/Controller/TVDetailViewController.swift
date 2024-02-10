@@ -10,7 +10,7 @@ import SnapKit
 import Kingfisher
 
 //TODO: - Empty 추가
-class TVDetailViewController: BaseViewController {
+final class TVDetailViewController: BaseViewController {
     
     let mainView = TVDetailView()
 //    override var tvID: Int =
