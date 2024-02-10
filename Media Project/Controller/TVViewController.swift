@@ -74,11 +74,7 @@ final class TVViewController: BaseViewController{
         navigationItem.title = "홈"
     }
     
-//    @objc override func profileButtonClicked(_ sender : UIBarButtonItem) {
-//        super.profileButtonClicked(sender)
-//        
-//        ViewTransition(style: .push, viewController: ProfileViewController.self)
-//    }
+
 }
 
 //MARK: - table View
@@ -89,7 +85,7 @@ extension TVViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return  MediaAPI.Trend.trend.indexValue == indexPath.row ? 550 : 300
+        return  MediaAPI.Trend.trend.indexValue == indexPath.row ? 600 : 300
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

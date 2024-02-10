@@ -11,10 +11,12 @@ import Alamofire
 
 enum MediaAPI {
     
-    static var baseImageUrl = "https://image.tmdb.org/t/p/w500/"
-    static var baseUrl =  "https://api.themoviedb.org/3/"
-    static var header : HTTPHeaders = ["Authorization" : API.TMDBAPI]
-    static var method : HTTPMethod = .get
+//    static let baseVideoUrl = "https://www.youtube.com/watch?v="
+    static let baseVideoUrl = "https://www.youtube.com/embed/"
+    static let baseImageUrl = "https://image.tmdb.org/t/p/w500/"
+    static let baseUrl =  "https://api.themoviedb.org/3/"
+    static let header : HTTPHeaders = ["Authorization" : API.TMDBAPI]
+    static let method : HTTPMethod = .get
     
     //MARK: - Error 관련 Enum
     enum APIError : Error {
@@ -112,8 +114,8 @@ enum MediaAPI {
         // 여기가 핵심. 구역별로 정하면 될 듯
         // 추가되는 항목을 아래의 리스트에 추가하면 될 듯
         static var contentsInfoAllcases : [TV] {
-//            return [.aggregate_credits(id: 0), .relatedVideo(id: 0)] //MARK: -
-            return [.aggregate_credits(id: 0)] //MARK: - 관련 동영상은 추후 구현
+            return [.relatedVideo(id: 0), .aggregate_credits(id: 0)] //MARK: -
+//            return [.aggregate_credits(id: 0)] //MARK: - 관련 동영상은 추후 구현
         }
         
         static var relatedContentsAllcases : [TV] {
@@ -129,12 +131,14 @@ enum MediaAPI {
         var endPoint : URL {
             get {
                 switch self {
-                case .detail(let id),.relatedVideo(id: let id):
+                case .detail(let id):
                     return URL(string: MediaAPI.baseUrl + "tv/\(id)")!
                 case .recommendations(let id):
                     return URL(string: MediaAPI.baseUrl + "tv/\(id)/recommendations")!
                 case .aggregate_credits(let id) :
                     return URL(string: MediaAPI.baseUrl + "tv/\(id)/aggregate_credits")!
+                case .relatedVideo(id: let id) :
+                    return URL(string: MediaAPI.baseUrl + "tv/\(id)/videos")!
                 }
             }
         }

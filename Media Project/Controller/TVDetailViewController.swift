@@ -13,8 +13,8 @@ import Kingfisher
 final class TVDetailViewController: BaseViewController {
     
     let mainView = TVDetailView()
-//    override var tvID: Int =
     var detailList : TVSeriesDetail?
+    var videoList : TVSeriesVideo?
     var aggregateCreditList : TVSeriesAggregateCredit?
     var recommendationsList : TVSeriesRecommendations?
 
@@ -48,6 +48,14 @@ final class TVDetailViewController: BaseViewController {
         
         group.enter()
         DispatchQueue.global().async(group: group) {
+            MediaAPIManager.shared.fetchAF(api: .relatedVideo(id: self.tvID)) { (item : TVSeriesVideo ) in
+                self.videoList = item
+                group.leave()
+            }
+        }
+    
+        group.enter()
+        DispatchQueue.global().async(group: group) {
             MediaAPIManager.shared.fetchAF(api: .aggregate_credits(id: self.tvID)) { (item : TVSeriesAggregateCredit ) in
                 self.aggregateCreditList = item
                 group.leave()
@@ -68,6 +76,8 @@ final class TVDetailViewController: BaseViewController {
             self.mainView.configureView(detailList: self.detailList)
             self.mainView.bottomLeftTableView.reloadData()
             self.mainView.bottomRightTableView.reloadData()
+            
+            dump(self.videoList)
         }
         
         //MARK: - button action, button 클릭에 따라 table view hidden
@@ -102,7 +112,6 @@ extension TVDetailViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         //MARK: - 일단은 관련동영상은 구현할 시간이 없으므로, 출연 목록 구현
-        
         if self.mainView.bottomLeftTableView == tableView{
             return MediaAPI.TV.contentsInfoAllcases.count
         } else {
@@ -112,18 +121,33 @@ extension TVDetailViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: TVDetailTableViewCell.identifier, for: indexPath) as! TVDetailTableViewCell
-        cell.subCollectionView.delegate = self
-        cell.subCollectionView.dataSource = self
+        if tableView == mainView.bottomLeftTableView && indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: WebKitTableViewCell.identifier, for: indexPath) as! WebKitTableViewCell
+            
+            cell.titleLabel.text = MediaAPI.TV.contentsInfoAllcases[indexPath.row].titleValue
+            
+            if let videoList = videoList {
+            let randomVideo = videoList.results.randomElement()!
+            cell.getVideo(videoKey: randomVideo.key)
+                
+            }
+            
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: TVDetailTableViewCell.identifier, for: indexPath) as! TVDetailTableViewCell
+            cell.subCollectionView.delegate = self
+            cell.subCollectionView.dataSource = self
+            
+            //MARK: - 항목이 2개이므로, 삼항 연산자 가능
+            let dataModel = self.mainView.bottomLeftTableView == tableView ? MediaAPI.TV.contentsInfoAllcases[indexPath.row] : MediaAPI.TV.relatedContentsAllcases[indexPath.row]
+            cell.titleLabel.text = dataModel.titleValue
+            cell.subCollectionView.layer.name = dataModel.caseValue
+            cell.subCollectionView.tag = dataModel.indexValue
+            cell.subCollectionView.reloadData()
+            
+            return cell
+        }
         
-        //MARK: - 항목이 2개이므로, 삼항 연산자 가능
-        let dataModel = self.mainView.bottomLeftTableView == tableView ? MediaAPI.TV.contentsInfoAllcases[indexPath.row] : MediaAPI.TV.relatedContentsAllcases[indexPath.row]
-        cell.titleLabel.text = dataModel.titleValue
-        cell.subCollectionView.layer.name = dataModel.caseValue
-        cell.subCollectionView.tag = dataModel.indexValue
-        cell.subCollectionView.reloadData()
-        
-        return cell
     }
 }
 

@@ -52,12 +52,11 @@ class PosterTableViewCell : BaseTableViewCell {
     func configureView(dataList : TVTrendModel?) {
         
         if let dataList = dataList {
-            let randomTrendTV = dataList.results.randomElement()!
+            let randomTrendTV = dataList.results[0]
             if let posterPath = randomTrendTV.posterPath {
                 let url = URL(string: MediaAPI.baseImageUrl + posterPath)!
                 posterImageView.kf.setImage(with: url, options: [.transition(.fade(1))])
             } 
-            
         }
     }
     

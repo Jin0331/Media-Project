@@ -51,6 +51,7 @@
 		DBCC22942B77429E007F61B2 /* Label+TextfieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCC22932B77429E007F61B2 /* Label+TextfieldTableViewCell.swift */; };
 		DBCC22962B774EF9007F61B2 /* UITextField + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCC22952B774EF9007F61B2 /* UITextField + Extension.swift */; };
 		DBCC22982B7751DA007F61B2 /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCC22972B7751DA007F61B2 /* ProfileDetailViewController.swift */; };
+		DBCC229A2B776DEE007F61B2 /* WebKitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCC22992B776DEE007F61B2 /* WebKitTableViewCell.swift */; };
 		DBDB26B82B70A1A3001B901F /* TVSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB26B72B70A1A3001B901F /* TVSearchView.swift */; };
 		DBDB26BA2B70A46B001B901F /* TVSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB26B92B70A46B001B901F /* TVSearchViewController.swift */; };
 		DBDB26BC2B70A958001B901F /* ConfigurationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB26BB2B70A958001B901F /* ConfigurationModel.swift */; };
@@ -101,6 +102,7 @@
 		DBCC22932B77429E007F61B2 /* Label+TextfieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label+TextfieldTableViewCell.swift"; sourceTree = "<group>"; };
 		DBCC22952B774EF9007F61B2 /* UITextField + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField + Extension.swift"; sourceTree = "<group>"; };
 		DBCC22972B7751DA007F61B2 /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
+		DBCC22992B776DEE007F61B2 /* WebKitTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebKitTableViewCell.swift; sourceTree = "<group>"; };
 		DBDB26B72B70A1A3001B901F /* TVSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVSearchView.swift; sourceTree = "<group>"; };
 		DBDB26B92B70A46B001B901F /* TVSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVSearchViewController.swift; sourceTree = "<group>"; };
 		DBDB26BB2B70A958001B901F /* ConfigurationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationModel.swift; sourceTree = "<group>"; };
@@ -184,8 +186,8 @@
 				DB7482AD2B6E862A002CDD2D /* UIImage + Extension.swift */,
 				DB7482AF2B6E8DE9002CDD2D /* UITabBarController + Extension.swift */,
 				DBA5B4792B712EAA004C3B8C /* UIViewController + Extension.swift */,
-				DB8151C52B6914250026AAA9 /* API.swift */,
 				DBCC22952B774EF9007F61B2 /* UITextField + Extension.swift */,
+				DB8151C52B6914250026AAA9 /* API.swift */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -209,6 +211,7 @@
 				DBCC228F2B773D5A007F61B2 /* ProfileTableViewCell.swift */,
 				DBCC22912B773FC0007F61B2 /* LabelTableViewCell.swift */,
 				DBCC22932B77429E007F61B2 /* Label+TextfieldTableViewCell.swift */,
+				DBCC22992B776DEE007F61B2 /* WebKitTableViewCell.swift */,
 			);
 			path = Table;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB8151B92B69137C0026AAA9 /* MediaAPIManager.swift in Sources */,
+				DBCC229A2B776DEE007F61B2 /* WebKitTableViewCell.swift in Sources */,
 				DBB376DC2B68DCA800DA1C8F /* TVViewController.swift in Sources */,
 				DB8151B72B6911390026AAA9 /* TVTrendModel.swift in Sources */,
 				DB8151CB2B6923090026AAA9 /* Protocol.swift in Sources */,
