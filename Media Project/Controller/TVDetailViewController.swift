@@ -79,6 +79,8 @@ class TVDetailViewController: BaseViewController {
     override func configureNavigation() {
         super.configureNavigation()
         navigationItem.title = ""
+        
+        navigationItem.rightBarButtonItem = nil
     }
     
     @objc func middleButtonClicked(sender : UIButton){

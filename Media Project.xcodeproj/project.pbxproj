@@ -50,6 +50,7 @@
 		DBDB26BC2B70A958001B901F /* ConfigurationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB26BB2B70A958001B901F /* ConfigurationModel.swift */; };
 		DBDB26C02B70AEE6001B901F /* MediaSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB26BF2B70AEE6001B901F /* MediaSessionManager.swift */; };
 		DBDB26C22B70BD02001B901F /* GenresModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB26C12B70BD02001B901F /* GenresModel.swift */; };
+		DBDD00A72B7729CD0040FA51 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDD00A62B7729CD0040FA51 /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +94,7 @@
 		DBDB26BB2B70A958001B901F /* ConfigurationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationModel.swift; sourceTree = "<group>"; };
 		DBDB26BF2B70AEE6001B901F /* MediaSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSessionManager.swift; sourceTree = "<group>"; };
 		DBDB26C12B70BD02001B901F /* GenresModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresModel.swift; sourceTree = "<group>"; };
+		DBDD00A62B7729CD0040FA51 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 				DB5D40982B6A24D6003B9176 /* TVDetailViewController.swift */,
 				DBDB26B92B70A46B001B901F /* TVSearchViewController.swift */,
 				DBA5B47B2B713279004C3B8C /* CommonCollectionViewController.swift */,
+				DBDD00A62B7729CD0040FA51 /* ProfileViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 				DB22C2462B6B4B5E0011970E /* BaseView.swift in Sources */,
 				DB9CEE472B6BCF4300B0E0A1 /* TVDetailTableViewCell.swift in Sources */,
 				DB8151C62B6914250026AAA9 /* API.swift in Sources */,
+				DBDD00A72B7729CD0040FA51 /* ProfileViewController.swift in Sources */,
 				DB7482B02B6E8DE9002CDD2D /* UITabBarController + Extension.swift in Sources */,
 				DBB376DA2B68DCA800DA1C8F /* SceneDelegate.swift in Sources */,
 			);
