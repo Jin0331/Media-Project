@@ -86,7 +86,7 @@ struct Recommendations : Decodable {
     let id : Int
     let originalName : String
     let overview : String
-    let posterPath : String
+    let posterPath : String?
     
     enum CodingKeys : String, CodingKey {
         case id, overview

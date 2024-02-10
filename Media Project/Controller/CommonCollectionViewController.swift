@@ -86,7 +86,7 @@ extension CommonCollectionViewController : UICollectionViewDelegate, UICollectio
         if let dataList {
             let item = dataList.results[indexPath.item]
             
-            let url = URL(string: MediaAPI.baseImageUrl + item.posterPath)!
+            let url = URL(string: MediaAPI.baseImageUrl + item.posterPath!)!
             cell.posterImageView.kf.setImage(with: url, options: [.transition(.fade(1))])
         }
 

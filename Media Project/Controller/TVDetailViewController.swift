@@ -164,7 +164,11 @@ extension TVDetailViewController : UICollectionViewDelegate, UICollectionViewDat
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CommonCollectionViewCell.identifier, for: indexPath) as! CommonCollectionViewCell
             if let recommendationsList = recommendationsList {
                 if collectionView.tag == MediaAPI.TV.recommendations(id: 0).indexValue { // 출연 및 관련 동영상 구분하기 위한 tag 사용
-                    cell.posterImageView.kf.setImage(with: URL(string: MediaAPI.baseImageUrl + recommendationsList.results[indexPath.item].posterPath), options: [.transition(.fade(1))])
+                    
+                    if let posterPath = recommendationsList.results[indexPath.item].posterPath {
+                        cell.posterImageView.kf.setImage(with: URL(string: MediaAPI.baseImageUrl + posterPath),
+                                                         options: [.transition(.fade(1))])
+                    }
                 } else {
                     //TODO: - 아직 추가되지 않은 관련 동영상 항목
                     print("관련 동영상 입니다. - recommendations")
