@@ -71,6 +71,9 @@ final class TVDetailViewController: BaseViewController {
         }
         
         //MARK: - button action, button 클릭에 따라 table view hidden
+        mainView.middleLeftButton.tag = 0
+        mainView.middleRightButton.tag = 1
+        
         mainView.middleLeftButton.addTarget(self, action: #selector(middleButtonClicked), for: .touchUpInside)
         mainView.middleRightButton.addTarget(self, action: #selector(middleButtonClicked), for: .touchUpInside)
         }
@@ -84,8 +87,14 @@ final class TVDetailViewController: BaseViewController {
     }
     
     @objc func middleButtonClicked(sender : UIButton){
-        mainView.bottomLeftTableView.isHidden.toggle()
-        mainView.bottomRightTableView.isHidden.toggle()
+        if sender.tag == 0 {
+            mainView.bottomLeftTableView.isHidden = false
+            mainView.bottomRightTableView.isHidden = true
+        } else {
+            mainView.bottomLeftTableView.isHidden = true
+            mainView.bottomRightTableView.isHidden = false
+        }
+
     }
 }
 
