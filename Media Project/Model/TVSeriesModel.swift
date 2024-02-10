@@ -9,7 +9,7 @@ import Foundation
 
 //MARK: - Detail API
 struct TVSeriesDetail : Decodable {
-    let backdropPath : String
+    let backdropPath : String?
     let genres : [TVGenres]
     let id : Int
     let originalName : String
@@ -93,4 +93,18 @@ struct Recommendations : Decodable {
         case originalName = "original_name"
         case posterPath = "poster_path"
     }
+}
+
+//MARK: - video
+struct TVSeriesVideo : Decodable {
+    let results : [Videos]
+}
+
+struct Videos : Decodable {
+    let name : String
+    let key : String
+    let site : String
+    let size : Int
+    let type : String
+    let official : Bool
 }

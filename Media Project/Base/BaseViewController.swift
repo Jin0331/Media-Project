@@ -25,15 +25,12 @@ class BaseViewController: UIViewController{
     }
     
     func configureHirerachy() {
-        print(#function, "base")
     }
     
     func configureLayout() {
-        
     }
     
     func configureView() {
-        print(#function, "base")
     }
     
     func configureNavigation () {
@@ -47,12 +44,26 @@ class BaseViewController: UIViewController{
             NSAttributedString.Key.font : UIFont.systemFont(ofSize: 25, weight: .heavy)
         ]
         
+        // back button
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil) // title 부분 수정
         backBarButtonItem.tintColor = .white
         self.navigationItem.backBarButtonItem = backBarButtonItem
         
-        navigationItem.title = "고래밥님"
+        // profile button
+        let profileButton = UIBarButtonItem(image: UIImage(systemName: "figure.child.circle"), style: .plain, target: self, action: #selector(profileButtonClicked))
+        profileButton.tintColor = .white
         
+        //  item 설정
+        navigationItem.rightBarButtonItem = profileButton
+        navigationItem.title = ""
+        
+    }
+    
+    // profile button 누를때 동작
+    @objc func profileButtonClicked(_ sender : UIBarButtonItem) {
+        
+//        print(#function)
+        ViewTransition(style: .push, viewController: ProfileViewController.self)
     }
 }
 

@@ -10,7 +10,7 @@ import SnapKit
 import Kingfisher
 
 
-class CommonCollectionViewController: BaseViewController {
+final class CommonCollectionViewController: BaseViewController {
     
     let mainView = CommonCollcionView()
     
@@ -86,8 +86,11 @@ extension CommonCollectionViewController : UICollectionViewDelegate, UICollectio
         if let dataList {
             let item = dataList.results[indexPath.item]
             
-            let url = URL(string: MediaAPI.baseImageUrl + item.posterPath!)!
-            cell.posterImageView.kf.setImage(with: url, options: [.transition(.fade(1))])
+            if let posterPath = item.posterPath {
+                let url = URL(string: MediaAPI.baseImageUrl + posterPath)!
+                cell.posterImageView.kf.setImage(with: url, options: [.transition(.fade(1))])
+            }
+            
         }
 
         return cell

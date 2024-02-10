@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TVSearchViewController : BaseViewController {
+final class TVSearchViewController : BaseViewController {
     
     // View class로부터 데이터 끌어와서 사용
     let mainView = TVSearchView()

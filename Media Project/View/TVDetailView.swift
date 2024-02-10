@@ -8,7 +8,7 @@
 import UIKit
 import Then
 
-class TVDetailView : BaseView {
+final class TVDetailView : BaseView {
     
     //MARK: - UI Variable
     let topView = UIView().then {view in}
@@ -60,8 +60,9 @@ class TVDetailView : BaseView {
     
     let bottomLeftTableView = UITableView().then {
         $0.backgroundColor = .clear
-        $0.rowHeight = UIScreen.main.bounds.height / 2
+        $0.rowHeight = UIScreen.main.bounds.height / 3
         $0.register(TVDetailTableViewCell.self, forCellReuseIdentifier: TVDetailTableViewCell.identifier)
+        $0.register(WebKitTableViewCell.self, forCellReuseIdentifier: WebKitTableViewCell.identifier)
     }
     
     let bottomRightTableView = UITableView().then {
@@ -139,8 +140,11 @@ class TVDetailView : BaseView {
     func configureView(detailList : TVSeriesDetail?) {
         
         if let detailList = detailList {
-            let url = URL(string: MediaAPI.baseImageUrl + detailList.backdropPath)!
-            topViewImage.kf.setImage(with: url, options: [.transition(.fade(1))])
+            
+            if let backdropPath = detailList.backdropPath {
+                let url = URL(string: MediaAPI.baseImageUrl + backdropPath)!
+                topViewImage.kf.setImage(with: url, options: [.transition(.fade(1))])
+            } 
             topViewTitle.text = detailList.originalName
             topViewInformation.text = detailList.mainText
             topViewOverView.text = detailList.overview

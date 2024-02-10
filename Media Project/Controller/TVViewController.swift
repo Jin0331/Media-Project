@@ -13,7 +13,7 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class TVViewController: BaseViewController{
+final class TVViewController: BaseViewController{
     
     let mainView = TVView()
     
@@ -74,6 +74,7 @@ class TVViewController: BaseViewController{
         navigationItem.title = "홈"
     }
     
+
 }
 
 //MARK: - table View
@@ -84,7 +85,7 @@ extension TVViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return  MediaAPI.Trend.trend.indexValue == indexPath.row ? 550 : 300
+        return  MediaAPI.Trend.trend.indexValue == indexPath.row ? 600 : 300
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -93,10 +94,6 @@ extension TVViewController : UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: PosterTableViewCell.identifier, for: indexPath) as! PosterTableViewCell
             cell.configureView(dataList: mainList)
             cell.titleLabel.text = MediaAPI.Trend.searchByIndex(value: indexPath.row).textValue
-//            cell.emptyButton.tag = mainList?.results[indexPath.row].id ?? 0
-//            print(cell.emptyButton)
-//            //TODO: - 해당 부분은 delegate pattern으로 수정해야 됨
-//            cell.emptyButton.addTarget(self, action: #selector(emptyButtonClicked), for: .touchUpInside)
             
             return cell
             
@@ -122,13 +119,6 @@ extension TVViewController : UITableViewDelegate, UITableViewDataSource {
             ViewTransition(style: .push, viewControllerType: TVDetailViewController.self, tvID: tvID)
         }
     }
-
-// ⭕️ cell에서 empty button을 클릭했을 때 사용하려고 만든 method
-//    @objc func emptyButtonClicked(_ sender : UIButton) {
-//        print(#function, sender.tag)
-//        ViewTransition(style: .push, viewControllerType: TVDetailViewController.self, tvID: sender.tag)
-//    }
-    
 }
 
 //MARK: -collection View

@@ -45,11 +45,19 @@
 		DBB376DC2B68DCA800DA1C8F /* TVViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB376DB2B68DCA800DA1C8F /* TVViewController.swift */; };
 		DBB376E12B68DCAA00DA1C8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBB376E02B68DCAA00DA1C8F /* Assets.xcassets */; };
 		DBB376E42B68DCAA00DA1C8F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBB376E22B68DCAA00DA1C8F /* LaunchScreen.storyboard */; };
+		DBCC228E2B772F39007F61B2 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCC228D2B772F39007F61B2 /* ProfileView.swift */; };
+		DBCC22902B773D5A007F61B2 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCC228F2B773D5A007F61B2 /* ProfileTableViewCell.swift */; };
+		DBCC22922B773FC0007F61B2 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCC22912B773FC0007F61B2 /* LabelTableViewCell.swift */; };
+		DBCC22942B77429E007F61B2 /* Label+TextfieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCC22932B77429E007F61B2 /* Label+TextfieldTableViewCell.swift */; };
+		DBCC22962B774EF9007F61B2 /* UITextField + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCC22952B774EF9007F61B2 /* UITextField + Extension.swift */; };
+		DBCC22982B7751DA007F61B2 /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCC22972B7751DA007F61B2 /* ProfileDetailViewController.swift */; };
+		DBCC229A2B776DEE007F61B2 /* WebKitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCC22992B776DEE007F61B2 /* WebKitTableViewCell.swift */; };
 		DBDB26B82B70A1A3001B901F /* TVSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB26B72B70A1A3001B901F /* TVSearchView.swift */; };
 		DBDB26BA2B70A46B001B901F /* TVSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB26B92B70A46B001B901F /* TVSearchViewController.swift */; };
 		DBDB26BC2B70A958001B901F /* ConfigurationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB26BB2B70A958001B901F /* ConfigurationModel.swift */; };
 		DBDB26C02B70AEE6001B901F /* MediaSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB26BF2B70AEE6001B901F /* MediaSessionManager.swift */; };
 		DBDB26C22B70BD02001B901F /* GenresModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB26C12B70BD02001B901F /* GenresModel.swift */; };
+		DBDD00A72B7729CD0040FA51 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDD00A62B7729CD0040FA51 /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,11 +96,19 @@
 		DBB376E02B68DCAA00DA1C8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DBB376E32B68DCAA00DA1C8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DBB376E52B68DCAA00DA1C8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DBCC228D2B772F39007F61B2 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		DBCC228F2B773D5A007F61B2 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		DBCC22912B773FC0007F61B2 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
+		DBCC22932B77429E007F61B2 /* Label+TextfieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label+TextfieldTableViewCell.swift"; sourceTree = "<group>"; };
+		DBCC22952B774EF9007F61B2 /* UITextField + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField + Extension.swift"; sourceTree = "<group>"; };
+		DBCC22972B7751DA007F61B2 /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
+		DBCC22992B776DEE007F61B2 /* WebKitTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebKitTableViewCell.swift; sourceTree = "<group>"; };
 		DBDB26B72B70A1A3001B901F /* TVSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVSearchView.swift; sourceTree = "<group>"; };
 		DBDB26B92B70A46B001B901F /* TVSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVSearchViewController.swift; sourceTree = "<group>"; };
 		DBDB26BB2B70A958001B901F /* ConfigurationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationModel.swift; sourceTree = "<group>"; };
 		DBDB26BF2B70AEE6001B901F /* MediaSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSessionManager.swift; sourceTree = "<group>"; };
 		DBDB26C12B70BD02001B901F /* GenresModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresModel.swift; sourceTree = "<group>"; };
+		DBDD00A62B7729CD0040FA51 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +145,7 @@
 				DB22C2432B6B4B010011970E /* TVDetailView.swift */,
 				DBDB26B72B70A1A3001B901F /* TVSearchView.swift */,
 				DBA5B47D2B71342D004C3B8C /* CommonCollcionView.swift */,
+				DBCC228D2B772F39007F61B2 /* ProfileView.swift */,
 				DB8151CC2B6924E30026AAA9 /* CustomView */,
 				DBA65C1A2B6BCD5000D3143D /* Cell */,
 			);
@@ -154,6 +171,8 @@
 				DB5D40982B6A24D6003B9176 /* TVDetailViewController.swift */,
 				DBDB26B92B70A46B001B901F /* TVSearchViewController.swift */,
 				DBA5B47B2B713279004C3B8C /* CommonCollectionViewController.swift */,
+				DBDD00A62B7729CD0040FA51 /* ProfileViewController.swift */,
+				DBCC22972B7751DA007F61B2 /* ProfileDetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -167,6 +186,7 @@
 				DB7482AD2B6E862A002CDD2D /* UIImage + Extension.swift */,
 				DB7482AF2B6E8DE9002CDD2D /* UITabBarController + Extension.swift */,
 				DBA5B4792B712EAA004C3B8C /* UIViewController + Extension.swift */,
+				DBCC22952B774EF9007F61B2 /* UITextField + Extension.swift */,
 				DB8151C52B6914250026AAA9 /* API.swift */,
 			);
 			path = Resource;
@@ -188,6 +208,10 @@
 				DB8151D72B692E180026AAA9 /* TVTableViewCell.swift */,
 				DB9CEE462B6BCF4300B0E0A1 /* TVDetailTableViewCell.swift */,
 				DB7482AB2B6E2228002CDD2D /* PosterTableViewCell.swift */,
+				DBCC228F2B773D5A007F61B2 /* ProfileTableViewCell.swift */,
+				DBCC22912B773FC0007F61B2 /* LabelTableViewCell.swift */,
+				DBCC22932B77429E007F61B2 /* Label+TextfieldTableViewCell.swift */,
+				DBCC22992B776DEE007F61B2 /* WebKitTableViewCell.swift */,
 			);
 			path = Table;
 			sourceTree = "<group>";
@@ -337,14 +361,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB8151B92B69137C0026AAA9 /* MediaAPIManager.swift in Sources */,
+				DBCC229A2B776DEE007F61B2 /* WebKitTableViewCell.swift in Sources */,
 				DBB376DC2B68DCA800DA1C8F /* TVViewController.swift in Sources */,
 				DB8151B72B6911390026AAA9 /* TVTrendModel.swift in Sources */,
 				DB8151CB2B6923090026AAA9 /* Protocol.swift in Sources */,
 				DBDB26C22B70BD02001B901F /* GenresModel.swift in Sources */,
 				DB5D40992B6A24D6003B9176 /* TVDetailViewController.swift in Sources */,
+				DBCC22922B773FC0007F61B2 /* LabelTableViewCell.swift in Sources */,
 				DBA5B47E2B71342D004C3B8C /* CommonCollcionView.swift in Sources */,
+				DBCC22982B7751DA007F61B2 /* ProfileDetailViewController.swift in Sources */,
 				DB5D40972B6A203E003B9176 /* TVSeriesModel.swift in Sources */,
 				DB8151D02B69254D0026AAA9 /* CommonCollectionViewCell.swift in Sources */,
+				DBCC22902B773D5A007F61B2 /* ProfileTableViewCell.swift in Sources */,
 				DB7482AC2B6E2228002CDD2D /* PosterTableViewCell.swift in Sources */,
 				DB7482AE2B6E862A002CDD2D /* UIImage + Extension.swift in Sources */,
 				DB8151CE2B6924F80026AAA9 /* PosterImageView.swift in Sources */,
@@ -352,8 +380,10 @@
 				DBA5B47C2B713279004C3B8C /* CommonCollectionViewController.swift in Sources */,
 				DB8151D42B6926270026AAA9 /* UIView + Extension.swift in Sources */,
 				DB22C2442B6B4B010011970E /* TVDetailView.swift in Sources */,
+				DBCC228E2B772F39007F61B2 /* ProfileView.swift in Sources */,
 				DBA5B47A2B712EAA004C3B8C /* UIViewController + Extension.swift in Sources */,
 				DBB376D82B68DCA800DA1C8F /* AppDelegate.swift in Sources */,
+				DBCC22942B77429E007F61B2 /* Label+TextfieldTableViewCell.swift in Sources */,
 				DBDB26BC2B70A958001B901F /* ConfigurationModel.swift in Sources */,
 				DB9CEE4B2B6BF40E00B0E0A1 /* TVView.swift in Sources */,
 				DB8151D22B6925920026AAA9 /* CommonTextLabel.swift in Sources */,
@@ -361,6 +391,7 @@
 				DBA65C192B6BCCC700D3143D /* BaseCollectionViewCell.swift in Sources */,
 				DBDB26C02B70AEE6001B901F /* MediaSessionManager.swift in Sources */,
 				DBDB26BA2B70A46B001B901F /* TVSearchViewController.swift in Sources */,
+				DBCC22962B774EF9007F61B2 /* UITextField + Extension.swift in Sources */,
 				DBA65C1C2B6BCD9E00D3143D /* TVDetailCollectionViewCell.swift in Sources */,
 				DB1FCA5C2B6B764D00755D80 /* MediaAPI.swift in Sources */,
 				DB8151C82B6918E00026AAA9 /* TVSeriesListsModel.swift in Sources */,
@@ -370,6 +401,7 @@
 				DB22C2462B6B4B5E0011970E /* BaseView.swift in Sources */,
 				DB9CEE472B6BCF4300B0E0A1 /* TVDetailTableViewCell.swift in Sources */,
 				DB8151C62B6914250026AAA9 /* API.swift in Sources */,
+				DBDD00A72B7729CD0040FA51 /* ProfileViewController.swift in Sources */,
 				DB7482B02B6E8DE9002CDD2D /* UITabBarController + Extension.swift in Sources */,
 				DBB376DA2B68DCA800DA1C8F /* SceneDelegate.swift in Sources */,
 			);
