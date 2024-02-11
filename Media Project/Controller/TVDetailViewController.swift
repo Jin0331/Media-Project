@@ -121,15 +121,21 @@ extension TVDetailViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if tableView == mainView.bottomLeftTableView && indexPath.row == 0 {
+        if tableView == mainView.bottomLeftTableView && indexPath.row == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: WebKitTableViewCell.identifier, for: indexPath) as! WebKitTableViewCell
             
             cell.titleLabel.text = MediaAPI.TV.contentsInfoAllcases[indexPath.row].titleValue
             
             if let videoList = videoList {
-            let randomVideo = videoList.results.randomElement()!
-            cell.getVideo(videoKey: randomVideo.key)
                 
+                if videoList.results.count > 0 {
+                    let randomVideo = videoList.results[0]
+                    cell.getVideo(videoKey: randomVideo.key)
+                } else {
+                    cell.isHidden = true
+                }
+            } else {
+                cell.isHidden = true
             }
             
             return cell
