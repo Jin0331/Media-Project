@@ -19,7 +19,8 @@ class WebKitTableViewCell: BaseTableViewCell {
     }
     
     let videoWebKit = WKWebView().then {
-        $0.backgroundColor = .clear
+        $0.backgroundColor = .black
+        
     }
     
     override func configureHierarchy() {

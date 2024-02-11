@@ -114,7 +114,7 @@ enum MediaAPI {
         // 여기가 핵심. 구역별로 정하면 될 듯
         // 추가되는 항목을 아래의 리스트에 추가하면 될 듯
         static var contentsInfoAllcases : [TV] {
-            return [.relatedVideo(id: 0), .aggregate_credits(id: 0)] //MARK: -
+            return [.aggregate_credits(id: 0), .relatedVideo(id: 0)] //MARK: -
 //            return [.aggregate_credits(id: 0)] //MARK: - 관련 동영상은 추후 구현
         }
         
@@ -145,13 +145,14 @@ enum MediaAPI {
         
         var parameter : Parameters {
             switch self {
-            case  .detail, .relatedVideo :
+            case  .detail :
                 return ["language":"ko-KR"]
             case .recommendations:
                 return ["language":"ko-KR"]
             case .aggregate_credits :
                 return ["language":"ko-KR"]
-                
+            default :
+                return [:]
             }
         }
         
