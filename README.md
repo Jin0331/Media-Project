@@ -18,6 +18,9 @@
 >4. Search API를 활용하여, 첫 화면의 Collection View Cell을 클릭했을 때 전환하도록 수정해야 할 듯(로직은 다 구성되어 있어서, 조금만 수정하면 될 것 같다. 현재는 고정값으로 id가 박혀있음)
 
 #### 2월 2일 (금) ~ 2월 6일 (화)
+
+![media (2)](https://github.com/Jin0331/Media-Project/assets/42958809/857e55e8-3eca-4fcb-b628-fa4f79c1eb14)
+
 1차 마무리...
 >1. URLSession, Alamofire를 이용한 TMDB API 연습
 >2. Snapkit + Then을 이용한 MVC pattern 연습
@@ -31,4 +34,5 @@
   -> Watcha처럼 슬라이드 뷰로 구현해야 됨.
 4. Search에서 장르 및 국가 비디오에서 Sort기능이 없어, 원하는 항목찾기 어렵고 비디오가 0개 임에도 포함된 경우가 있음.
 5. UI가 조잡한 느낌?!
+6. Search에서 데이터 꼬인듯?? 나중에 확인....
 ```
